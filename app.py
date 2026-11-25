@@ -1,7 +1,7 @@
 """muse2api — 把 Muse(muse.ai) 网页免费账号的对话/生图/生视频额度反代成 API。
 
 OpenAI 兼容:
-  POST /v1/chat/completions          （文本 / 代码对话，支持 stream，可接 Codex）
+  POST /v1/chat/completions          (percakapan teks / kode, mendukung stream, bisa dipakai Codex)
   POST /v1/images/generations
   POST /v1/videos  +  GET /v1/videos/{task_id}
   GET  /v1/models
@@ -325,11 +325,11 @@ async def _validation_exc(request: Request, exc: RequestValidationError):
 
 MODELS = [
     {"id": "muse-spark", "object": "model", "owned_by": "muse",
-     "description": "Muse Spark —— 文本 / 代码对话（网页免费额度，支持流式）"},
+     "description": "Muse Spark — Percakapan teks / kode (kuota gratis web, mendukung streaming)"},
     {"id": "muse-image", "object": "model", "owned_by": "muse",
-     "description": "Muse Image —— 文生图 / 图像编辑（网页免费额度）"},
+     "description": "Muse Image — Text-to-image / edit gambar (kuota gratis web)"},
     {"id": "muse-video", "object": "model", "owned_by": "muse",
-     "description": "Muse Video —— 文生视频 / 图生视频（网页免费额度）"},
+     "description": "Muse Video — Text-to-video / image-to-video (kuota gratis web)"},
 ]
 
 # 下游（Codex / Cline / 各种客户端）习惯按 OpenAI、Anthropic 的名字传模型，
