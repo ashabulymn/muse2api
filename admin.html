@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>muse2api · 账号池控制台</title>
+<title>muse2api · Konsol Kumpulan Akun</title>
 <style>
   :root{
     --bg:#0a0e17; --bg2:#0e1421; --panel:#121a2b; --panel2:#0f1626;
@@ -20,7 +20,7 @@
   a{color:var(--accent);text-decoration:none}
   code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Cascadia Mono",monospace}
 
-  /* ---------- 顶栏 ---------- */
+  /* ---------- Bilah Atas ---------- */
   header{
     position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);
     background:rgba(10,14,23,.82);border-bottom:1px solid var(--line);
@@ -43,7 +43,7 @@
   .keybox input{min-width:0;flex:1 1 120px;background:transparent;border:0;color:var(--text);outline:none;width:210px;font-size:12.5px;font-family:ui-monospace,monospace}
   .keybox button{padding:5px 10px;font-size:12px}
 
-  /* ---------- 布局 ---------- */
+  /* ---------- Tata Letak ---------- */
   main{width:100%;max-width:none;margin:0;padding:clamp(12px,1.2vw,24px)}
   nav.tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:0}
   nav.tabs button{
@@ -55,7 +55,7 @@
   .tab{display:none}.tab.active{display:block;animation:fade .18s ease}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-  /* ---------- 卡片 ---------- */
+  /* ---------- Kartu ---------- */
   .card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px}
   .card>h3{margin:0 0 4px;font-size:14.5px;display:flex;align-items:center;gap:8px}
   .card>h3 .tag{font-size:11px;font-weight:500;color:var(--muted);background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 7px}
@@ -65,7 +65,7 @@
   .copyline{display:flex;gap:7px;align-items:center}
   .copyline input{flex:1;font-family:ui-monospace,monospace;font-size:12.5px}
 
-  /* ---------- 分步引导 ---------- */
+  /* ---------- Panduan Bertahap ---------- */
   .stepbox{display:flex;gap:13px;align-items:flex-start;padding:15px 0;border-bottom:1px solid rgba(32,41,61,.6)}
   .stepbox:last-child{border-bottom:0;padding-bottom:0}
   .stepbox:first-of-type{padding-top:4px}
@@ -86,14 +86,14 @@
   kbd{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-bottom-width:2px;
     border-radius:5px;padding:1px 7px;font-size:11.5px;color:var(--text);line-height:1.6;white-space:nowrap}
 
-  /* ---------- 统计 ---------- */
+  /* ---------- Statistik ---------- */
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
   .stat{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px}
   .stat .k{color:var(--muted);font-size:12px;margin-bottom:4px}
   .stat .v{font-size:25px;font-weight:650;letter-spacing:.4px}
   .stat.g .v{color:var(--ok)}.stat.r .v{color:var(--bad)}.stat.y .v{color:var(--warn)}.stat.b .v{color:var(--accent)}
 
-  /* ---------- 表单 ---------- */
+  /* ---------- Formulir ---------- */
   label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px}
   input[type=text],input[type=number],.proxy-dialog input[type=password],textarea,select{
     width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--line);border-radius:9px;
@@ -123,7 +123,7 @@
   button.mini{padding:4px 10px;font-size:12px;border-radius:7px}
   button.primary-lg{padding:11px 24px;font-size:13.5px}
 
-  /* ---------- 表格 ---------- */
+  /* ---------- Tabel ---------- */
   .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
   table{width:100%;border-collapse:collapse;font-size:13px}
   th{background:var(--bg2);color:var(--muted);font-weight:500;font-size:12px;text-align:left;padding:10px 13px;white-space:nowrap;border-bottom:1px solid var(--line)}
@@ -143,7 +143,7 @@
   #poolBody .proxy-summary{display:block;max-width:100%}
   .empty{text-align:center;color:var(--muted);padding:34px 10px;font-size:13px}
 
-  /* ---------- 媒体库 ---------- */
+  /* ---------- Pustaka Media ---------- */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
   .tile{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.18s}
   .tile:hover{border-color:#37415a;transform:translateY(-2px)}
@@ -166,19 +166,19 @@
   .tile .meta .nm{font-family:ui-monospace,monospace;color:var(--text);font-size:11px;word-break:break-all}
   .tile .meta .ac{display:flex;gap:6px;margin-top:7px;align-items:center}
 
-  /* ---------- 结果预览 ---------- */
+  /* ---------- Pratinjau Hasil ---------- */
   .result{margin-top:14px;padding:14px;background:var(--bg2);border:1px dashed var(--line);border-radius:var(--radius);display:none}
   .result.show{display:block}
   .result img,.result video{max-width:100%;max-height:420px;border-radius:9px;display:block;margin-top:10px;background:#060911}
   pre.out{background:#060911;border:1px solid var(--line);border-radius:9px;padding:12px;overflow:auto;max-height:280px;font-size:12px;color:#9fe8c0;margin:10px 0 0;white-space:pre-wrap;word-break:break-all}
 
-  /* ---------- 提示条 ---------- */
+  /* ---------- Bilah Pemberitahuan ---------- */
   #toasts{position:fixed;right:20px;bottom:20px;z-index:99;display:flex;flex-direction:column;gap:9px;align-items:flex-end}
   .toast{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:11px 15px;font-size:13px;max-width:380px;box-shadow:0 12px 34px rgba(0,0,0,.55);animation:slide .2s ease}
   .toast.ok{border-left-color:var(--ok)}.toast.bad{border-left-color:var(--bad)}.toast.warn{border-left-color:var(--warn)}
   @keyframes slide{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
 
-  /* ---------- 文档 ---------- */
+  /* ---------- Dokumen ---------- */
   .doc h4{margin:20px 0 8px;font-size:13.5px;color:var(--text)}
   .doc h4:first-child{margin-top:0}
   pre.code{background:#060911;border:1px solid var(--line);border-radius:9px;padding:14px;overflow:auto;font-size:12.5px;line-height:1.65;color:#cfe3ff;position:relative}
@@ -191,7 +191,7 @@
   .live .led{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:bl 1.6s infinite}
   @keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
 
-  /* ---------- 未登录提示条 ---------- */
+  /* ---------- Bilah Pemberitahuan Belum Masuk ---------- */
   .banner{display:none;align-items:flex-start;gap:13px;background:linear-gradient(90deg,rgba(251,191,36,.14),rgba(251,191,36,.03));
     border:1px solid rgba(251,191,36,.42);border-radius:var(--radius);padding:15px 18px;margin-bottom:16px;font-size:13.5px;line-height:1.75}
   .banner.show{display:flex}
@@ -212,27 +212,27 @@
 <header>
   <div class="hwrap">
     <div class="logo">
-      <span class="dot"></span>muse2api <small>Muse 网页额度 · 反代 API</small>
-      <a href="https://github.com/czg86389-hub/muse2api" target="_blank" id="repoHomeLink" class="pill" style="margin-left:10px;text-decoration:none;color:var(--text);border-color:var(--line2);cursor:pointer" title="打开 GitHub 开源仓库 (https://github.com/czg86389-hub/muse2api)">
+      <span class="dot"></span>muse2api <small>Kuota web Muse · API reverse proxy</small>
+      <a href="https://github.com/czg86389-hub/muse2api" target="_blank" id="repoHomeLink" class="pill" style="margin-left:10px;text-decoration:none;color:var(--text);border-color:var(--line2);cursor:pointer" title="Buka repositori open-source GitHub (https://github.com/czg86389-hub/muse2api)">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" style="vertical-align:-2px"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-        <b>GitHub 仓库</b>
+        <b>Repositori GitHub</b>
       </a>
-      <button class="ghost mini" onclick="toggleRepoPanel()" id="btnRepoTop" style="display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 11px;font-size:12px" title="查看官方仓库最新版本状态与更新通知">
-        📦 <span id="repoTopTxt">版本检测</span>
+      <button class="ghost mini" onclick="toggleRepoPanel()" id="btnRepoTop" style="display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 11px;font-size:12px" title="Lihat status versi terbaru dan pemberitahuan pembaruan dari repositori resmi">
+        📦 <span id="repoTopTxt">Pemeriksaan versi</span>
       </button>
     </div>
     <div class="pills">
-      <span class="pill" id="pSvc"><span class="led"></span>服务 <b>—</b></span>
-      <span class="pill" id="pAcc"><span class="led"></span>账号 <b>—</b></span>
-      <span class="pill" id="pBr"><span class="led"></span>浏览器 <b>—</b></span>
-      <span class="live" id="live"><span class="led"></span>自动刷新</span>
+      <span class="pill" id="pSvc"><span class="led"></span>Layanan <b>—</b></span>
+      <span class="pill" id="pAcc"><span class="led"></span>Akun <b>—</b></span>
+      <span class="pill" id="pBr"><span class="led"></span>Browser <b>—</b></span>
+      <span class="live" id="live"><span class="led"></span>Muat ulang otomatis</span>
       <span class="keybox" id="keyBox">
         <span class="lbl" id="keyLbl">API Key</span>
-        <input id="key" type="password" placeholder="粘贴 m2a_ 开头的密钥" autocomplete="off">
-        <button class="ghost mini" onclick="saveKey()">保存</button>
+        <input id="key" type="password" placeholder="Tempel kunci yang diawali m2a_" autocomplete="off">
+        <button class="ghost mini" onclick="saveKey()">Simpan</button>
       </span>
-      <select id="langSel" class="langsel" data-no-i18n onchange="setLang(this.value)" title="Language / 语言">
-        <option value="zh">中文</option>
+      <select id="langSel" class="langsel" data-no-i18n onchange="setLang(this.value)" title="Language / Bahasa">
+        <option value="id">Bahasa Indonesia</option>
         <option value="en">English</option>
       </select>
     </div>
@@ -240,178 +240,178 @@
 </header>
 
 <main>
-  <!-- 实时新版本更新通知横幅（当官方仓库有新提交/新版本时自动向所有已部署用户弹出） -->
+  <!-- Spanduk pemberitahuan pembaruan versi baru real-time (otomatis muncul untuk semua pengguna yang sudah ter-deploy saat repositori resmi ada commit/versi baru) -->
   <div class="banner" id="updateBanner" style="border-color:rgba(79,140,255,.65);background:linear-gradient(90deg,rgba(79,140,255,.16),rgba(167,139,250,.05));align-items:center;justify-content:space-between;flex-wrap:wrap">
     <div style="display:flex;gap:12px;align-items:flex-start;flex:1;min-width:260px">
       <span class="ic">🔔</span>
       <div>
-        <b style="color:#60a5fa">检测到 muse2api 官方仓库发布了新版本更新！</b>
-        <span id="updBannerVer" class="badge info" style="margin-left:8px">新版本</span><br>
-        <span id="updBannerMsg" style="color:var(--muted);font-size:13px">官方仓库已有新功能或性能优化提交，点击右侧按钮即可一键在线升级（自动保留本地 .env 密钥与账号池数据）。</span>
+        <b style="color:#60a5fa">Terdeteksi pembaruan versi baru telah dirilis di repositori resmi muse2api!</b>
+        <span id="updBannerVer" class="badge info" style="margin-left:8px">Versi baru</span><br>
+        <span id="updBannerMsg" style="color:var(--muted);font-size:13px">Repositori resmi sudah memiliki commit fitur baru atau optimasi kinerja, klik tombol di kanan untuk meningkatkan secara online dengan sekali klik (kunci .env lokal dan data kumpulan akun otomatis dipertahankan).</span>
       </div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button onclick="upgradeNow()" id="btnBannerUpgrade">⚡ 一键在线升级并重启</button>
-      <button class="ghost mini" onclick="toggleRepoPanel()">查看更新内容</button>
-      <button class="ghost mini" onclick="dismissUpdateBanner()">暂不提醒</button>
+      <button onclick="upgradeNow()" id="btnBannerUpgrade">⚡ Tingkatkan online dan mulai ulang dengan sekali klik</button>
+      <button class="ghost mini" onclick="toggleRepoPanel()">Lihat isi pembaruan</button>
+      <button class="ghost mini" onclick="dismissUpdateBanner()">Ingatkan nanti</button>
     </div>
   </div>
 
-  <!-- 版本状态与官方仓库更新中心面板 -->
+  <!-- Panel status versi dan pusat pembaruan repositori resmi -->
   <div class="card" id="repoPanel" style="display:none;border-color:rgba(79,140,255,.45);margin-bottom:16px">
     <h3>
       <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-      仓库版本检测与更新
+      Pemeriksaan versi repositori & pembaruan online
       <a href="https://github.com/czg86389-hub/muse2api" target="_blank" id="repoPanelLink" class="tag" style="color:var(--accent)">czg86389-hub/muse2api ↗</a>
-      <span id="repoBadge" class="badge info" style="margin-left:auto">检测中…</span>
+      <span id="repoBadge" class="badge info" style="margin-left:auto">Memeriksa…</span>
     </h3>
-    <div class="hint" id="repoStatusDesc" data-i18n="repo-status-desc">正在实时对比本地版本与 GitHub 官方仓库最新版本…（在线升级自动保留 <code>.env</code> 密钥与 <code>data/</code> 账号池及媒体数据）</div>
+    <div class="hint" id="repoStatusDesc" data-i18n="repo-status-desc">Sedang membandingkan versi lokal dengan versi terbaru repositori resmi GitHub secara real-time… (upgrade online otomatis mempertahankan kunci <code>.env</code> dan data kumpulan akun serta media <code>data/</code>)</div>
     <div id="repoCommitsBox" style="margin-top:10px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;font-size:12.5px"></div>
     <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-      <button onclick="upgradeNow()" id="btnRepoPull">⚡ 一键从 GitHub 在线更新并重启</button>
-      <button class="ghost" onclick="loadRepoStatus(true)">🔍 立即重新检测更新</button>
-      <a id="repoCommitsLink" href="https://github.com/czg86389-hub/muse2api/commits/main" target="_blank" class="btnlike ghostlike" style="padding:7px 13px;font-size:12.5px">查看 GitHub 完整提交记录 ↗</a>
+      <button onclick="upgradeNow()" id="btnRepoPull">⚡ Perbarui online dari GitHub dan mulai ulang dengan sekali klik</button>
+      <button class="ghost" onclick="loadRepoStatus(true)">🔍 Periksa pembaruan lagi sekarang</button>
+      <a id="repoCommitsLink" href="https://github.com/czg86389-hub/muse2api/commits/main" target="_blank" class="btnlike ghostlike" style="padding:7px 13px;font-size:12.5px">Lihat riwayat commit lengkap di GitHub ↗</a>
     </div>
   </div>
 
   <div class="banner" id="authBanner">
     <span class="ic">🔑</span>
     <div data-i18n="auth-banner">
-      <b>需要先填入 API Key，页面才能读到数据</b><br>
+      <b>Isi API Key terlebih dahulu agar halaman dapat membaca data</b><br>
       <span style="color:var(--muted)">
-        API Key 是这个服务自己的「访问密码」，用来防止别人白用你的 Muse 账号额度。
-        它<b style="color:var(--text)">不是</b> Muse 的账号密码，是部署时自动生成的一串随机字符（以 <code>m2a_</code> 开头）。<br>
-        把它粘贴到右上角的输入框，点「保存」即可 —— 浏览器会记住，下次不用再输。
+        API Key adalah "kata sandi akses" layanan ini sendiri, untuk mencegah orang lain memakai kuota akun Muse Anda secara gratis.
+        Itu<b style="color:var(--text)">bukan</b> kata sandi akun Muse, melainkan rangkaian karakter acak yang dibuat otomatis saat deployment (diawali <code>m2a_</code>).<br>
+        Tempelkan ke kolom input di kanan atas, lalu klik "Simpan" — browser akan mengingatnya, jadi tidak perlu memasukkan lagi lain kali.
       </span>
     </div>
   </div>
 
   <nav class="tabs">
-    <button class="active" data-t="pool">账号池</button>
-    <button data-t="cookie">获取 Cookie</button>
-    <button data-t="tasks">任务记录</button>
-    <button data-t="media">媒体库</button>
-    <button data-t="play">接口测试</button>
-    <button data-t="docs">接入文档</button>
+    <button class="active" data-t="pool">Kumpulan Akun</button>
+    <button data-t="cookie">Ambil Cookie</button>
+    <button data-t="tasks">Catatan Tugas</button>
+    <button data-t="media">Pustaka Media</button>
+    <button data-t="play">Uji API</button>
+    <button data-t="docs">Dokumen Integrasi</button>
   </nav>
 
-  <div class="card" id="extensionUpgradeNotice" style="border-color:var(--warn)" role="note" data-i18n="extension-upgrade-notice"><b>重要：请手动升级浏览器插件至 1.0.3</b><br>更新服务不会自动升级已加载的扩展。下载新包，替换原扩展目录文件，再到 <code>chrome://extensions</code> 或 <code>edge://extensions</code> 点击“重新加载”。不同浏览器个人资料需分别升级。<br><a href="/admin/extension">下载扩展 1.0.3</a>；油猴用户请升级脚本至 1.1.2。</div>
+  <div class="card" id="extensionUpgradeNotice" style="border-color:var(--warn)" role="note" data-i18n="extension-upgrade-notice"><b>Penting: Perbarui plugin browser secara manual ke 1.0.3</b><br>Memperbarui layanan tidak otomatis memperbarui ekstensi yang sudah dimuat. Unduh paket baru, ganti berkas di direktori ekstensi lama, lalu di <code>chrome://extensions</code> atau <code>edge://extensions</code> klik "Muat Ulang". Setiap profil browser perlu diperbarui secara terpisah.<br><a href="/admin/extension">Unduh ekstensi 1.0.3</a>; pengguna Tampermonkey harap perbarui skrip ke 1.1.2.</div>
 
-  <!-- ==================== 账号池 ==================== -->
+  <!-- ==================== Kumpulan Akun ==================== -->
   <section class="tab active" id="tab-pool">
     <div class="warnbar" id="expWarn" style="display:none">
       <span id="expWarnText"></span>
-      <button class="ghost mini" onclick="goTab('cookie')">去重新登录</button>
+      <button class="ghost mini" onclick="goTab('cookie')">Masuk lagi</button>
     </div>
     <div class="card" style="border-color:rgba(79,140,255,.4)">
-      <h3>接入信息 <span class="tag">下游项目填这两个值</span></h3>
-      <div class="hint">把下面两项填进你的项目就能调用。BASE URL 就是接口地址前缀。</div>
+      <h3>Info integrasi <span class="tag">Isi kedua nilai ini ke proyek downstream</span></h3>
+      <div class="hint">Masukkan dua item di bawah ke proyek Anda untuk mulai memanggil. BASE URL adalah awalan alamat API.</div>
       <div class="row">
         <div style="flex:3">
-          <label>BASE URL（接口地址）</label>
+          <label>BASE URL (alamat API)</label>
           <div class="copyline">
             <input type="text" id="inBase" readonly>
-            <button class="ghost mini" onclick="copyEl('inBase')">复制</button>
+            <button class="ghost mini" onclick="copyEl('inBase')">Salin</button>
           </div>
         </div>
         <div style="flex:3">
-          <label>API Key（访问密钥）</label>
+          <label>API Key (kunci akses)</label>
           <div class="copyline">
             <input type="text" id="inKey" readonly>
-            <button class="ghost mini" onclick="toggleKey()" id="keyEye">显示</button>
-            <button class="ghost mini" onclick="copyKey()">复制</button>
-            <button class="danger mini" onclick="rotateKey()">重新生成</button>
+            <button class="ghost mini" onclick="toggleKey()" id="keyEye">Tampilkan</button>
+            <button class="ghost mini" onclick="copyKey()">Salin</button>
+            <button class="danger mini" onclick="rotateKey()">Buat Ulang</button>
           </div>
         </div>
       </div>
       <div class="hint" style="margin:11px 0 0" data-i18n="model-names-hint">
-        模型名：<code>muse-spark</code>（对话/代码）、<code>muse-image</code>（生图）、<code>muse-video</code>（生视频）。
-        完整调用示例见「接入文档」页签。
+        Nama model: <code>muse-spark</code> (percakapan/kode), <code>muse-image</code> (buat gambar), <code>muse-video</code> (buat video).
+        Contoh pemanggilan lengkap lihat tab "Dokumen Integrasi".
       </div>
     </div>
 
     <div class="stats">
-      <div class="stat b"><div class="k">账号总数</div><div class="v" id="sTotal">0</div></div>
-      <div class="stat g"><div class="k">可用</div><div class="v" id="sOk">0</div></div>
-      <div class="stat r"><div class="k">异常</div><div class="v" id="sBad">0</div></div>
-      <div class="stat y"><div class="k">已禁用</div><div class="v" id="sDis">0</div></div>
-      <div class="stat"><div class="k">媒体文件</div><div class="v" id="sMedia">0</div></div>
+      <div class="stat b"><div class="k">Total akun</div><div class="v" id="sTotal">0</div></div>
+      <div class="stat g"><div class="k">Tersedia</div><div class="v" id="sOk">0</div></div>
+      <div class="stat r"><div class="k">Error</div><div class="v" id="sBad">0</div></div>
+      <div class="stat y"><div class="k">Dinonaktifkan</div><div class="v" id="sDis">0</div></div>
+      <div class="stat"><div class="k">Berkas media</div><div class="v" id="sMedia">0</div></div>
     </div>
 
     <div class="card" id="generationQueuePanel">
-      <h3>排队与生成时限</h3>
-      <div class="hint">排队不占用生成时限。任务获得并发槽位和账号后开始计算生成时间；重试时等待账号也不计入。</div>
+      <h3>Antrean dan batas waktu pembuatan</h3>
+      <div class="hint">Waktu antre tidak memakan kuota waktu pembuatan. Waktu pembuatan mulai dihitung setelah tugas mendapat slot konkurensi dan akun; saat percobaan ulang, waktu menunggu akun juga tidak dihitung.</div>
       <form id="generationQueueForm" onsubmit="event.preventDefault();saveGenerationQueue()">
-        <div class="row"><div style="max-width:340px"><label for="generationQueueTimeout">独立排队时限（秒，0 为不限）</label><input id="generationQueueTimeout" type="number" min="0" max="86400" required value="3600"></div></div>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:12px"><button id="generationQueueSave" type="submit">保存排队设置</button><span class="hint" id="generationQueueSummary"></span></div>
+        <div class="row"><div style="max-width:340px"><label for="generationQueueTimeout">Batas waktu antre terpisah (detik, 0 = tanpa batas)</label><input id="generationQueueTimeout" type="number" min="0" max="86400" required value="3600"></div></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px"><button id="generationQueueSave" type="submit">Simpan pengaturan antrean</button><span class="hint" id="generationQueueSummary"></span></div>
       </form>
     </div>
 
     <div class="card">
-      <h3>添加账号 <span class="tag">支持批量</span></h3>
+      <h3>Tambah akun <span class="tag">Mendukung batch</span></h3>
       <div class="hint" data-i18n="add-account-hint">
-        从浏览器复制 <b>muse.ai</b> 的 Cookie 字符串粘贴进来即可。必要 cookie：
-        <code>hatch_sess</code>。<code>hatch_vml</code> 为可选工作区令牌，缺少时不阻止导入。
-        批量导入时每行一个账号，格式 <code>标签 | cookie串</code>（标签可省略）。
+        Salin string Cookie <b>muse.ai</b> dari browser lalu tempel di sini. Cookie wajib:
+        <code>hatch_sess</code>.<code>hatch_vml</code> adalah token workspace opsional, ketiadaannya tidak menghalangi impor.
+        Saat impor massal, satu akun per baris, format <code>Label | string cookie</code> (label boleh dikosongkan).
       </div>
       <div class="row">
         <div style="max-width:230px">
-          <label>账号标签（单条导入用）</label>
-          <input type="text" id="newLabel" placeholder="例如 muse-main">
+          <label>Label akun (untuk impor tunggal)</label>
+          <input type="text" id="newLabel" placeholder="misalnya muse-main">
         </div>
         <div style="flex:3">
-          <label>Cookie 字符串</label>
-          <textarea id="newCookie" rows="4" placeholder="hatch_sess=...; hatch_vml=...&#10;或批量：&#10;acc-01 | hatch_sess=...; hatch_vml=...&#10;acc-02 | hatch_sess=...; hatch_vml=..."></textarea>
+          <label>String cookie</label>
+          <textarea id="newCookie" rows="4" placeholder="hatch_sess=...; hatch_vml=...&#10;atau batch:&#10;acc-01 | hatch_sess=...; hatch_vml=...&#10;acc-02 | hatch_sess=...; hatch_vml=..."></textarea>
         </div>
       </div>
       <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-        <button class="primary-lg" onclick="addAccount(false)">导入账号</button>
-        <button class="ghost" onclick="document.getElementById('newCookie').value='';">清空</button>
+        <button class="primary-lg" onclick="addAccount(false)">Impor akun</button>
+        <button class="ghost" onclick="document.getElementById('newCookie').value='';">Kosongkan</button>
       </div>
     </div>
 
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:8px">
         <div style="display:flex;align-items:center;gap:10px">
-          <h3 style="margin:0">账号列表 <span class="tag" id="poolCount">0</span></h3>
-          <span class="badge ok" id="keepaliveBadge" style="font-size:11px">● 自动保活轮转中 (30m)</span>
+          <h3 style="margin:0">Daftar akun <span class="tag" id="poolCount">0</span></h3>
+          <span class="badge ok" id="keepaliveBadge" style="font-size:11px">● Rotasi keep-alive otomatis berjalan (30 mnt)</span>
         </div>
         <div style="display:flex;gap:8px">
-          <button class="secondary" id="btnKeepaliveAll" onclick="keepaliveAll()" style="font-size:12px;padding:6px 14px">⚡ 一键保活所有账号</button>
+          <button class="secondary" id="btnKeepaliveAll" onclick="keepaliveAll()" style="font-size:12px;padding:6px 14px">⚡ Keep-alive semua akun dengan sekali klik</button>
         </div>
       </div>
-      <div class="hint" data-i18n="keepalive-hint">系统已开启<b>后台每 30 分钟静默保活</b>与<b>多账号公平轮转（LRU）</b>；「测试」会真实打开 muse.ai 验证会话。</div>
+      <div class="hint" data-i18n="keepalive-hint">Sistem sudah mengaktifkan <b>keep-alive senyap di latar belakang setiap 30 menit</b> dan <b>rotasi adil multi-akun (LRU)</b>; "Uji" akan benar-benar membuka muse.ai untuk memverifikasi sesi.</div>
       <div class="tblwrap"><table>
         <thead><tr>
-          <th>标签</th><th>账号 ID</th><th>状态</th><th>有效期</th><th>额度</th><th data-i18n="col-enabled">启用</th><th>Cookie</th>
-          <th>最后使用</th><th>备注</th><th style="min-width:250px">操作</th>
+          <th>Label</th><th>ID Akun</th><th>Status</th><th>Masa Berlaku</th><th>Kuota</th><th data-i18n="col-enabled">Aktifkan</th><th>Cookie</th>
+          <th>Terakhir digunakan</th><th>Catatan</th><th style="min-width:250px">Aksi</th>
         </tr></thead>
-        <tbody id="poolBody"><tr><td colspan="10" class="empty">加载中…</td></tr></tbody>
+        <tbody id="poolBody"><tr><td colspan="10" class="empty">Memuat…</td></tr></tbody>
       </table></div>
     </div>
   </section>
 
-  <!-- ==================== 获取 Cookie ==================== -->
+  <!-- ==================== Ambil Cookie ==================== -->
   <section class="tab" id="tab-cookie">
     <div class="card" style="border-color:rgba(52,211,153,.45)">
-      <h3>方式一：浏览器扩展 <span class="tag">推荐 · 零命令行 · 全平台</span></h3>
+      <h3>Cara 1: Ekstensi browser <span class="tag">Direkomendasikan · Tanpa baris perintah · Semua platform</span></h3>
       <div class="hint" data-i18n="ext-why-hint">
-        用一个浏览器小扩展，把你<b>自己电脑上已经登录好的 muse.ai 登录态</b>同步过来。
-        不用装 Python、不用开终端、不用敲命令。<br>
-        <b>为什么必须用扩展</b>：muse.ai 的登录会话 cookie 带
-        <code>httpOnly</code> 标记，网页脚本（F12 里敲 <code>document.cookie</code>、
-        小书签）读不到；只有浏览器扩展的 <code>cookies</code> 接口能拿到。
+        Gunakan ekstensi browser kecil untuk menyinkronkan <b>status login muse.ai yang sudah masuk di komputer Anda sendiri</b>.
+        Tidak perlu memasang Python, membuka terminal, atau mengetik perintah.<br>
+        <b>Mengapa harus memakai ekstensi</b>: cookie sesi login muse.ai bertanda
+        <code>httpOnly</code> tersebut, skrip halaman web (mengetik <code>document.cookie</code> di F12,
+        bookmarklet) tidak dapat membacanya; hanya antarmuka <code>cookies</code> ekstensi browser yang bisa mengambilnya.
       </div>
 
       <div class="stepbox">
         <div class="stepno">1</div>
         <div>
-          <b>下载并解压扩展</b>
+          <b>Unduh dan ekstrak ekstensi</b>
           <div class="hint" style="margin:4px 0 9px" data-i18n="ext-unzip-hint">
-            解压到一个你不会删掉的目录，比如 <code>D:\muse2api-extension</code>。
+            Ekstrak ke direktori yang tidak akan Anda hapus, misalnya <code>D:\muse2api-extension</code>.
           </div>
-          <a class="btnlike" href="/admin/extension" download>⬇ 下载 muse2api-extension.zip</a>
-          <button class="ghost mini" onclick="loadExtFiles()">查看包含哪些文件</button>
+          <a class="btnlike" href="/admin/extension" download>⬇ Unduh muse2api-extension.zip</a>
+          <button class="ghost mini" onclick="loadExtFiles()">Lihat berkas yang disertakan</button>
           <span class="hint" id="extFiles" style="margin-left:8px"></span>
         </div>
       </div>
@@ -419,15 +419,15 @@
       <div class="stepbox">
         <div class="stepno">2</div>
         <div>
-          <b>在浏览器里加载扩展</b>
+          <b>Muat ekstensi di browser</b>
           <div class="hint" style="margin:4px 0 9px">
-            以 Chrome 为例（Edge / Brave / 360 极速 等 Chromium 内核浏览器步骤类似）：
+            Contoh memakai Chrome (langkah untuk browser berbasis Chromium seperti Edge / Brave / 360 serupa):
           </div>
           <ol class="olsteps" data-i18n="ext-load-steps">
-            <li>地址栏输入 <code>chrome://extensions</code> 回车</li>
-            <li>打开右上角 <b>开发者模式</b> 开关</li>
-            <li>点左上角 <b>加载已解压的扩展程序</b></li>
-            <li>选中第 1 步解压出来的<b>文件夹</b>（不是里面的单个文件）</li>
+            <li>Ketik <code>chrome://extensions</code> di bilah alamat lalu tekan Enter</li>
+            <li>Nyalakan sakelar <b>Mode Pengembang</b> di kanan atas</li>
+            <li>Klik <b>Muat ekstensi yang telah diekstrak</b> di kiri atas</li>
+            <li>Pilih <b>folder</b> hasil ekstraksi dari langkah 1 (bukan berkas tunggal di dalamnya)</li>
           </ol>
         </div>
       </div>
@@ -435,25 +435,25 @@
       <div class="stepbox">
         <div class="stepno">3</div>
         <div>
-          <b>登录 muse.ai，然后点扩展图标导入</b>
+          <b>Masuk ke muse.ai, lalu klik ikon ekstensi untuk mengimpor</b>
           <div class="hint" style="margin:4px 0 9px" data-i18n="ext-login-hint">
-            先在你自己的浏览器里打开 <code>https://muse.ai/</code> 并登录
-            （登录到能看到聊天界面为止），再点浏览器工具栏上的扩展图标，
-            把下面两项填进去，点「读取并导入」。
+            Buka <code>https://muse.ai/</code> di browser Anda sendiri dan masuk
+            (sampai terlihat antarmuka chat), lalu klik ikon ekstensi di bilah alat browser,
+            Isi kedua item di bawah, lalu klik "Baca dan Impor".
           </div>
           <div class="row">
             <div style="flex:3">
-              <label>BASE URL（填进扩展）</label>
+              <label>BASE URL (masukkan ke ekstensi)</label>
               <div class="copyline">
                 <input type="text" id="exBase" readonly>
-                <button class="ghost mini" onclick="copyEl('exBase')">复制</button>
+                <button class="ghost mini" onclick="copyEl('exBase')">Salin</button>
               </div>
             </div>
             <div style="flex:3">
-              <label>API Key（填进扩展）</label>
+              <label>API Key (masukkan ke ekstensi)</label>
               <div class="copyline">
                 <input type="text" id="exKey" readonly>
-                <button class="ghost mini" onclick="copyExKey()">复制</button>
+                <button class="ghost mini" onclick="copyExKey()">Salin</button>
               </div>
             </div>
           </div>
@@ -462,227 +462,228 @@
     </div>
 
     <div class="card">
-      <h3>方式二：手动复制 <span class="tag">零安装 · 兜底</span></h3>
+      <h3>Cara 2: Salin manual <span class="tag">Tanpa instalasi · Cadangan</span></h3>
       <div class="hint" data-i18n="manual-copy-hint">
-        不想装扩展的话，可以手动把 cookie 串抠出来。关键是用
-        <b>「网络」面板的请求标头</b>，而不是 Console —— 请求头里的
-        <code>cookie:</code> 一行<b>包含 httpOnly 的那几条</b>，Console 读不到。
+        Jika tidak ingin memasang ekstensi, Anda bisa mengambil string cookie secara manual. Kuncinya adalah memakai
+        <b>header permintaan di panel "Jaringan"</b>, bukan Console — baris
+        <code>cookie:</code> di header permintaan <b>berisi cookie httpOnly tersebut</b>, yang tidak bisa dibaca Console.
       </div>
       <ol class="olsteps" style="margin-top:10px" data-i18n="manual-copy-steps">
-        <li>在你自己的浏览器里打开并登录 <code>https://muse.ai/</code>，停在聊天界面</li>
-        <li>按 <kbd>F12</kbd> 打开开发者工具，切到 <b>网络 / Network</b> 面板</li>
-        <li>按 <kbd>F5</kbd> 刷新页面，让请求列表出现内容</li>
-        <li>点列表里<b>任意一条 muse.ai 的请求</b>（第一个就行）</li>
-        <li>右侧找到 <b>标头 / Headers</b> → 往下滚到 <b>请求标头 / Request Headers</b></li>
-        <li>找到以 <code>cookie:</code> 开头的那一行，<b>把冒号后面的整串复制</b>
-            （从 <code>hatch_sess=</code> 开始，一直到行尾）</li>
-        <li>粘到下面「方式三」的输入框里，点导入</li>
+        <li>Buka dan masuk ke <code>https://muse.ai/</code> di browser Anda sendiri, berhenti di antarmuka chat</li>
+        <li>Tekan <kbd>F12</kbd> untuk membuka alat pengembang, beralih ke panel <b>Jaringan / Network</b></li>
+        <li>Tekan <kbd>F5</kbd> untuk memuat ulang halaman agar daftar permintaan muncul</li>
+        <li>Klik <b>salah satu permintaan muse.ai</b> di daftar (yang pertama pun boleh)</li>
+        <li>Di sisi kanan, temukan <b>Header / Headers</b> → gulir ke bawah ke <b>Header Permintaan / Request Headers</b></li>
+        <li>Temukan baris yang diawali <code>cookie:</code>, <b>salin seluruh string setelah titik dua</b>
+            (mulai dari <code>hatch_sess=</code> sampai akhir baris)</li>
+        <li>Tempel ke kolom input "Cara 3" di bawah, lalu klik impor</li>
       </ol>
       <div class="hint" style="margin-top:10px;color:var(--warn)" data-i18n="manual-copy-warn">
-        注意：是<b>请求标头</b>里的 <code>cookie:</code>，不是「响应标头」。
-        响应标头里的 <code>set-cookie</code> 只有部分 cookie，会缺东西。
+        Perhatian: yang dipakai adalah <code>cookie:</code> di <b>header permintaan</b>, bukan "header respons".
+        <code>set-cookie</code> di header respons hanya berisi sebagian cookie, akan ada yang hilang.
       </div>
     </div>
 
     <div class="card">
-      <h3>方式三：粘贴导入 / 本机脚本 <span class="tag">进阶</span></h3>
-      <div class="hint">已经拿到 cookie 串的话，直接粘在这里导入（方式二手动复制的串也粘这里）。</div>
+      <h3>Cara 3: Tempel untuk impor / skrip lokal <span class="tag">Lanjutan</span></h3>
+      <div class="hint">Jika sudah mendapatkan string cookie, tempel langsung di sini untuk mengimpor (string yang disalin manual pada Cara 2 juga ditempel di sini).</div>
       <div class="row" style="margin-top:10px">
         <div style="max-width:230px">
-          <label>账号标签</label>
-          <input type="text" id="mLabel" placeholder="例如 acc-01">
+          <label>Label akun</label>
+          <input type="text" id="mLabel" placeholder="misalnya acc-01">
         </div>
         <div style="flex:3">
-          <label>Cookie 字符串</label>
+          <label>String cookie</label>
           <textarea id="mCookie" rows="3" placeholder="hatch_sess=...; hatch_vml=..."></textarea>
         </div>
       </div>
       <div style="margin-top:12px">
-        <button class="primary-lg" onclick="addAccount(true)">导入账号</button>
+        <button class="primary-lg" onclick="addAccount(true)">Impor akun</button>
       </div>
 
       <div class="hint" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)" data-i18n="cli-script-hint">
-        如果你习惯命令行、或者想用独立浏览器登录（不碰日常浏览器），也可以用这个脚本。
-        它只用 Python 标准库，<b>不需要 pip 安装任何东西</b>。
+        Jika Anda terbiasa dengan baris perintah, atau ingin masuk dengan browser terpisah (tanpa menyentuh browser harian), Anda juga bisa memakai skrip ini.
+        Skrip ini hanya memakai pustaka standar Python, <b>tidak perlu memasang apa pun via pip</b>.
       </div>
       <div class="row" style="margin-top:10px">
         <div style="flex:2">
-          <label>① 下载脚本</label>
+          <label>① Unduh skrip</label>
           <div class="copyline">
             <a class="btnlike ghostlike" href="/admin/cookie-helper?download=1" download>⬇ get_muse_cookie.py</a>
-            <a class="btnlike ghostlike" href="/admin/cookie-helper" target="_blank">查看源码</a>
+            <a class="btnlike ghostlike" href="/admin/cookie-helper" target="_blank">Lihat kode sumber</a>
           </div>
         </div>
         <div style="flex:4;min-width:0">
-          <label>② 运行（地址和密钥已帮你填好）</label>
-          <pre class="code" id="cmdBox"><span class="cp" onclick="copyCmd()">复制</span><span id="cmdText">正在生成命令…</span></pre>
+          <label>② Jalankan (alamat dan kunci sudah diisi untuk Anda)</label>
+          <pre class="code" id="cmdBox"><span class="cp" onclick="copyCmd()">Salin</span><span id="cmdText">Sedang membuat perintah…</span></pre>
         </div>
       </div>
       <div class="hint" style="margin-top:8px">
-        ③ 在弹出的浏览器窗口里登录 muse.ai → 脚本自动抓取并上传 → 自动关窗。
+        ③ Masuk ke muse.ai di jendela browser yang muncul → skrip otomatis mengambil dan mengunggah → jendela tertutup otomatis.
       </div>
     </div>
 
     <div class="card">
-      <h3>Cookie 有效期说明 <span class="tag">实测</span></h3>
+      <h3>Penjelasan masa berlaku Cookie <span class="tag">Terukur</span></h3>
       <div class="hint" style="margin:0 0 12px">
-        实测 muse.ai 各条 cookie 的有效期（不同账号可能略有差异）：
+        Masa berlaku terukur tiap cookie muse.ai (dapat sedikit berbeda antar akun):
       </div>
       <div class="tblwrap"><table>
-        <thead><tr><th>cookie</th><th>httpOnly</th><th>实测有效期</th><th>作用</th></tr></thead>
+        <thead><tr><th>cookie</th><th>httpOnly</th><th>Masa berlaku terukur</th><th>Fungsi</th></tr></thead>
         <tbody>
-          <tr><td class="mono">hatch_sess</td><td>是</td><td><b style="color:var(--ok)">约 30 天</b></td><td>主会话，决定能不能登录</td></tr>
-          <tr><td class="mono">hatch_gw</td><td>是</td><td><b style="color:var(--ok)">约 1 年</b></td><td>可选的网关路由缓存（不是登录必要项）</td></tr>
-          <tr><td class="mono">hatch_vml</td><td>是</td><td><b style="color:var(--bad)">约 2 天</b></td><td data-i18n="vml-role">可选工作区令牌，<b>不是导入必要项</b></td></tr>
-          <tr><td class="mono">hatch_native_auth_device</td><td>是</td><td><b style="color:var(--ok)">约 30 天</b></td><td>可选设备标识（匿名访客也有，不是登录凭证）</td></tr>
+          <tr><td class="mono">hatch_sess</td><td>Ya</td><td><b style="color:var(--ok)">Sekitar 30 hari</b></td><td>Sesi utama, menentukan apakah bisa masuk</td></tr>
+          <tr><td class="mono">hatch_gw</td><td>Ya</td><td><b style="color:var(--ok)">Sekitar 1 tahun</b></td><td>Cache routing gateway opsional (bukan syarat wajib login)</td></tr>
+          <tr><td class="mono">hatch_vml</td><td>Ya</td><td><b style="color:var(--bad)">Sekitar 2 hari</b></td><td data-i18n="vml-role">Token workspace opsional, <b>bukan syarat wajib impor</b></td></tr>
+          <tr><td class="mono">hatch_native_auth_device</td><td>Ya</td><td><b style="color:var(--ok)">Sekitar 30 hari</b></td><td>Pengenal perangkat opsional (pengunjung anonim juga memilikinya, bukan kredensial login)</td></tr>
         </tbody>
       </table></div>
-      <div class="hint" style="margin:12px 0 0;line-height:1.85" data-i18n="lifetime-hint">登录会话是否有效以上游认证为准。hatch_vml 是可选工作区令牌，可能缺失或重新签发，不能仅凭缺少它或其到期时间判断账号失效。导入后请点击“测试”；收到 HTTP 401 时再重新登录并导入。</div>
+      <div class="hint" style="margin:12px 0 0;line-height:1.85" data-i18n="lifetime-hint">Keberlakuan sesi login ditentukan oleh autentikasi upstream. hatch_vml adalah token workspace opsional, bisa hilang atau diterbitkan ulang, jadi jangan menilai akun tidak berlaku hanya karena token ini hilang atau kedaluwarsa. Setelah impor, klik "Uji"; jika menerima HTTP 401, masuk ulang dan impor lagi.</div>
     </div>
   </section>
 
-  <!-- ==================== 任务记录 ==================== -->
+  <!-- ==================== Catatan Tugas ==================== -->
   <section class="tab" id="tab-tasks">
     <div class="card">
-      <h3>生成任务记录 <span class="tag" id="taskCount">0</span></h3>
-      <div class="hint">生视频是异步任务，状态会从 queued → processing → succeeded / failed。</div>
+      <h3>Catatan tugas pembuatan <span class="tag" id="taskCount">0</span></h3>
+      <div class="hint">Buat Video adalah tugas asinkron, status berubah dari queued → processing → succeeded / failed.</div>
       <div style="margin-bottom:12px;display:flex;gap:9px">
-        <button class="ghost mini" onclick="loadTasks()">刷新</button>
-        <button class="danger mini" onclick="clearTasks()">清空全部</button>
+        <button class="ghost mini" onclick="loadTasks()">Muat Ulang</button>
+        <button class="danger mini" onclick="clearTasks()">Kosongkan semua</button>
       </div>
       <div class="tblwrap"><table>
         <thead><tr>
-          <th>任务 ID</th><th>类型</th><th>提示词</th><th>状态</th>
-          <th>耗时</th><th>创建时间</th><th>结果 / 错误</th><th></th>
+          <th>ID Tugas</th><th>Jenis</th><th>Prompt</th><th>Status</th>
+          <th>Durasi</th><th>Waktu dibuat</th><th>Hasil / Error</th><th></th>
         </tr></thead>
-        <tbody id="taskBody"><tr><td colspan="8" class="empty">加载中…</td></tr></tbody>
+        <tbody id="taskBody"><tr><td colspan="8" class="empty">Memuat…</td></tr></tbody>
       </table></div>
     </div>
   </section>
 
-  <!-- ==================== 媒体库 ==================== -->
+  <!-- ==================== Pustaka Media ==================== -->
   <section class="tab" id="tab-media">
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
         <div>
-          <h3 style="margin:0 0 4px">媒体库 <span class="tag" id="mediaCount">0</span></h3>
-          <div class="hint" style="margin:0">所有已生成并落盘的图片 / 视频，可直接下载或把链接给下游项目使用。</div>
+          <h3 style="margin:0 0 4px">Pustaka Media <span class="tag" id="mediaCount">0</span></h3>
+          <div class="hint" style="margin:0">Semua gambar / video yang sudah dibuat dan tersimpan di disk dapat langsung diunduh atau tautannya diberikan ke proyek downstream.</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <button class="ghost mini" onclick="loadMedia()">刷新</button>
-          <button class="ghost mini" id="btnSelectAllMedia" onclick="toggleSelectAllMedia()">全选</button>
-          <button class="danger mini" id="btnDelSelectedMedia" onclick="delSelectedMedia()" style="display:none">删除选中 (<span id="selMediaCount">0</span>)</button>
+          <button class="ghost mini" onclick="loadMedia()">Muat Ulang</button>
+          <button class="ghost mini" id="btnSelectAllMedia" onclick="toggleSelectAllMedia()">Pilih Semua</button>
+          <button class="danger mini" id="btnDelSelectedMedia" onclick="delSelectedMedia()" style="display:none">Hapus yang dipilih (<span id="selMediaCount">0</span>)</button>
         </div>
       </div>
-      <div class="grid" id="mediaGrid"><div class="empty">加载中…</div></div>
+      <div class="grid" id="mediaGrid"><div class="empty">Memuat…</div></div>
     </div>
   </section>
 
-  <!-- ==================== 接口测试 ==================== -->
+  <!-- ==================== Uji API ==================== -->
   <section class="tab" id="tab-play">
     <div class="card">
-      <h3>在线生图测试 <span class="tag">POST /v1/images/generations</span></h3>
-      <div class="hint">真实调用 muse.ai 生成，图片约 10–30 秒返回。</div>
+      <h3>Uji buat gambar online <span class="tag">POST /v1/images/generations</span></h3>
+      <div class="hint">Memanggil muse.ai secara nyata untuk membuat, gambar kembali sekitar 10–30 detik.</div>
       <div class="row">
-        <div style="flex:3"><label>提示词</label>
-          <input type="text" id="imgPrompt" value="一只戴宇航头盔的柴犬，赛博朋克风格，霓虹灯背景"></div>
-        <div style="max-width:140px"><label>比例</label>
+        <div style="flex:3"><label>Prompt</label>
+          <input type="text" id="imgPrompt" value="Seekor anjing Shiba memakai helm astronot, gaya cyberpunk, latar lampu neon"></div>
+        <div style="max-width:140px"><label>Rasio</label>
           <select id="imgSize"><option>1:1</option><option>16:9</option><option>9:16</option><option>4:3</option><option>3:4</option></select></div>
       </div>
-      <div style="margin-top:12px"><button class="primary-lg" id="imgBtn" onclick="runImage()">开始生成图片</button></div>
+      <div style="margin-top:12px"><button class="primary-lg" id="imgBtn" onclick="runImage()">Mulai buat gambar</button></div>
       <div class="result" id="imgRes"></div>
     </div>
 
     <div class="card">
-      <h3>在线生视频测试 <span class="tag">POST /v1/videos</span></h3>
-      <div class="hint">异步任务，一般 60–120 秒完成，页面会自动轮询进度。</div>
+      <h3>Uji buat video online <span class="tag">POST /v1/videos</span></h3>
+      <div class="hint">Tugas asinkron, umumnya selesai dalam 60–120 detik, halaman otomatis memantau progres.</div>
       <div class="row">
-        <div style="flex:3"><label>提示词</label>
-          <input type="text" id="vidPrompt" value="一只橙色小猫在草地上慢慢走动，阳光明媚"></div>
-        <div style="max-width:110px"><label>时长(秒)</label>
+        <div style="flex:3"><label>Prompt</label>
+          <input type="text" id="vidPrompt" value="Seekor anak kucing oranye berjalan perlahan di atas rumput, cuaca cerah"></div>
+        <div style="max-width:110px"><label>Durasi (detik)</label>
           <input type="number" id="vidDur" value="5" min="1" max="30"></div>
-        <div style="max-width:140px"><label>比例</label>
+        <div style="max-width:140px"><label>Rasio</label>
           <select id="vidSize"><option>16:9</option><option>9:16</option><option>1:1</option></select></div>
       </div>
-      <div style="margin-top:12px"><button class="primary-lg" id="vidBtn" onclick="runVideo()">开始生成视频</button></div>
+      <div style="margin-top:12px"><button class="primary-lg" id="vidBtn" onclick="runVideo()">Mulai buat video</button></div>
       <div class="result" id="vidRes"></div>
     </div>
   </section>
 
-  <!-- ==================== 接入文档 ==================== -->
+  <!-- ==================== Dokumen Integrasi ==================== -->
   <section class="tab" id="tab-docs">
     <div class="card doc">
-      <h3>接入说明</h3>
+      <h3>Panduan integrasi</h3>
       <div class="hint" data-i18n="docs-intro">
-        接口与 OpenAI 风格对齐，下游项目只需改 <code>base_url</code> 和 <code>api_key</code>。
-        <br>BASE URL：<code id="dBase">—</code>
+        API selaras dengan gaya OpenAI, proyek downstream cukup mengubah <code>base_url</code> dan <code>api_key</code>.
+        <br>BASE URL: <code id="dBase">—</code>
       </div>
 
-      <h4>1. 可用模型</h4>
+      <h4>1. Model yang tersedia</h4>
       <div class="tblwrap"><table>
-        <thead><tr><th>模型 ID</th><th>用途</th><th>接口</th></tr></thead>
+        <thead><tr><th>ID Model</th><th>Kegunaan</th><th>API</th></tr></thead>
         <tbody>
-          <tr><td class="mono">muse-spark</td><td>文本 / 代码对话（支持流式）</td><td class="mono">POST /v1/chat/completions<br>POST /v1/responses</td></tr>
-          <tr><td class="mono">muse-image</td><td>文生图 / 图像编辑</td><td class="mono">POST /v1/images/generations</td></tr>
-          <tr><td class="mono">muse-video</td><td>文生视频 / 图生视频</td><td class="mono">POST /v1/videos → GET /v1/videos/{id}</td></tr>
+          <tr><td class="mono">muse-spark</td><td>Obrolan teks / kode (mendukung streaming)</td><td class="mono">POST /v1/chat/completions<br>POST /v1/responses</td></tr>
+          <tr><td class="mono">muse-image</td><td>Teks ke gambar / edit gambar</td><td class="mono">POST /v1/images/generations</td></tr>
+          <tr><td class="mono">muse-video</td><td>Teks ke video / gambar ke video</td><td class="mono">POST /v1/videos → GET /v1/videos/{id}</td></tr>
         </tbody>
       </table></div>
       <div class="hint" style="margin-top:6px" data-i18n="models-hint">
-        这三个就是 Muse 系列的真实能力：<b>Muse Spark</b>（语言 / 代码）、<b>Muse Image</b>（生图）、
-        <b>Muse Video</b>（生视频）。muse.ai 网页是自动路由的 agent、界面没有模型选择器，
-        所以 <code>model</code> 字段只用于兼容下游 —— 传 <code>gpt-4o</code>、
-        <code>claude-sonnet-4</code>、<code>dall-e-3</code> 等常见名字会自动映射到对应能力。
+        Ketiga ini adalah kemampuan nyata seri Muse: <b>Muse Spark</b> (bahasa / kode), <b>Muse Image</b> (buat gambar),
+        <b>Muse Video</b> (buat video). Halaman web muse.ai adalah agent dengan routing otomatis, antarmukanya tidak memiliki pemilih model,
+        Jadi kolom <code>model</code> hanya untuk kompatibilitas downstream — mengirim <code>gpt-4o</code>,
+        <code>claude-sonnet-4</code>, <code>dall-e-3</code> dan nama umum lainnya akan otomatis dipetakan ke kemampuan yang sesuai.
       </div>
 
-      <h4>2. 对话 / 写代码</h4>
-      <pre class="code"><span class="cp" onclick="cp(this)">复制</span><span class="c"># 非流式</span>
+      <h4>2. Obrolan / tulis kode</h4>
+      <pre class="code"><span class="cp" onclick="cp(this)">Salin</span>
+<span class="c"># Non-streaming</span>
 curl -X POST <span class="s">"BASE/v1/chat/completions"</span> \
   -H <span class="s">"Authorization: Bearer $MUSE2API_KEY"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{"model":"muse-spark","messages":[{"role":"user","content":"写一个 Python 快排"}]}'</span>
+  -d <span class="s">'{"model":"muse-spark","messages":[{"role":"user","content":"Tulis quicksort Python"}]}'</span>
 
-<span class="c"># 流式：加 "stream":true，返回标准 SSE（data: {...} / data: [DONE]）</span></pre>
+<span class="c"># Streaming: tambahkan "stream":true, mengembalikan SSE standar (data: {...} / data: [DONE])</span></pre>
 
-      <h4>3. 生图（curl）</h4>
-      <pre class="code"><span class="cp" onclick="cp(this)">复制</span>curl -X POST <span class="s">"BASE/v1/images/generations"</span> \
+      <h4>3. Buat Gambar (curl)</h4>
+      <pre class="code"><span class="cp" onclick="cp(this)">Salin</span>curl -X POST <span class="s">"BASE/v1/images/generations"</span> \
   -H <span class="s">"Authorization: Bearer $MUSE2API_KEY"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{"prompt":"一只戴宇航头盔的柴犬","size":"1:1","response_format":"url"}'</span>
+  -d <span class="s">'{"prompt":"Seekor anjing Shiba memakai helm astronot","size":"1:1","response_format":"url"}'</span>
 
-<span class="c"># 返回</span>
+<span class="c"># Respons</span>
 {<span class="k">"created"</span>:1790148495,<span class="k">"data"</span>:[{
-  <span class="k">"revised_prompt"</span>:<span class="s">"一只戴宇航头盔的柴犬"</span>,
+  <span class="k">"revised_prompt"</span>:<span class="s">"Seekor anjing Shiba memakai helm astronot"</span>,
   <span class="k">"url"</span>:<span class="s">"http://your-server:18610/v1/media/xxxx.webp"</span>,
   <span class="k">"kind"</span>:<span class="s">"image"</span>,<span class="k">"bytes"</span>:23860}]}
 
-<span class="c"># url 是完整绝对地址，可直接给下游渲染 / 下载；/v1/media/* 无需鉴权。</span>
-<span class="c"># 想要 base64 就传 "response_format":"b64_json"。</span></pre>
+<span class="c"># url adalah alamat absolut lengkap, dapat langsung diberikan ke downstream untuk dirender / diunduh; /v1/media/* tidak perlu autentikasi.</span>
+<span class="c"># Untuk base64, kirim "response_format":"b64_json".</span></pre>
 
-      <h4>4. 生视频（curl，异步）</h4>
-      <pre class="code"><span class="cp" onclick="cp(this)">复制</span><span class="c"># ① 创建任务</span>
+      <h4>4. Buat Video (curl, asinkron)</h4>
+      <pre class="code"><span class="cp" onclick="cp(this)">Salin</span><span class="c"># ① Buat tugas</span>
 curl -X POST <span class="s">"BASE/v1/videos"</span> \
   -H <span class="s">"Authorization: Bearer $MUSE2API_KEY"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{"prompt":"一只小猫在草地上走动","duration":5,"size":"16:9"}'</span>
+  -d <span class="s">'{"prompt":"Seekor anak kucing berjalan di atas rumput","duration":5,"size":"16:9"}'</span>
 <span class="c"># → {"id":"task_xxx","status":"queued"}</span>
 
-<span class="c"># ② 轮询结果</span>
+<span class="c"># ② Pantau hasil</span>
 curl <span class="s">"BASE/v1/videos/task_xxx"</span> -H <span class="s">"Authorization: Bearer $MUSE2API_KEY"</span>
 <span class="c"># → {"status":"succeeded","result":{"url":"/v1/media/xxx.mp4"}}</span></pre>
 
-      <h4>5. Python（openai SDK 兼容）</h4>
-      <pre class="code"><span class="cp" onclick="cp(this)">复制</span><span class="k">from</span> openai <span class="k">import</span> OpenAI
+      <h4>5. Python (kompatibel openai SDK)</h4>
+      <pre class="code"><span class="cp" onclick="cp(this)">Salin</span><span class="k">from</span> openai <span class="k">import</span> OpenAI
 <span class="k">import</span> time
 
 client = OpenAI(base_url=<span class="s">"BASE/v1"</span>, api_key=<span class="s">"m2a_..."</span>)
 
-<span class="c"># 生图</span>
-r = client.images.generate(model=<span class="s">"muse-image"</span>, prompt=<span class="s">"一只戴宇航头盔的柴犬"</span>)
+<span class="c"># Buat Gambar</span>
+r = client.images.generate(model=<span class="s">"muse-image"</span>, prompt=<span class="s">"Seekor anjing Shiba memakai helm astronot"</span>)
 <span class="k">print</span>(r.data[<span class="s">0</span>].url)
 
-<span class="c"># 生视频（走原生接口，因为是异步任务）</span>
+<span class="c"># Buat Video (memakai endpoint native, karena ini tugas asinkron)</span>
 <span class="k">import</span> requests
-t = requests.post(<span class="s">"BASE/v1/videos"</span>, json={<span class="s">"prompt"</span>:<span class="s">"小猫走动"</span>,<span class="s">"duration"</span>:<span class="s">5</span>},
+t = requests.post(<span class="s">"BASE/v1/videos"</span>, json={<span class="s">"prompt"</span>:<span class="s">"Anak kucing berjalan"</span>,<span class="s">"duration"</span>:<span class="s">5</span>},
                   headers={<span class="s">"Authorization"</span>:<span class="s">"Bearer m2a_..."</span>}).json()
 <span class="k">while</span> <span class="k">True</span>:
     s = requests.get(<span class="s">f"BASE/v1/videos/{t['id']}"</span>,
@@ -691,556 +692,625 @@ t = requests.post(<span class="s">"BASE/v1/videos"</span>, json={<span class="s"
     time.sleep(<span class="s">5</span>)
 <span class="k">print</span>(s)</pre>
 
-      <h4>6. 管理接口</h4>
+      <h4>6. API admin</h4>
       <div class="tblwrap"><table>
-        <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+        <thead><tr><th>Metode</th><th>Path</th><th>Deskripsi</th></tr></thead>
         <tbody>
-          <tr><td class="mono">GET</td><td class="mono">/admin/status</td><td>服务总览 + 账号池 + 最近任务</td></tr>
-          <tr><td class="mono">GET</td><td class="mono">/admin/accounts</td><td>账号列表</td></tr>
-          <tr><td class="mono">POST</td><td class="mono">/admin/accounts</td><td>添加账号（单条 / batch 批量文本）</td></tr>
-          <tr><td class="mono">PATCH</td><td class="mono">/admin/accounts/{id}</td><td>改标签 / 启用禁用</td></tr>
-          <tr><td class="mono">DELETE</td><td class="mono">/admin/accounts/{id}</td><td>删除账号</td></tr>
-          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/test</td><td>真实校验会话有效性（顺带刷新额度）</td></tr>
-          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/quota</td><td>实时读取该账号剩余额度</td></tr>
-          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/cookies</td><td>更新该账号 cookie</td></tr>
-          <tr><td class="mono">GET</td><td class="mono">/admin/tasks</td><td>任务记录</td></tr>
-          <tr><td class="mono">GET</td><td class="mono">/admin/media</td><td>媒体库列表</td></tr>
-          <tr><td class="mono">POST</td><td class="mono">/admin/media/delete</td><td>批量删除媒体文件</td></tr>
+          <tr><td class="mono">GET</td><td class="mono">/admin/status</td><td>Ringkasan layanan + kumpulan akun + tugas terbaru</td></tr>
+          <tr><td class="mono">GET</td><td class="mono">/admin/accounts</td><td>Daftar akun</td></tr>
+          <tr><td class="mono">POST</td><td class="mono">/admin/accounts</td><td>Tambah akun (tunggal / teks batch)</td></tr>
+          <tr><td class="mono">PATCH</td><td class="mono">/admin/accounts/{id}</td><td>Ubah label / aktifkan-nonaktifkan</td></tr>
+          <tr><td class="mono">DELETE</td><td class="mono">/admin/accounts/{id}</td><td>Hapus akun</td></tr>
+          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/test</td><td>Verifikasi nyata validitas sesi (sekaligus memperbarui kuota)</td></tr>
+          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/quota</td><td>Baca sisa kuota akun ini secara real-time</td></tr>
+          <tr><td class="mono">POST</td><td class="mono">/admin/accounts/{id}/cookies</td><td>Perbarui cookie akun ini</td></tr>
+          <tr><td class="mono">GET</td><td class="mono">/admin/tasks</td><td>Catatan Tugas</td></tr>
+          <tr><td class="mono">GET</td><td class="mono">/admin/media</td><td>Daftar pustaka media</td></tr>
+          <tr><td class="mono">POST</td><td class="mono">/admin/media/delete</td><td>Hapus berkas media secara batch</td></tr>
         </tbody>
       </table></div>
 
-      <h4>7. 鉴权</h4>
+      <h4>7. Autentikasi</h4>
       <div class="hint" style="margin:0" data-i18n="auth-hint">
-        除 <code>/healthz</code>、<code>/readyz</code>、<code>/v1/media/*</code> 外，其余接口均需
-        <code>Authorization: Bearer &lt;API Key&gt;</code>。API Key 在服务器
-        <code>/opt/muse2api/.env</code> 的 <code>MUSE2API_KEY</code> 中配置。
+        Selain <code>/healthz</code>, <code>/readyz</code>, dan <code>/v1/media/*</code>, semua API lain memerlukan
+        <code>Authorization: Bearer &lt;API Key&gt;</code>. API Key dikonfigurasi di server
+        pada <code>MUSE2API_KEY</code> di <code>/opt/muse2api/.env</code>.
       </div>
 
-      <h4>8. 接入各类客户端 / 智能体</h4>
+      <h4>8. Menghubungkan berbagai klien / agen</h4>
       <div class="hint">
-        凡是支持「自定义 OpenAI 兼容端点」的客户端，都只填三个值就能用：
+        Klien apa pun yang mendukung "endpoint kompatibel OpenAI kustom" hanya perlu mengisi tiga nilai:
       </div>
       <div class="tblwrap" style="margin-top:8px"><table>
-        <thead><tr><th>配置项</th><th>填什么</th></tr></thead>
+        <thead><tr><th>Item pengaturan</th><th>Isi apa</th></tr></thead>
         <tbody>
-          <tr><td>Base URL / API 地址</td><td class="mono">http://&lt;你的服务器IP或域名&gt;:18610/v1</td></tr>
-          <tr><td>API Key</td><td class="mono">m2a_...（本页顶部「接入信息」里那个）</td></tr>
-          <tr><td>模型名</td><td class="mono">muse-spark</td></tr>
+          <tr><td>Base URL / alamat API</td><td class="mono">http://&lt;IP atau domain server Anda&gt;:18610/v1</td></tr>
+          <tr><td>API Key</td><td class="mono">m2a_... (yang ada di "Info integrasi" di bagian atas halaman ini)</td></tr>
+          <tr><td>Nama model</td><td class="mono">muse-spark</td></tr>
         </tbody>
       </table></div>
 
       <div class="hint" style="margin-top:14px" data-i18n="model-alias-hint">
-        <b>模型名随便填也能用</b>：常见名字（<code>gpt-4o</code>、<code>gpt-5</code>、
-        <code>claude-sonnet-4</code>、<code>deepseek-chat</code>、<code>gemini-2.5-pro</code> 等）
-        会自动映射到对应能力；完全没见过的名字会原样透传，muse.ai 那边本来就是自动路由，
-        不影响结果。
+        <b>Nama model apa pun bisa dipakai</b>: nama umum (<code>gpt-4o</code>, <code>gpt-5</code>,
+        <code>claude-sonnet-4</code>, <code>deepseek-chat</code>, <code>gemini-2.5-pro</code>, dll.)
+        akan otomatis dipetakan ke kemampuan yang sesuai; nama yang sama sekali belum dikenal akan diteruskan apa adanya, muse.ai memang memakai routing otomatis,
+        Tidak memengaruhi hasil.
       </div>
 
-      <h4 style="margin-top:18px">按客户端类型看能不能用</h4>
+      <h4 style="margin-top:18px">Kompatibilitas berdasarkan jenis klien</h4>
       <div class="tblwrap"><table>
-        <thead><tr><th>客户端类型</th><th>依赖能力</th><th>状态</th></tr></thead>
+        <thead><tr><th>Jenis klien</th><th>Kemampuan yang dibutuhkan</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>对话 / 聊天类（桌面端、Web UI、浏览器插件）</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>流式输出（打字机效果）</td><td class="mono">stream:true（标准 SSE）</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>代码补全 / 内联补全插件</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>翻译 / 总结 / 解释类工具</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>画图类客户端</td><td class="mono">POST /v1/images/generations</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>视频生成客户端</td><td class="mono">POST /v1/videos（异步轮询）</td><td><span class="badge ok">✅ 可用</span></td></tr>
-          <tr><td>需要「工具调用」的自主 Agent 模式</td><td class="mono">tool_calls / function calling</td><td><span class="badge warn">⚠️ 不可用</span></td></tr>
+          <tr><td>Obrolan / chat (desktop, Web UI, plugin browser)</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Output streaming (efek mesin tik)</td><td class="mono">stream:true (SSE standar)</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Plugin pelengkapan kode / pelengkapan inline</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Alat terjemahan / ringkasan / penjelasan</td><td class="mono">POST /v1/chat/completions</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Klien pembuatan gambar</td><td class="mono">POST /v1/images/generations</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Klien pembuatan video</td><td class="mono">POST /v1/videos (polling asinkron)</td><td><span class="badge ok">✅ Tersedia</span></td></tr>
+          <tr><td>Mode agen otonom yang membutuhkan "pemanggilan alat"</td><td class="mono">tool_calls / function calling</td><td><span class="badge warn">⚠️ Tidak tersedia</span></td></tr>
         </tbody>
       </table></div>
 
       <div class="hint" style="margin-top:8px" data-i18n="tool-calls-hint">
-        <b>关于「工具调用」这条限制（重要，已实测）：</b><br>
-        muse.ai 的网页助手对「输出伪工具调用 JSON」有明确的对齐拒绝策略 —— 实测原话是
-        「我不会按这种 JSON 格式输出'伪工具调用'——我没有 get_weather 这个工具」。
-        用三种不同措辞、不同位置的提示词协议去适配，全部失败。<br>
-        所以：依赖 <code>tool_calls</code> 的<b>自主 Agent 模式</b>（自动读写文件、执行命令那一类）接不了；
-        但所有<b>问答式</b>用法 —— 对话、写代码、解释、翻译、总结、生图、生视频 —— <b>全部完全可用</b>。<br>
-        客户端若强行带上 <code>tools</code> 字段，接口不会报错，会忽略工具声明、按普通对话正常回答。
+        <b>Tentang batasan "pemanggilan alat" ini (penting, sudah teruji):</b><br>
+        Asisten web muse.ai memiliki kebijakan penolakan alignment yang jelas terhadap "output JSON pemanggilan alat palsu" — kalimat asli yang teruji adalah
+        "Saya tidak akan mengeluarkan 'pemanggilan alat palsu' dalam format JSON seperti ini — saya tidak punya alat get_weather".
+        Mencoba adaptasi dengan tiga protokol prompt yang berbeda kata dan posisi, semuanya gagal.<br>
+        Jadi: <b>mode Agen otonom</b> yang bergantung pada <code>tool_calls</code> (yang otomatis membaca-menulis berkas, menjalankan perintah, dan sejenisnya) tidak bisa diintegrasikan;
+        Tetapi semua penggunaan <b>gaya tanya-jawab</b> — percakapan, menulis kode, penjelasan, penerjemahan, ringkasan, buat gambar, buat video — <b>semuanya sepenuhnya tersedia</b>.<br>
+        Jika klien tetap memaksa menyertakan kolom <code>tools</code>, API tidak akan error, melainkan mengabaikan deklarasi alat dan menjawab seperti percakapan biasa.
       </div>
     </div>
   </section>
 </main>
 
 <footer style="max-width:1280px;margin:18px auto 32px;padding:12px 24px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line)">
-  <span>开源仓库：<a href="https://github.com/czg86389-hub/muse2api" target="_blank" style="color:var(--acc);text-decoration:none">GitHub · muse2api</a></span>
+  <span>Repositori open-source:<a href="https://github.com/czg86389-hub/muse2api" target="_blank" style="color:var(--acc);text-decoration:none">GitHub · muse2api</a></span>
 </footer>
 
 <div id="toasts"></div>
 
 <dialog id="mediaDialog" class="media-dialog" aria-labelledby="mediaPreviewTitle">
-  <header><h2 id="mediaPreviewTitle" data-no-i18n></h2><button class="btn" type="button" onclick="closeMediaPreview()">关闭预览</button></header>
+  <header><h2 id="mediaPreviewTitle" data-no-i18n></h2><button class="btn" type="button" onclick="closeMediaPreview()">Tutup pratinjau</button></header>
   <div id="mediaPlayer"></div>
 </dialog>
 
 <dialog id="proxyDialog" class="proxy-dialog" aria-labelledby="proxyTitle" aria-describedby="proxyHelp">
   <form id="proxyForm">
-    <h2 id="proxyTitle">账号代理</h2>
-    <p class="hint" id="proxyHelp">该账号的浏览器、会话检测与保活使用同一代理。代理失败会报告错误，不会自动直连。</p>
-    <label for="proxyMode">连接方式</label>
+    <h2 id="proxyTitle">Proxy akun</h2>
+    <p class="hint" id="proxyHelp">Browser, pemeriksaan sesi, dan keep-alive akun ini memakai proxy yang sama. Kegagalan proxy akan dilaporkan sebagai error, tidak otomatis beralih ke koneksi langsung.</p>
+    <label for="proxyMode">Cara koneksi</label>
     <select id="proxyMode">
-      <option value="default">默认网络</option>
-      <option value="proxy">指定代理</option>
+      <option value="default">Jaringan default</option>
+      <option value="proxy">Gunakan proxy</option>
     </select>
     <div id="proxyFields">
-      <label for="proxyServer">代理地址或完整链接</label>
+      <label for="proxyServer">Alamat proxy atau tautan lengkap</label>
       <input id="proxyServer" type="text" placeholder="socks5://user:password@proxy.example.com:1080" autocomplete="off" spellcheck="false">
-      <p class="hint">可直接粘贴包含用户名和密码的 HTTP、SOCKS5 或 SOCKS5h 链接，立即测试，无需先保存。</p>
-      <details class="proxy-auth"><summary>手动填写认证信息（可选）</summary>
-      <label for="proxyUsername">代理用户名（可选）</label>
+      <p class="hint">Tempel langsung tautan HTTP, SOCKS5, atau SOCKS5h yang berisi nama pengguna dan kata sandi, lalu uji segera, tanpa perlu menyimpan dulu.</p>
+      <details class="proxy-auth"><summary>Isi info autentikasi secara manual (opsional)</summary>
+      <label for="proxyUsername">Nama pengguna proxy (opsional)</label>
       <input id="proxyUsername" type="text" autocomplete="off" spellcheck="false">
-      <label for="proxyPassword">代理密码</label>
+      <label for="proxyPassword">Kata sandi proxy</label>
       <input id="proxyPassword" type="password" autocomplete="new-password" aria-describedby="proxyPasswordHelp">
-      <p class="hint" id="proxyPasswordHelp">密码不会回显。地址与用户名不变时，留空保留已保存密码；修改地址或用户名后请重新输入密码。</p>
+      <p class="hint" id="proxyPasswordHelp">Kata sandi tidak ditampilkan kembali. Jika alamat dan nama pengguna tidak berubah, kosongkan untuk mempertahankan kata sandi tersimpan; setelah mengubah alamat atau nama pengguna, masukkan ulang kata sandi.</p>
       </details>
     </div>
-    <p class="hint">账号正在执行任务时，请稍后再修改代理。保存后，下次请求使用新设置。</p>
+    <p class="hint">Saat akun sedang menjalankan tugas, ubah proxy nanti. Setelah disimpan, permintaan berikutnya memakai pengaturan baru.</p>
     <div id="proxyError" role="alert"></div>
     <div id="proxyResult" class="hint" role="status" aria-live="polite" style="white-space:pre-line;overflow-wrap:anywhere"></div>
     <div class="proxy-actions">
-      <button type="button" class="ghost" id="proxyTest">测试连通性</button>
-      <button type="button" class="danger" id="proxyRemove">移除代理</button>
-      <button type="button" class="ghost" onclick="$('proxyDialog').close()">取消</button>
-      <button type="submit" id="proxySave">保存</button>
+      <button type="button" class="ghost" id="proxyTest">Uji konektivitas</button>
+      <button type="button" class="danger" id="proxyRemove">Hapus proxy</button>
+      <button type="button" class="ghost" onclick="$('proxyDialog').close()">Batal</button>
+      <button type="submit" id="proxySave">Simpan</button>
     </div>
   </form>
 </dialog>
 
 <script>
-/* ================= 界面语言 / UI language =================
- * 中文是源语言；英文通过下面的词典在渲染时替换（静态文本、动态插入的节点、alert/confirm/prompt）。
- * 新增中文文案时，请在 I18N_EN（整句）或 I18N_EN_PATTERNS（含变量）里补上英文。 */
+/* ================= Bahasa antarmuka / UI language =================
+ * Bahasa Indonesia adalah bahasa sumber; bahasa Inggris diganti saat render melalui kamus di bawah (teks statis, node yang disisipkan dinamis, alert/confirm/prompt).
+ * Saat menambah teks Indonesia baru, tambahkan padanan Inggrisnya di I18N_EN (kalimat utuh) atau I18N_EN_PATTERNS (mengandung variabel). */
 const LANG_STORE = 'muse2api_lang';
 const LANG = (() => {
-  try { const v = localStorage.getItem(LANG_STORE); if (v === 'zh' || v === 'en') return v; } catch (e) {}
-  return /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  try { const v = localStorage.getItem(LANG_STORE); if (v === 'id' || v === 'en') return v; } catch (e) {}
+  return /^en\b/i.test(navigator.language || '') ? 'en' : 'id';
 })();
 function setLang(v){
   try { localStorage.setItem(LANG_STORE, v); } catch (e) {}
   location.reload();
 }
-/* 整句：中文 → 英文 */
+/* Kalimat utuh: Indonesia → Inggris */
 const I18N_EN = {
-  "排队与生成时限": "Queue and generation timeouts",
-  "排队不占用生成时限。任务获得并发槽位和账号后开始计算生成时间；重试时等待账号也不计入。": "Queue time does not consume the generation budget. Execution starts after acquiring a slot and account; retry account waits are excluded too.",
-  "独立排队时限（秒，0 为不限）": "Separate queue timeout (seconds; 0 = unlimited)",
-  "保存排队设置": "Save queue settings",
-  "排队设置已保存": "Queue settings saved",
+  "Antrean dan batas waktu pembuatan": "Queue and generation timeouts",
+  "Waktu antre tidak memakan kuota waktu pembuatan. Waktu pembuatan mulai dihitung setelah tugas mendapat slot konkurensi dan akun; saat percobaan ulang, waktu menunggu akun juga tidak dihitung.": "Queue time does not consume the generation budget. Execution starts after acquiring a slot and account; retry account waits are excluded too.",
+  "Batas waktu antre terpisah (detik, 0 = tanpa batas)": "Separate queue timeout (seconds; 0 = unlimited)",
+  "Simpan pengaturan antrean": "Save queue settings",
+  "Pengaturan antrean disimpan": "Queue settings saved",
 
-"播放视频": "Play video",
-  "关闭预览": "Close preview",
-  "代理配置已保存，账号浏览器状态待测试": "Proxy saved; account browser status still needs testing",
-  "代理地址或完整链接": "Proxy address or full URL",
-  "可直接粘贴包含用户名和密码的 HTTP、SOCKS5 或 SOCKS5h 链接，立即测试，无需先保存。": "Paste an HTTP, SOCKS5 or SOCKS5h URL including credentials and test it immediately, without saving.",
-  "手动填写认证信息（可选）": "Enter credentials manually (optional)",
-  "测试连通性": "Test connection",
-  "请输入代理链接": "Enter a proxy URL",
-  "请输入代理链接或先保存该账号的代理": "Enter a proxy URL or save a proxy for this account first",
-  "正在通过当前输入的代理检测出口与 Muse 会话…": "Checking egress and Muse session through the entered proxy…",
-  "取消": "Cancel",
-  "http://proxy.example.com:8080 或 socks5://proxy.example.com:1080": "http://proxy.example.com:8080 or socks5://proxy.example.com:1080",
-  "请先保存该账号的代理": "Save a proxy for this account first",
-  "账号正在执行任务或检测，请稍后再试": "The account is running a task or check; retry later",
-  "账号正在执行任务或检测，请稍后再修改代理": "The account is running a task or check; wait before changing its proxy",
-  "代理已修改，请重新测试": "Proxy changed; test the account again",
-  "请先保存该账号的 HTTP 代理": "Save an HTTP proxy for this account first",
-  "代理出口检测未成功，请检查代理连接或认证": "Proxy egress check did not succeed; check the connection or credentials",
-  "代理出口与 Muse 会话检查通过；生成能力请使用账号测试和实际任务验证": "Proxy egress and Muse session checks passed; use the account browser test and an actual task to verify generation",
-  "代理可连接，但 Muse 会话认证失败，请重新导入 Cookie": "The proxy is reachable, but Muse session authentication failed; re-import the cookies",
-  "代理出口检测失败，请检查代理地址、认证和网络": "Proxy egress check failed; check the server, credentials and network",
-  "账号代理认证失败 (HTTP 407)，请检查代理用户名和密码": "Account proxy authentication failed (HTTP 407); check the proxy username and password",
-  "账号代理认证失败 (HTTP 407)，未完成 VM 唤醒": "Account proxy authentication failed (HTTP 407); VM wake was not completed",
-  "账号代理认证失败 (HTTP 407)，未完成 VM 状态确认": "Account proxy authentication failed (HTTP 407); VM state was not confirmed",
-  "账号代理浏览器连接失败，请检查节点或认证；未回退直连": "The browser could not connect through the account proxy; check the node or credentials. Direct fallback was not used",
-  "代理未测试": "Proxy untested",
-  "代理已连通": "Proxy reachable",
-  "代理未通过": "Proxy failed",
-  "代理未确认": "Proxy unconfirmed",
-  "账号代理": "Account proxy",
-  "该账号的浏览器、会话检测与保活使用同一代理。代理失败会报告错误，不会自动直连。": "The account's browser, session checks and keep-alive use the same proxy. A proxy failure is reported without falling back to a direct connection.",
-  "连接方式": "Connection mode",
-  "默认网络": "Default network",
-  "指定代理": "Use a proxy",
-  "代理": "Proxy",
-  "代理地址": "Proxy server",
-  "代理用户名（可选）": "Proxy username (optional)",
-  "代理密码": "Proxy password",
-  "支持 HTTP 与 SOCKS5（socks5/socks5h）代理及用户名/密码认证。127.0.0.1 指部署服务器，不是你的电脑。": "Supports HTTP and SOCKS5 (socks5/socks5h) proxies with optional username/password authentication. 127.0.0.1 refers to the deployment server, not your computer.",
-  "密码不会回显。地址与用户名不变时，留空保留已保存密码；修改地址或用户名后请重新输入密码。": "The saved password is never shown. Leave it blank to keep it when the server and username are unchanged; enter it again after changing either.",
-  "账号正在执行任务时，请稍后再修改代理。保存后，下次请求使用新设置。": "Wait for the account's active task to finish before editing its proxy. Saved changes apply to the next request.",
-  "测试已保存代理": "Test saved proxy",
-  "移除代理": "Remove proxy",
-  "代理已保存，下次请求生效": "Proxy saved; applies to the next request",
-  "代理已移除，恢复默认网络": "Proxy removed; default network restored",
-  "请先保存代理设置，再重新打开此窗口测试": "Save the proxy settings first, then reopen this dialog to test them",
-  "正在通过当前输入的代理检测出口与 Muse 会话…": "Checking egress and Muse session through the entered proxy…",
-  "代理连通：已确认": "Proxy connectivity: confirmed",
-  "代理连通：未通过": "Proxy connectivity: failed",
-  "代理连通：未确认": "Proxy connectivity: unconfirmed",
-  "Muse 会话：已确认": "Muse session: confirmed",
-  "Muse 会话：未通过": "Muse session: failed",
-  "Muse 会话：未确认": "Muse session: unconfirmed",
-  "账号或任务正在使用中，请稍后重试 (HTTP 409)": "The account or task is busy; retry later (HTTP 409)",
-  "muse2api · 账号池控制台": "muse2api · Account Pool Console",
-  "Muse 网页额度 · 反代 API": "Muse web quota · Reverse-proxy API",
-  "打开 GitHub 开源仓库 (https://github.com/czg86389-hub/muse2api)": "Open the GitHub repository (https://github.com/czg86389-hub/muse2api)",
+"Putar video": "Play video",
+  "Tutup pratinjau": "Close preview",
+  "Konfigurasi proxy disimpan, status browser akun masih perlu diuji": "Proxy saved; account browser status still needs testing",
+  "Alamat proxy atau tautan lengkap": "Proxy address or full URL",
+  "Tempel langsung tautan HTTP, SOCKS5, atau SOCKS5h yang berisi nama pengguna dan kata sandi, lalu uji segera, tanpa perlu menyimpan dulu.": "Paste an HTTP, SOCKS5 or SOCKS5h URL including credentials and test it immediately, without saving.",
+  "Isi info autentikasi secara manual (opsional)": "Enter credentials manually (optional)",
+  "Uji konektivitas": "Test connection",
+  "Masukkan tautan proxy": "Enter a proxy URL",
+  "Masukkan tautan proxy atau simpan dulu proxy akun ini": "Enter a proxy URL or save a proxy for this account first",
+  "Sedang memeriksa egress dan sesi Muse melalui proxy yang dimasukkan…": "Checking egress and Muse session through the entered proxy…",
+  "Batal": "Cancel",
+  "http://proxy.example.com:8080 atau socks5://proxy.example.com:1080": "http://proxy.example.com:8080 or socks5://proxy.example.com:1080",
+  "Simpan dulu proxy akun ini": "Save a proxy for this account first",
+  "Akun sedang menjalankan tugas atau pemeriksaan, silakan coba lagi nanti": "The account is running a task or check; retry later",
+  "Akun sedang menjalankan tugas atau pemeriksaan, ubah proxy nanti": "The account is running a task or check; wait before changing its proxy",
+  "Proxy sudah diubah, silakan uji ulang": "Proxy changed; test the account again",
+  "Simpan dulu proxy HTTP akun ini": "Save an HTTP proxy for this account first",
+  "Pemeriksaan egress proxy tidak berhasil, periksa koneksi atau autentikasi proxy": "Proxy egress check did not succeed; check the connection or credentials",
+  "Pemeriksaan egress proxy dan sesi Muse lolos; untuk kemampuan pembuatan, verifikasi dengan uji akun dan tugas nyata": "Proxy egress and Muse session checks passed; use the account browser test and an actual task to verify generation",
+  "Proxy dapat terhubung, tetapi autentikasi sesi Muse gagal, silakan impor ulang Cookie": "The proxy is reachable, but Muse session authentication failed; re-import the cookies",
+  "Pemeriksaan egress proxy gagal, periksa alamat proxy, autentikasi, dan jaringan": "Proxy egress check failed; check the server, credentials and network",
+  "Autentikasi proxy akun gagal (HTTP 407), periksa nama pengguna dan kata sandi proxy": "Account proxy authentication failed (HTTP 407); check the proxy username and password",
+  "Autentikasi proxy akun gagal (HTTP 407), wake-up VM tidak selesai": "Account proxy authentication failed (HTTP 407); VM wake was not completed",
+  "Autentikasi proxy akun gagal (HTTP 407), konfirmasi status VM tidak selesai": "Account proxy authentication failed (HTTP 407); VM state was not confirmed",
+  "Koneksi browser proxy akun gagal, periksa node atau autentikasi; tidak dialihkan ke koneksi langsung": "The browser could not connect through the account proxy; check the node or credentials. Direct fallback was not used",
+  "Proxy belum diuji": "Proxy untested",
+  "Proxy terhubung": "Proxy reachable",
+  "Proxy tidak lolos": "Proxy failed",
+  "Proxy belum dikonfirmasi": "Proxy unconfirmed",
+  "Proxy akun": "Account proxy",
+  "Browser, pemeriksaan sesi, dan keep-alive akun ini memakai proxy yang sama. Kegagalan proxy akan dilaporkan sebagai error, tidak otomatis beralih ke koneksi langsung.": "The account's browser, session checks and keep-alive use the same proxy. A proxy failure is reported without falling back to a direct connection.",
+  "Cara koneksi": "Connection mode",
+  "Jaringan default": "Default network",
+  "Gunakan proxy": "Use a proxy",
+  "Proxy": "Proxy",
+  "Alamat proxy": "Proxy server",
+  "Nama pengguna proxy (opsional)": "Proxy username (optional)",
+  "Kata sandi proxy": "Proxy password",
+  "Mendukung proxy HTTP dan SOCKS5 (socks5/socks5h) beserta autentikasi nama pengguna/kata sandi. 127.0.0.1 merujuk ke server deployment, bukan komputer Anda.": "Supports HTTP and SOCKS5 (socks5/socks5h) proxies with optional username/password authentication. 127.0.0.1 refers to the deployment server, not your computer.",
+  "Kata sandi tidak ditampilkan kembali. Jika alamat dan nama pengguna tidak berubah, kosongkan untuk mempertahankan kata sandi tersimpan; setelah mengubah alamat atau nama pengguna, masukkan ulang kata sandi.": "The saved password is never shown. Leave it blank to keep it when the server and username are unchanged; enter it again after changing either.",
+  "Saat akun sedang menjalankan tugas, ubah proxy nanti. Setelah disimpan, permintaan berikutnya memakai pengaturan baru.": "Wait for the account's active task to finish before editing its proxy. Saved changes apply to the next request.",
+  "Uji proxy tersimpan": "Test saved proxy",
+  "Hapus proxy": "Remove proxy",
+  "Proxy disimpan, berlaku untuk permintaan berikutnya": "Proxy saved; applies to the next request",
+  "Proxy dihapus, kembali ke jaringan default": "Proxy removed; default network restored",
+  "Simpan dulu pengaturan proxy, lalu buka kembali jendela ini untuk menguji": "Save the proxy settings first, then reopen this dialog to test them",
+  "Sedang memeriksa egress dan sesi Muse melalui proxy yang dimasukkan…": "Checking egress and Muse session through the entered proxy…",
+  "Konektivitas proxy: terkonfirmasi": "Proxy connectivity: confirmed",
+  "Konektivitas proxy: tidak lolos": "Proxy connectivity: failed",
+  "Konektivitas proxy: belum dikonfirmasi": "Proxy connectivity: unconfirmed",
+  "Sesi Muse: terkonfirmasi": "Muse session: confirmed",
+  "Sesi Muse: tidak lolos": "Muse session: failed",
+  "Sesi Muse: belum dikonfirmasi": "Muse session: unconfirmed",
+  "Akun atau tugas sedang digunakan, silakan coba lagi nanti (HTTP 409)": "The account or task is busy; retry later (HTTP 409)",
+  "muse2api · Konsol Kumpulan Akun": "muse2api · Account Pool Console",
+  "Kuota web Muse · API reverse proxy": "Muse web quota · Reverse-proxy API",
+  "Buka repositori open-source GitHub (https://github.com/czg86389-hub/muse2api)": "Open the GitHub repository (https://github.com/czg86389-hub/muse2api)",
+  "Repositori GitHub": "GitHub repo",
+  "Lihat status versi terbaru dan pemberitahuan pembaruan dari repositori resmi": "View the latest version status and update notices from the official repository",
+  "Pemeriksaan versi": "Version check",
+  "Layanan": "Service",
+  "Akun": "Accounts",
+  "Browser": "Browser",
+  "Muat ulang otomatis": "Auto refresh",
+  "Tempel kunci yang diawali m2a_": "Paste the key starting with m2a_",
+  "Simpan": "Save",
+  "Terdeteksi pembaruan versi baru telah dirilis di repositori resmi muse2api!": "A new muse2api version has been released in the official repository!",
+  "Versi baru": "New version",
+  "Repositori resmi sudah memiliki commit fitur baru atau optimasi kinerja, klik tombol di kanan untuk meningkatkan secara online dengan sekali klik (kunci .env lokal dan data kumpulan akun otomatis dipertahankan).": "The official repository has new features or performance improvements. Click the button on the right to upgrade online in one step (your local .env keys and Account Pool data are kept).",
+  "⚡ Tingkatkan online dan mulai ulang dengan sekali klik": "⚡ Upgrade online and restart",
+  "Lihat isi pembaruan": "View changes",
+  "Ingatkan nanti": "Remind me later",
+  "Pemeriksaan versi repositori & pembaruan online": "Official repository version check & online hot upgrade",
+  "Memeriksa…": "Checking…",
+  "⚡ Perbarui online dari GitHub dan mulai ulang dengan sekali klik": "⚡ Update from GitHub and restart",
+  "🔍 Periksa pembaruan lagi sekarang": "🔍 Check for updates now",
+  "Lihat riwayat commit lengkap di GitHub ↗": "View full commit history on GitHub ↗",
+  "Kumpulan Akun": "Account Pool",
+  "Ambil Cookie": "Get Cookies",
+  "Catatan Tugas": "Tasks",
+  "Pustaka Media": "Media Library",
+  "Uji API": "API Playground",
+  "Dokumen Integrasi": "Integration Docs",
+  "Masuk lagi": "Log in again",
+  "Info integrasi": "Connection info",
+  "Isi kedua nilai ini ke proyek downstream": "Fill these two values into your project",
+  "Masukkan dua item di bawah ke proyek Anda untuk mulai memanggil. BASE URL adalah awalan alamat API.": "Put the two values below into your project to start calling the API. BASE URL is the API address prefix.",
+  "BASE URL (alamat API)": "BASE URL (API address)",
+  "Salin": "Copy",
+  "API Key (kunci akses)": "API Key (access key)",
+  "Tampilkan": "Show",
+  "Buat Ulang": "Regenerate",
+  "Total akun": "Total accounts",
+  "Tersedia": "Available",
+  "Error": "Error",
+  "Dinonaktifkan": "Disabled",
+  "Berkas media": "Media files",
+  "Tambah akun": "Add accounts",
+  "Mendukung batch": "Batch supported",
+  "Label akun (untuk impor tunggal)": "Account label (single import)",
+  "misalnya muse-main": "e.g. muse-main",
+  "String cookie": "Cookie string",
+  "hatch_sess=...; hatch_vml=...\natau batch:\nacc-01 | hatch_sess=...; hatch_vml=...\nacc-02 | hatch_sess=...; hatch_vml=...": "hatch_sess=...; hatch_vml=...\nor in batch:\nacc-01 | hatch_sess=...; hatch_vml=...\nacc-02 | hatch_sess=...; hatch_vml=...",
+  "Impor akun": "Import accounts",
+  "Kosongkan": "Clear",
+  "Daftar akun": "Accounts",
+  "● Rotasi keep-alive otomatis berjalan (30 mnt)": "● Auto keep-alive rotation on (30m)",
+  "⚡ Keep-alive semua akun dengan sekali klik": "⚡ Keep all accounts alive now",
+  "Label": "Label",
+  "ID Akun": "Account ID",
+  "Status": "Status",
+  "Masa Berlaku": "Expires",
+  "Kuota": "Quota",
+  "Aktifkan": "Enable",
+  "Terakhir digunakan": "Last used",
+  "Catatan": "Notes",
+  "Aksi": "Actions",
+  "Memuat…": "Loading…",
+  "Cara 1: Ekstensi browser": "Option 1: Browser extension",
+  "Direkomendasikan · Tanpa baris perintah · Semua platform": "Recommended · No command line · All platforms",
+  "Unduh dan ekstrak ekstensi": "Download and unzip the extension",
+  "⬇ Unduh muse2api-extension.zip": "⬇ Download muse2api-extension.zip",
+  "Lihat berkas yang disertakan": "Show included files",
+  "Muat ekstensi di browser": "Load the extension in your browser",
+  "Contoh memakai Chrome (langkah untuk browser berbasis Chromium seperti Edge / Brave / 360 serupa):": "Using Chrome as an example (Edge / Brave / 360 and other Chromium-based browsers are similar):",
+  "Masuk ke muse.ai, lalu klik ikon ekstensi untuk mengimpor": "Log in to muse.ai, then click the extension icon to import",
+  "BASE URL (masukkan ke ekstensi)": "BASE URL (enter in the extension)",
+  "API Key (masukkan ke ekstensi)": "API Key (enter in the extension)",
+  "Cara 2: Salin manual": "Option 2: Copy manually",
+  "Tanpa instalasi · Cadangan": "No install · Fallback",
+  "Cara 3: Tempel untuk impor / skrip lokal": "Option 3: Paste to import / local script",
+  "Lanjutan": "Advanced",
+  "Jika sudah mendapatkan string cookie, tempel langsung di sini untuk mengimpor (string yang disalin manual pada Cara 2 juga ditempel di sini).": "If you already have a cookie string, paste it here to import (strings copied manually in Option 2 go here too).",
+  "Label akun": "Account label",
+  "misalnya acc-01": "e.g. acc-01",
+  "① Unduh skrip": "① Download the script",
+  "Lihat kode sumber": "View source",
+  "② Jalankan (alamat dan kunci sudah diisi untuk Anda)": "② Run it (address and key are pre-filled)",
+  "Sedang membuat perintah…": "Generating command…",
+  "③ Masuk ke muse.ai di jendela browser yang muncul → skrip otomatis mengambil dan mengunggah → jendela tertutup otomatis.": "③ Log in to muse.ai in the browser window that opens → the script captures and uploads the cookies → the window closes automatically.",
+  "Penjelasan masa berlaku Cookie": "Cookie lifetime",
+  "Terukur": "Measured",
+  "Masa berlaku terukur tiap cookie muse.ai (dapat sedikit berbeda antar akun):": "Measured lifetime of each muse.ai cookie (may vary slightly between accounts):",
+  "Masa berlaku terukur": "Measured lifetime",
+  "Fungsi": "Purpose",
+  "Ya": "Yes",
+  "Sekitar 30 hari": "~30 days",
+  "Sesi utama, menentukan apakah bisa masuk": "Main session; decides whether you are logged in",
+  "Sekitar 1 tahun": "~1 year",
+  "Token gateway": "Gateway token",
+  "Sekitar 2 hari": "~2 days",
+  "ID perangkat (pengunjung anonim juga memilikinya, bukan kredensial masuk)": "Device ID (anonymous visitors have it too; not a login credential)",
+  "Catatan tugas pembuatan": "Generation tasks",
+  "Buat Video adalah tugas asinkron, status berubah dari queued → processing → succeeded / failed.": "Video generation is asynchronous; status goes queued → processing → succeeded / failed.",
+  "Muat Ulang": "Refresh",
+  "Kosongkan semua": "Clear all",
+  "ID Tugas": "Task ID",
+  "Jenis": "Type",
+  "Prompt": "Prompt",
+  "Durasi": "Duration",
+  "Waktu dibuat": "Created",
+  "Hasil / Error": "Result / Error",
+  "Semua gambar / video yang sudah dibuat dan tersimpan di disk dapat langsung diunduh atau tautannya diberikan ke proyek downstream.": "All generated images / videos saved on disk. Download them directly or give the links to downstream projects.",
+  "Pilih Semua": "Select all",
+  "Hapus yang dipilih (": "Delete selected (",
+  "Uji buat gambar online": "Image generation test",
+  "Memanggil muse.ai secara nyata untuk membuat, gambar kembali sekitar 10–30 detik.": "Calls muse.ai for real; images return in about 10–30 seconds.",
+  "Rasio": "Aspect ratio",
+  "Mulai buat gambar": "Generate image",
+  "Uji buat video online": "Video generation test",
+  "Tugas asinkron, umumnya selesai dalam 60–120 detik, halaman otomatis memantau progres.": "Asynchronous task, usually done in 60–120 seconds; the page polls progress automatically.",
+  "Durasi (detik)": "Duration (s)",
+  "Mulai buat video": "Generate video",
+  "Panduan integrasi": "Integration guide",
+  "1. Model yang tersedia": "1. Available models",
+  "ID Model": "Model ID",
+  "Kegunaan": "Use",
+  "Endpoint": "Endpoint",
+  "Obrolan teks / kode (mendukung streaming)": "Text / code chat (streaming supported)",
+  "Teks ke gambar / edit gambar": "Text-to-image / image editing",
+  "Teks ke video / gambar ke video": "Text-to-video / image-to-video",
+  "2. Obrolan / tulis kode": "2. Chat / coding",
+  "# Non-streaming": "# Non-streaming",
+  "'{\"model\":\"muse-spark\",\"messages\":[{\"role\":\"user\",\"content\":\"Tulis quicksort Python\"}]}'": "'{\"model\":\"muse-spark\",\"messages\":[{\"role\":\"user\",\"content\":\"Write a quicksort in Python\"}]}'",
+  "# Streaming: tambahkan \"stream\":true, mengembalikan SSE standar (data: {...} / data: [DONE])": "# Streaming: add \"stream\":true to get standard SSE (data: {...} / data: [DONE])",
+  "3. Buat Gambar (curl)": "3. Image generation (curl)",
+  "'{\"prompt\":\"Seekor anjing Shiba memakai helm astronot\",\"size\":\"1:1\",\"response_format\":\"url\"}'": "'{\"prompt\":\"A Shiba Inu wearing a space helmet\",\"size\":\"1:1\",\"response_format\":\"url\"}'",
+  "# Respons": "# Response",
+  "\"Seekor anjing Shiba memakai helm astronot\"": "\"A Shiba Inu wearing a space helmet\"",
+  "# url adalah alamat absolut lengkap, dapat langsung diberikan ke downstream untuk dirender / diunduh; /v1/media/* tidak perlu autentikasi.": "# url is a full absolute address that downstream apps can render / download directly; /v1/media/* needs no auth.",
+  "# Untuk base64, kirim \"response_format\":\"b64_json\".": "# For base64, pass \"response_format\":\"b64_json\".",
+  "4. Buat Video (curl, asinkron)": "4. Video generation (curl, async)",
+  "# ① Buat tugas": "# ① Create the task",
+  "'{\"prompt\":\"Seekor anak kucing berjalan di atas rumput\",\"duration\":5,\"size\":\"16:9\"}'": "'{\"prompt\":\"A kitten walking on the grass\",\"duration\":5,\"size\":\"16:9\"}'",
+  "# ② Pantau hasil": "# ② Poll for the result",
+  "5. Python (kompatibel openai SDK)": "5. Python (openai SDK compatible)",
+  "# Buat Gambar": "# Image generation",
+  "# Buat Video (memakai endpoint native, karena ini tugas asinkron)": "# Video generation (uses the native endpoint because it is asynchronous)",
+  "\"Anak kucing berjalan\"": "\"A kitten walking\"",
+  "6. API admin": "6. Admin API",
+  "Metode": "Method",
+  "Path": "Path",
+  "Deskripsi": "Description",
+  "Ringkasan layanan + kumpulan akun + tugas terbaru": "Service overview + Account Pool + recent tasks",
+  "Tambah akun (tunggal / teks batch)": "Add accounts (single / batch text)",
+  "Ubah label / aktifkan-nonaktifkan": "Rename / enable or disable",
+  "Hapus akun": "Delete account",
+  "Verifikasi nyata validitas sesi (sekaligus memperbarui kuota)": "Verify the session for real (also refreshes quota)",
+  "Baca sisa kuota akun ini secara real-time": "Read this account's remaining quota live",
+  "Perbarui cookie akun ini": "Update this account's cookies",
+  "Daftar pustaka media": "Media library list",
+  "Hapus berkas media secara batch": "Delete media files in batch",
+  "7. Autentikasi": "7. Authentication",
+  "8. Menghubungkan berbagai klien / agen": "8. Connecting clients / agents",
+  "Klien apa pun yang mendukung \"endpoint kompatibel OpenAI kustom\" hanya perlu mengisi tiga nilai:": "Any client that supports a \"custom OpenAI-compatible endpoint\" works with just three values:",
+  "Item pengaturan": "Setting",
+  "Isi apa": "Value",
+  "Base URL / alamat API": "Base URL / API address",
+  "http://<IP-atau-domain-server-Anda>:18610/v1": "http://<your-server-IP-or-domain>:18610/v1",
+  "m2a_... (yang ada di \"Info integrasi\" di bagian atas halaman ini)": "m2a_... (the one under \"Connection info\" at the top of this page)",
+  "Nama model": "Model name",
+  "Kompatibilitas berdasarkan jenis klien": "Compatibility by client type",
+  "Jenis klien": "Client type",
+  "Kemampuan yang dibutuhkan": "Requires",
+  "Obrolan / chat (desktop, Web UI, plugin browser)": "Chat clients (desktop, Web UI, browser extensions)",
+  "✅ Tersedia": "✅ Works",
+  "Output streaming (efek mesin ketik)": "Streaming output (typewriter effect)",
+  "stream:true (SSE standar)": "stream:true (standard SSE)",
+  "Plugin pelengkapan kode / pelengkapan inline": "Code completion / inline completion plugins",
+  "Alat terjemahan / ringkasan / penjelasan": "Translation / summarization / explanation tools",
+  "Klien pembuatan gambar": "Image generation clients",
+  "Klien pembuatan video": "Video generation clients",
+  "POST /v1/videos (polling asinkron)": "POST /v1/videos (async polling)",
+  "Mode agen otonom yang membutuhkan \"pemanggilan alat\"": "Autonomous agent modes that need \"tool calling\"",
+  "⚠️ Tidak tersedia": "⚠️ Not supported",
+  "Repositori open-source:": "Source code: ",
+  "Seekor anjing Shiba memakai helm astronot, gaya cyberpunk, latar lampu neon": "A Shiba Inu wearing a space helmet, cyberpunk style, neon background",
+  "Seekor anak kucing oranye berjalan perlahan di atas rumput, cuaca cerah": "An orange kitten slowly walking on the grass on a sunny day",
+  "✓ Sudah masuk": "✓ Logged in",
+  "API Key wajib diisi": "API Key required",
+  "API Key sudah dibersihkan": "API Key cleared",
+  "API Key disimpan di browser perangkat ini, otomatis terisi saat dibuka berikutnya": "API Key saved in this browser; it will be used automatically next time",
+  "API Key belum diisi atau salah": "API Key is missing or incorrect",
+  "Parameter permintaan salah (HTTP 400), periksa isi input": "Invalid request parameters (HTTP 400); please check your input",
+  "Server menolak permintaan ini (HTTP 403), konfirmasi status masuk dan izin akses": "The server rejected the request (HTTP 403); please check your login state and permissions",
+  "Endpoint tidak ada (HTTP 404), mungkin versi tidak cocok, muat ulang halaman atau perbarui server": "Endpoint not found (HTTP 404); possibly a version mismatch — refresh the page or update the server",
+  "Server tidak mendukung metode permintaan ini (HTTP 405), muat ulang halaman atau perbarui server": "Request method not supported by the server (HTTP 405); refresh the page or update the server",
+  "Data yang dikirim terlalu besar (HTTP 413), kurangi jumlah data lalu coba lagi": "Payload too large (HTTP 413); reduce the amount of data submitted and try again",
+  "Permintaan terlalu sering (HTTP 429), tunggu sebentar lalu coba lagi": "Too many requests (HTTP 429); please wait a moment and try again",
+  "Kesalahan internal server (HTTP 500), coba lagi nanti atau lihat log server": "Internal server error (HTTP 500); try again later or check the server logs",
+  "Layanan mengembalikan error gateway (HTTP 502), coba lagi nanti; jika terus gagal, lihat log server": "The service returned a gateway error (HTTP 502); try again later, and check the server logs if it keeps failing",
+  "Layanan sementara tidak tersedia (HTTP 503), mungkin sedang mulai ulang atau kelebihan beban, coba lagi nanti": "Service temporarily unavailable (HTTP 503); it may be restarting or overloaded — try again later",
+  "Waktu habis gateway (HTTP 504), pemrosesan upstream terlalu lama, coba lagi nanti atau sesuaikan pengaturan waktu habis reverse proxy": "Gateway timeout (HTTP 504); the upstream took too long — try again later or adjust the reverse-proxy timeout",
+  "Tidak pernah": "Never",
+  "Disalin": "Copied",
+  "Disalin ke clipboard": "Copied to clipboard",
+  "Tidak ada konten untuk disalin": "Nothing to copy",
+  "Gagal menyalin, pilih dan salin secara manual": "Copy failed; please select and copy manually",
+  "(Isi dulu API Key di kanan atas, perintah lengkap akan dibuat di sini)": "(Enter the API Key in the top-right corner first; the full command will be generated here)",
+  "Sembunyikan": "Hide",
+  "Memuat…": "Loading…",
+  "(Direktori ekstensi kosong, periksa deployment)": "(Extension folder is empty; please check the deployment)",
+  ", ": ", ",
+  "Buat Ulang API Key?\n\nKunci lama langsung tidak berlaku, proyek downstream yang sudah terhubung harus diperbarui secara bersamaan, jika tidak akan error 401.": "Regenerate the API Key?\n\nThe old key stops working immediately; downstream projects already using it must be updated, or they will get 401 errors.",
+  "Kunci baru sudah dibuat dan langsung berlaku, halaman ini sudah diperbarui otomatis": "New key generated and active immediately; this page has been updated",
+  "Belum diperiksa": "Unchecked",
+  "Belum pernah diperiksa. Klik \"Kuota\" di \"Aksi\" untuk memeriksa secara real-time": "Not checked yet. Click \"Quota\" under Actions to query it live",
+  "Data kuota sudah lebih dari 1 jam, perlu diperiksa ulang": "Quota data is over 1 hour old; please re-check",
+  "Memeriksa…": "Checking…",
+  "Tidak ada data kuota terbaca di panel pengaturan (mungkin struktur halaman berubah)": "No quota data found in the settings panel (the page structure may have changed)",
+  "Tidak diketahui": "Unknown",
+  "Masa berlaku tidak tercatat": "No expiry recorded",
+  "Sudah kedaluwarsa": "Expired",
+  "masa berlakunya kurang dari 12 jam. Sesi muse.ai kedaluwarsa sekitar 2 hari dan tidak diperpanjang karena pemakaian, disarankan masuk lagi sekarang untuk menghindari kegagalan mendadak saat pembuatan.": "expire(s) in less than 12 hours. muse.ai sessions expire in about 2 days and are not extended by use; log in again now to avoid sudden failures during generation.",
+  "Belum ada akun. Buka tab \"Ambil Cookie\" dan impor satu akun dalam tiga langkah": "No accounts yet. Go to the \"Get cookies\" tab and import one in three steps",
+  "● Tersedia": "● Healthy",
+  "● Error": "● Error",
+  "○ Belum diuji": "○ Untested",
+  "Cookie inti tidak ada, tidak dapat membuat": "Core cookies missing; cannot generate",
+  "Inti hilang": "Missing core",
+  "Aktif": "On",
+  "Nonaktif": "Off",
+  "Uji": "Test",
+  "Keep-alive": "Keep alive",
+  "Perbarui token sesi dan masa berlaku secara diam-diam": "Silently refresh the session token and expiry",
+  "Nonaktifkan": "Disable",
+  "Ubah nama": "Rename",
+  "Perbarui Cookie": "Update cookies",
+  "Hapus": "Delete",
+  "🔑 Isi dulu API Key di kanan atas lalu klik \"Simpan\"": "🔑 Enter the API Key in the top-right corner and click \"Save\" first",
+  "Tempel dulu Cookie": "Please paste a cookie first",
+  "Sedang membuka muse.ai secara nyata untuk memverifikasi sesi…": "Opening muse.ai to verify the session…",
+  "Sedang memperpanjang sesi akun ini secara diam-diam…": "Silently renewing the session for this account…",
+  "✓ Keep-alive akun berhasil, waktu kedaluwarsa baru sudah diperbarui": "✓ Keep-alive succeeded; new expiry updated",
+  "Kesalahan tidak diketahui": "unknown error",
+  "Keep-alive sedang berjalan…": "Keeping alive…",
+  "Sedang membangunkan browser headless untuk memperpanjang dan menjaga kumpulan akun secara diam-diam…": "Waking the headless browser to silently renew and keep the account pool alive…",
+  "Tugas keep-alive sedang berjalan di latar belakang, periksa lagi nanti": "A keep-alive job is already running in the background; check back shortly",
+  "Sudah diaktifkan": "Enabled",
+  "Label akun baru:": "New account label:",
+  "Label diperbarui": "Label updated",
+  "Tempel string Cookie terbaru akun ini:": "Paste the latest cookie string for this account:",
+  "Sudah dihapus": "Deleted",
+  "Belum ada catatan tugas": "No tasks yet",
+  "Lihat hasil": "View result",
+  "Video": "Video",
+  "Gambar": "Image",
+  "Hapus": "Delete",
+  "Yakin kosongkan semua catatan tugas? (Berkas media yang sudah dibuat tidak akan dihapus)": "Clear all task records? (Generated media files will not be deleted)",
+  "Batalkan pilih semua": "Deselect all",
+  "Berhasil dihapus": "Deleted",
+  "Berkas tidak ada atau sudah dihapus": "File does not exist or was already deleted",
+  "Pilih dulu berkas media yang akan dihapus": "Select the media files to delete first",
+  "Menghapus…": "Deleting…",
+  "Belum ada berkas media yang dibuat": "No media files generated yet",
+  "Centang untuk aksi batch": "Select for batch actions",
+  "Buka": "Open",
+  "Unduh": "Download",
+  "Masukkan prompt": "Please enter a prompt",
+  "Sedang membuat…": "Generating…",
+  "Sedang mengirim tugas gambar, status akan terus dipantau selama pembuatan…": "Submitting image task; status will be polled during generation…",
+  "Menunggu lebih dari 15 menit, lihat hasil di catatan tugas, jangan kirim ulang": "Waited more than 15 minutes; check the result in Tasks and do not resubmit",
+  "Gagal membuat gambar": "Image generation failed",
+  "Pemeriksaan status sementara gagal, lihat di catatan tugas, jangan kirim ulang": "Status polling is temporarily failing; check Tasks and do not resubmit",
+  "✓ Berhasil dibuat": "✓ Generated successfully",
+  "✗ Gagal dibuat": "✗ Generation failed",
+  "Sedang membuat tugas video…": "Creating video task…",
+  "✗ Gagal membuat tugas": "✗ Failed to create task",
+  "Versi lama": "old",
+  "Terbaru": "latest",
+  "Commit repositori terbaru:": "Latest repository commit: ",
+  "Optimasi kinerja dan pembaruan fitur": "Performance improvements and feature updates",
+  "· Klik \"⚡ Tingkatkan online & mulai ulang dengan sekali klik\" di kanan untuk menarik pembaruan secara otomatis (konfigurasi lokal dan data akun dipertahankan).": "· Click \"⚡ Upgrade online & restart\" on the right to pull the update automatically (local config and account data are preserved).",
+  "klik peningkatan sekali klik di atas": "click the one-click upgrade at the top",
+  "Versi yang saat ini diterapkan:": "Currently deployed: ",
+  "(Commit:": " (Commit:",
+  ") · Terbaru di repositori resmi GitHub:": ") · Latest in official GitHub repo: ",
+  ")": ")",
+  "📜 Aktivitas commit terbaru repositori resmi:": "📜 Recent commits in the official repository:",
+  "Belum ada riwayat commit": "No commits yet",
+  "🔔 Terdeteksi pembaruan versi baru!": "🔔 A new version is available!",
+  "✓ Saat ini sudah versi terbaru repositori resmi": "✓ You are on the latest version of the official repository",
+  "Menunggu autentikasi": "Awaiting auth",
+  "Yakin tarik kode terbaru dari repositori resmi GitHub (czg86389-hub/muse2api) sekarang dan mulai ulang layanan secara otomatis?\n\n(Catatan: kunci .env lokal, Cookie kumpulan akun, dan berkas media yang sudah dibuat akan otomatis dipertahankan, tidak terpengaruh)": "Pull the latest code from the official GitHub repository (czg86389-hub/muse2api) and restart the service now?\n\n(Note: your local .env keys, account pool cookies and generated media files are preserved automatically and will not be affected)",
+  "Sedang memperbarui online…": "Updating…",
+  "Pembaruan selesai": "Update complete",
+  "Normal": "OK",
+  "Berjalan": "Running",
+  "Senggang": "Idle",
+  "Menunggu masuk": "Login required",
+  "Waktu habis menunggu akun yang senggang, semua akun saat ini sibuk": "Timed out waiting for an idle account; all accounts are currently busy",
+  "Tidak ada akun tersedia, impor dulu cookie di halaman admin": "No available account; please import cookies on the admin page first",
+  "Kurang Authorization: Bearer <key>": "Missing Authorization: Bearer <key>",
+  "API key tidak valid": "Invalid API key",
+  "Waktu habis menunggu antrean browser, silakan coba lagi nanti": "Timed out waiting for the browser queue; please retry later",
+  "Batas waktu tunggu total tugas tercapai, berhenti mencoba ulang": "Total task wait time exceeded; stopping retries",
+  "image task tidak ada": "image task not found",
+  "task tidak ada": "task not found",
+  "messages kosong": "messages is empty",
+  "input kosong": "input is empty",
+  "Nama berkas tidak valid": "Invalid file name",
+  "Berkas tidak ada": "File not found",
+  "Tidak ada cookie yang terurai, periksa format": "No cookies could be parsed; please check the format",
+  "Tidak ada cookie yang terurai": "No cookies could be parsed",
+  "Akun tidak ada": "Account not found",
+  "Akun ini tidak memiliki cookie": "This account has no cookies",
+  "Tidak ada akun tersedia": "No available account",
+  "Panel kuota tidak membaca data valid; cache lama tidak ditimpa": "Quota panel returned no valid data; old cache kept",
+  "Sesi valid": "Session valid",
+  "Sesi valid; pembacaan kuota gagal": "Session valid; quota read failed",
+  "Sesi valid, dapat membuat secara normal": "Session valid; generation should work",
+  "Cookie sudah diperbarui": "Cookies updated",
+  "Kunci baru sudah dibuat dan langsung berlaku; kunci lama sudah tidak berlaku, perbarui proyek downstream": "New key generated and active immediately; the old key is now invalid, please update downstream projects",
+  "Skrip helper tidak ada": "Helper script missing",
+  "Direktori ekstensi tidak ada": "Extension directory missing",
+  "Tugas tidak ada": "Task not found",
+  "names harus berupa array nama berkas": "names must be an array of file names",
+  "Akun tidak memiliki cookie valid": "Account has no valid cookies",
+  "Sesi masih cukup dan baru saja di-keep-alive": "Session has plenty of time left and was kept alive recently",
+  "Tugas keep-alive sedang berjalan, tunggu sebentar": "A keep-alive task is already running; please wait",
+  "Berhasil di-commit dan di-push ke repositori GitHub": "Successfully committed and pushed to the GitHub repository",
+  "Layanan dimulai ulang sehingga tugas terputus, kirim ulang": "The task was interrupted by a service restart; please resubmit",
+  "Autentikasi sesi gagal (/api/session HTTP 401), konfirmasi sudah masuk di situs resmi lalu impor ulang cookie": "Session authentication failed (/api/session HTTP 401); confirm you are logged in on the official site and re-import the cookies",
+  "/api/session HTTP 200 mengembalikan non-JSON; status sesi belum dikonfirmasi": "/api/session HTTP 200 returned non-JSON; session status not confirmed",
+  "/api/session HTTP 200 tidak mengembalikan sesi assigned; periksa status akun/ruang kerja di situs resmi": "/api/session HTTP 200 did not return an assigned session; check the account/workspace status on the official site",
+  "Koneksi gateway halaman waktu habis (Connecting...), sedang beralih akun secara otomatis": "Page gateway connection timed out (Connecting...), switching account automatically",
+  "Sesi sudah di-logout oleh muse.ai (mungkin terdorong login lain atau memicu kontrol risiko), impor ulang cookie memakai ekstensi browser": "The session was logged out by muse.ai (possibly kicked by another login or by risk control); please re-import the cookies with the browser extension",
+  "Pemuatan halaman muse.ai waktu habis (kotak input chat tidak muncul), periksa jaringan server lalu coba lagi; sesi belum dikonfirmasi tidak valid": "muse.ai page load timed out (chat input did not appear); check the server network and retry. The session is not confirmed invalid",
+  "Entri pengaturan tidak ditemukan (Settings／設定／设置）": "Settings entry not found (Settings / 設定 / 设置)",
+  "Menu pengaturan tidak menampilkan item pengaturan yang dapat dikenali": "Settings menu did not show a recognizable Settings item",
+  "Panel kuota tidak membaca pemakaian valid; cache lama tidak ditimpa": "No valid usage read from the quota panel; old cache left unchanged",
+  "Kotak input chat tidak ditemukan": "Chat input box not found",
+  "Klien sudah terputus, tugas pembuatan dihentikan": "Client disconnected, aborting generation task",
+  "Kuota akun tidak cukup": "Account quota exhausted",
+  "Prompt tidak berhasil terkirim ke backend (Still sending / Delivery not confirmed), hentikan menunggu dan coba lagi": "Prompt was not delivered to the backend (Still sending / Delivery not confirmed), aborting wait and retrying",
+  "Koneksi VM cloud waktu habis (Still sending)": "Cloud VM connection timed out (Still sending)",
+  "Waktu habis menunggu respons kata pertama asisten": "Timed out waiting for the first token of the assistant reply",
+  "Waktu habis menunggu balasan asisten": "Timed out waiting for the assistant reply",
+  "Gagal membaca gambar referensi, pembuatan dihentikan": "Failed to read the reference image, generation stopped",
+  "Gagal melampirkan gambar referensi, pembuatan dihentikan": "Failed to attach the reference image, generation stopped",
+  "Unggahan gambar referensi belum dikonfirmasi, pembuatan dihentikan": "Reference image upload not confirmed, generation stopped",
+  "Persiapan tugas waktu habis, pengiriman dihentikan": "Task preparation timed out, sending stopped",
+  "Pengiriman prompt belum dikonfirmasi, pembuatan dihentikan": "Prompt sending not confirmed, generation stopped",
+  "Waktu habis menunggu pembuatan, tidak muncul hasil pembuatan baru": "Timed out waiting for generation, no new result appeared",
+  "Sudah dibuat tetapi berkas tidak dapat diambil": "Generated but the file could not be retrieved",
+  "Paket Gratis": "Free",
+  "Paket Gratis": "Free",
+  "Paket Gratis": "Free",
+  "Paket Gratis": "Free",
+  "✓ Sesi valid, dapat membuat secara normal": "✓ Session valid; generation should work",
+  "✗ Keep-alive gagal: Kesalahan tidak diketahui": "✗ Keep-alive failed: unknown error",
+  "/api/session HTTP 200 未返回 assigned 会话；请在官网检查账号/工作区状态": "/api/session HTTP 200 did not return an assigned session; check the account/workspace status on the official site",
+  "/api/session HTTP 200 返回非 JSON；会话状态未确认": "/api/session HTTP 200 returned non-JSON; session status not confirmed",
+  "API key 无效": "Invalid API key",
   "GitHub 仓库": "GitHub repo",
-  "查看官方仓库最新版本状态与更新通知": "View the latest version status and update notices from the official repository",
-  "版本检测": "Version check",
-  "服务": "Service",
-  "账号": "Accounts",
-  "浏览器": "Browser",
-  "自动刷新": "Auto refresh",
-  "粘贴 m2a_ 开头的密钥": "Paste the key starting with m2a_",
-  "保存": "Save",
-  "检测到 muse2api 官方仓库发布了新版本更新！": "A new muse2api version has been released in the official repository!",
-  "新版本": "New version",
-  "官方仓库已有新功能或性能优化提交，点击右侧按钮即可一键在线升级（自动保留本地 .env 密钥与账号池数据）。": "The official repository has new features or performance improvements. Click the button on the right to upgrade online in one step (your local .env keys and Account Pool data are kept).",
-  "⚡ 一键在线升级并重启": "⚡ Upgrade online and restart",
-  "查看更新内容": "View changes",
-  "暂不提醒": "Remind me later",
-  "仓库版本检测与更新": "Official repository version check & online hot upgrade",
-  "检测中…": "Checking…",
-  "⚡ 一键从 GitHub 在线更新并重启": "⚡ Update from GitHub and restart",
-  "🔍 立即重新检测更新": "🔍 Check for updates now",
-  "查看 GitHub 完整提交记录 ↗": "View full commit history on GitHub ↗",
-  "账号池": "Account Pool",
-  "获取 Cookie": "Get Cookies",
-  "任务记录": "Tasks",
-  "媒体库": "Media Library",
-  "接口测试": "API Playground",
-  "接入文档": "Integration Docs",
-  "去重新登录": "Log in again",
-  "接入信息": "Connection info",
-  "下游项目填这两个值": "Fill these two values into your project",
-  "把下面两项填进你的项目就能调用。BASE URL 就是接口地址前缀。": "Put the two values below into your project to start calling the API. BASE URL is the API address prefix.",
-  "BASE URL（接口地址）": "BASE URL (API address)",
-  "复制": "Copy",
-  "API Key（访问密钥）": "API Key (access key)",
-  "显示": "Show",
-  "重新生成": "Regenerate",
-  "账号总数": "Total accounts",
-  "可用": "Available",
-  "异常": "Error",
-  "已禁用": "Disabled",
-  "媒体文件": "Media files",
-  "添加账号": "Add accounts",
-  "支持批量": "Batch supported",
-  "账号标签（单条导入用）": "Account label (single import)",
-  "例如 muse-main": "e.g. muse-main",
-  "Cookie 字符串": "Cookie string",
-  "hatch_sess=...; hatch_vml=...\n或批量：\nacc-01 | hatch_sess=...; hatch_vml=...\nacc-02 | hatch_sess=...; hatch_vml=...": "hatch_sess=...; hatch_vml=...\nor in batch:\nacc-01 | hatch_sess=...; hatch_vml=...\nacc-02 | hatch_sess=...; hatch_vml=...",
-  "导入账号": "Import accounts",
-  "清空": "Clear",
-  "账号列表": "Accounts",
-  "● 自动保活轮转中 (30m)": "● Auto keep-alive rotation on (30m)",
-  "⚡ 一键保活所有账号": "⚡ Keep all accounts alive now",
-  "标签": "Label",
-  "账号 ID": "Account ID",
-  "状态": "Status",
-  "有效期": "Expires",
-  "额度": "Quota",
-  "启用": "Enable",
-  "最后使用": "Last used",
-  "备注": "Notes",
-  "操作": "Actions",
-  "加载中…": "Loading…",
-  "方式一：浏览器扩展": "Option 1: Browser extension",
-  "推荐 · 零命令行 · 全平台": "Recommended · No command line · All platforms",
-  "下载并解压扩展": "Download and unzip the extension",
-  "⬇ 下载 muse2api-extension.zip": "⬇ Download muse2api-extension.zip",
-  "查看包含哪些文件": "Show included files",
-  "在浏览器里加载扩展": "Load the extension in your browser",
-  "以 Chrome 为例（Edge / Brave / 360 极速 等 Chromium 内核浏览器步骤类似）：": "Using Chrome as an example (Edge / Brave / 360 and other Chromium-based browsers are similar):",
-  "登录 muse.ai，然后点扩展图标导入": "Log in to muse.ai, then click the extension icon to import",
-  "BASE URL（填进扩展）": "BASE URL (enter in the extension)",
-  "API Key（填进扩展）": "API Key (enter in the extension)",
-  "方式二：手动复制": "Option 2: Copy manually",
-  "零安装 · 兜底": "No install · Fallback",
-  "方式三：粘贴导入 / 本机脚本": "Option 3: Paste to import / local script",
-  "进阶": "Advanced",
-  "已经拿到 cookie 串的话，直接粘在这里导入（方式二手动复制的串也粘这里）。": "If you already have a cookie string, paste it here to import (strings copied manually in Option 2 go here too).",
-  "账号标签": "Account label",
-  "例如 acc-01": "e.g. acc-01",
-  "① 下载脚本": "① Download the script",
-  "查看源码": "View source",
-  "② 运行（地址和密钥已帮你填好）": "② Run it (address and key are pre-filled)",
-  "正在生成命令…": "Generating command…",
-  "③ 在弹出的浏览器窗口里登录 muse.ai → 脚本自动抓取并上传 → 自动关窗。": "③ Log in to muse.ai in the browser window that opens → the script captures and uploads the cookies → the window closes automatically.",
-  "Cookie 有效期说明": "Cookie lifetime",
-  "实测": "Measured",
-  "实测 muse.ai 各条 cookie 的有效期（不同账号可能略有差异）：": "Measured lifetime of each muse.ai cookie (may vary slightly between accounts):",
-  "实测有效期": "Measured lifetime",
-  "作用": "Purpose",
-  "是": "Yes",
-  "约 30 天": "~30 days",
-  "主会话，决定能不能登录": "Main session; decides whether you are logged in",
-  "约 1 年": "~1 year",
-  "网关令牌": "Gateway token",
-  "约 2 天": "~2 days",
-  "设备标识（匿名访客也有，不是登录凭证）": "Device ID (anonymous visitors have it too; not a login credential)",
-  "生成任务记录": "Generation tasks",
-  "生视频是异步任务，状态会从 queued → processing → succeeded / failed。": "Video generation is asynchronous; status goes queued → processing → succeeded / failed.",
-  "刷新": "Refresh",
-  "清空全部": "Clear all",
-  "任务 ID": "Task ID",
-  "类型": "Type",
-  "提示词": "Prompt",
-  "耗时": "Duration",
-  "创建时间": "Created",
-  "结果 / 错误": "Result / Error",
-  "所有已生成并落盘的图片 / 视频，可直接下载或把链接给下游项目使用。": "All generated images / videos saved on disk. Download them directly or give the links to downstream projects.",
-  "全选": "Select all",
-  "删除选中 (": "Delete selected (",
-  "在线生图测试": "Image generation test",
-  "真实调用 muse.ai 生成，图片约 10–30 秒返回。": "Calls muse.ai for real; images return in about 10–30 seconds.",
-  "比例": "Aspect ratio",
-  "开始生成图片": "Generate image",
-  "在线生视频测试": "Video generation test",
-  "异步任务，一般 60–120 秒完成，页面会自动轮询进度。": "Asynchronous task, usually done in 60–120 seconds; the page polls progress automatically.",
-  "时长(秒)": "Duration (s)",
-  "开始生成视频": "Generate video",
-  "接入说明": "Integration guide",
-  "1. 可用模型": "1. Available models",
-  "模型 ID": "Model ID",
-  "用途": "Use",
-  "接口": "Endpoint",
-  "文本 / 代码对话（支持流式）": "Text / code chat (streaming supported)",
+  "image task 不存在": "image task not found",
+  "input 为空": "input is empty",
+  "messages 为空": "messages is empty",
+  "muse.ai 页面加载超时（未出现聊天输入框），请检查服务器网络后重试；未确认会话失效": "muse.ai page load timed out (chat input did not appear); check the server network and retry. The session is not confirmed invalid",
+  "names 必须是文件名数组": "names must be an array of file names",
+  "task 不存在": "task not found",
+  "、": ", ",
+  "云端 VM 连接超时 (Still sending)": "Cloud VM connection timed out (Still sending)",
+  "代理出口与 Muse 会话检查通过；生成能力请使用账号测试和实际任务验证": "Proxy egress and Muse session checks passed; use the account browser test and an actual task to verify generation",
+  "代理出口检测失败，请检查代理地址、认证和网络": "Proxy egress check failed; check the server, credentials and network",
+  "代理出口检测未成功，请检查代理连接或认证": "Proxy egress check did not succeed; check the connection or credentials",
+  "代理可连接，但 Muse 会话认证失败，请重新导入 Cookie": "The proxy is reachable, but Muse session authentication failed; re-import the cookies",
+  "代理已修改，请重新测试": "Proxy changed; test the account again",
+  "代理配置已保存，账号浏览器状态待测试": "Proxy saved; account browser status still needs testing",
+  "任务不存在": "Task not found",
+  "任务准备超时，已停止发送": "Task preparation timed out, sending stopped",
+  "会话充足且近期已保活": "Session has plenty of time left and was kept alive recently",
+  "会话有效": "Session valid",
+  "会话有效，可正常生成": "Session valid; generation should work",
+  "会话认证失败 (/api/session HTTP 401)，请在官网确认登录后重新导入 cookie": "Session authentication failed (/api/session HTTP 401); confirm you are logged in on the official site and re-import the cookies",
+  "保活任务正在执行中，请稍候": "A keep-alive task is already running; please wait",
+  "助手脚本缺失": "Helper script missing",
+  "图片": "Image",
+  "客户端已断开连接，终止生成任务": "Client disconnected, aborting generation task",
+  "已成功提交并推送到 GitHub 仓库": "Successfully committed and pushed to the GitHub repository",
+  "已更新 cookie": "Cookies updated",
+  "已生成但未能取回文件": "Generated but the file could not be retrieved",
+  "已生成新 Key 并立即生效；旧 Key 已失效，请更新下游项目": "New key generated and active immediately; the old key is now invalid, please update downstream projects",
+  "扩展目录缺失": "Extension directory missing",
+  "找不到聊天输入框": "Chat input box not found",
+  "找不到设置入口（Settings／設定／设置）": "Settings entry not found (Settings / 設定 / 设置)",
+  "提示词发送未确认，已停止生成": "Prompt sending not confirmed, generation stopped",
+  "提示词未成功送达后端（Still sending / Delivery not confirmed），终止等待并重试": "Prompt was not delivered to the backend (Still sending / Delivery not confirmed), aborting wait and retrying",
+  "文件不存在": "File not found",
   "文生图 / 图像编辑": "Text-to-image / image editing",
   "文生视频 / 图生视频": "Text-to-video / image-to-video",
-  "2. 对话 / 写代码": "2. Chat / coding",
-  "# 非流式": "# Non-streaming",
-  "'{\"model\":\"muse-spark\",\"messages\":[{\"role\":\"user\",\"content\":\"写一个 Python 快排\"}]}'": "'{\"model\":\"muse-spark\",\"messages\":[{\"role\":\"user\",\"content\":\"Write a quicksort in Python\"}]}'",
-  "# 流式：加 \"stream\":true，返回标准 SSE（data: {...} / data: [DONE]）": "# Streaming: add \"stream\":true to get standard SSE (data: {...} / data: [DONE])",
-  "3. 生图（curl）": "3. Image generation (curl)",
-  "'{\"prompt\":\"一只戴宇航头盔的柴犬\",\"size\":\"1:1\",\"response_format\":\"url\"}'": "'{\"prompt\":\"A Shiba Inu wearing a space helmet\",\"size\":\"1:1\",\"response_format\":\"url\"}'",
-  "# 返回": "# Response",
-  "\"一只戴宇航头盔的柴犬\"": "\"A Shiba Inu wearing a space helmet\"",
-  "# url 是完整绝对地址，可直接给下游渲染 / 下载；/v1/media/* 无需鉴权。": "# url is a full absolute address that downstream apps can render / download directly; /v1/media/* needs no auth.",
-  "# 想要 base64 就传 \"response_format\":\"b64_json\"。": "# For base64, pass \"response_format\":\"b64_json\".",
-  "4. 生视频（curl，异步）": "4. Video generation (curl, async)",
-  "# ① 创建任务": "# ① Create the task",
-  "'{\"prompt\":\"一只小猫在草地上走动\",\"duration\":5,\"size\":\"16:9\"}'": "'{\"prompt\":\"A kitten walking on the grass\",\"duration\":5,\"size\":\"16:9\"}'",
-  "# ② 轮询结果": "# ② Poll for the result",
-  "5. Python（openai SDK 兼容）": "5. Python (openai SDK compatible)",
-  "# 生图": "# Image generation",
-  "# 生视频（走原生接口，因为是异步任务）": "# Video generation (uses the native endpoint because it is asynchronous)",
-  "\"小猫走动\"": "\"A kitten walking\"",
-  "6. 管理接口": "6. Admin API",
-  "方法": "Method",
-  "路径": "Path",
-  "说明": "Description",
-  "服务总览 + 账号池 + 最近任务": "Service overview + Account Pool + recent tasks",
-  "添加账号（单条 / batch 批量文本）": "Add accounts (single / batch text)",
-  "改标签 / 启用禁用": "Rename / enable or disable",
-  "删除账号": "Delete account",
-  "真实校验会话有效性（顺带刷新额度）": "Verify the session for real (also refreshes quota)",
-  "实时读取该账号剩余额度": "Read this account's remaining quota live",
-  "更新该账号 cookie": "Update this account's cookies",
-  "媒体库列表": "Media library list",
-  "批量删除媒体文件": "Delete media files in batch",
-  "7. 鉴权": "7. Authentication",
-  "8. 接入各类客户端 / 智能体": "8. Connecting clients / agents",
-  "凡是支持「自定义 OpenAI 兼容端点」的客户端，都只填三个值就能用：": "Any client that supports a \"custom OpenAI-compatible endpoint\" works with just three values:",
-  "配置项": "Setting",
-  "填什么": "Value",
-  "Base URL / API 地址": "Base URL / API address",
-  "http://<你的服务器IP或域名>:18610/v1": "http://<your-server-IP-or-domain>:18610/v1",
-  "m2a_...（本页顶部「接入信息」里那个）": "m2a_... (the one under \"Connection info\" at the top of this page)",
-  "模型名": "Model name",
-  "按客户端类型看能不能用": "Compatibility by client type",
-  "客户端类型": "Client type",
-  "依赖能力": "Requires",
-  "对话 / 聊天类（桌面端、Web UI、浏览器插件）": "Chat clients (desktop, Web UI, browser extensions)",
-  "✅ 可用": "✅ Works",
-  "流式输出（打字机效果）": "Streaming output (typewriter effect)",
-  "stream:true（标准 SSE）": "stream:true (standard SSE)",
-  "代码补全 / 内联补全插件": "Code completion / inline completion plugins",
-  "翻译 / 总结 / 解释类工具": "Translation / summarization / explanation tools",
-  "画图类客户端": "Image generation clients",
-  "视频生成客户端": "Video generation clients",
-  "POST /v1/videos（异步轮询）": "POST /v1/videos (async polling)",
-  "需要「工具调用」的自主 Agent 模式": "Autonomous agent modes that need \"tool calling\"",
-  "⚠️ 不可用": "⚠️ Not supported",
-  "开源仓库：": "Source code: ",
-  "一只戴宇航头盔的柴犬，赛博朋克风格，霓虹灯背景": "A Shiba Inu wearing a space helmet, cyberpunk style, neon background",
-  "一只橙色小猫在草地上慢慢走动，阳光明媚": "An orange kitten slowly walking on the grass on a sunny day",
-  "✓ 已登录": "✓ Logged in",
-  "API Key 必填": "API Key required",
-  "已清除 API Key": "API Key cleared",
-  "API Key 已保存到本机浏览器，下次打开自动带上": "API Key saved in this browser; it will be used automatically next time",
-  "API Key 未填写或填写错误": "API Key is missing or incorrect",
-  "请求参数有误 (HTTP 400)，请检查输入内容": "Invalid request parameters (HTTP 400); please check your input",
-  "服务器拒绝了该请求 (HTTP 403)，请确认登录状态与访问权限": "The server rejected the request (HTTP 403); please check your login state and permissions",
-  "接口不存在 (HTTP 404)，可能是版本不匹配，请刷新页面或更新服务端": "Endpoint not found (HTTP 404); possibly a version mismatch — refresh the page or update the server",
-  "服务端不支持该请求方式 (HTTP 405)，请刷新页面或更新服务端": "Request method not supported by the server (HTTP 405); refresh the page or update the server",
-  "提交内容过大 (HTTP 413)，请减少本次提交的数据量后重试": "Payload too large (HTTP 413); reduce the amount of data submitted and try again",
-  "请求过于频繁 (HTTP 429)，请稍等片刻后重试": "Too many requests (HTTP 429); please wait a moment and try again",
-  "服务端内部错误 (HTTP 500)，请稍后重试或查看服务器日志": "Internal server error (HTTP 500); try again later or check the server logs",
-  "服务返回网关错误 (HTTP 502)，请稍后重试；持续失败请查看服务器日志": "The service returned a gateway error (HTTP 502); try again later, and check the server logs if it keeps failing",
-  "服务暂时不可用 (HTTP 503)，可能正在重启或过载，请稍后重试": "Service temporarily unavailable (HTTP 503); it may be restarting or overloaded — try again later",
-  "网关超时 (HTTP 504)，上游处理时间过长，请稍后重试或调整反代超时设置": "Gateway timeout (HTTP 504); the upstream took too long — try again later or adjust the reverse-proxy timeout",
-  "从未": "Never",
-  "已复制": "Copied",
-  "已复制到剪贴板": "Copied to clipboard",
-  "没有可复制的内容": "Nothing to copy",
-  "复制失败，请手动选中复制": "Copy failed; please select and copy manually",
-  "（先在右上角填入 API Key，这里会生成完整命令）": "(Enter the API Key in the top-right corner first; the full command will be generated here)",
-  "隐藏": "Hide",
-  "读取中…": "Loading…",
-  "（扩展目录为空，请检查部署）": "(Extension folder is empty; please check the deployment)",
-  "、": ", ",
-  "重新生成 API Key？\n\n旧 Key 会立即失效，已经接入的下游项目必须同步更新，否则会报 401。": "Regenerate the API Key?\n\nThe old key stops working immediately; downstream projects already using it must be updated, or they will get 401 errors.",
-  "已生成新 Key 并立即生效，本页已自动更新": "New key generated and active immediately; this page has been updated",
-  "未查": "Unchecked",
-  "还没查过。点「操作」里的「额度」实时查询": "Not checked yet. Click \"Quota\" under Actions to query it live",
-  "额度数据已超过 1 小时，需重新查询": "Quota data is over 1 hour old; please re-check",
-  "查询中…": "Checking…",
-  "设置面板里没有读到额度数据（可能是页面结构变了）": "No quota data found in the settings panel (the page structure may have changed)",
-  "未知": "Unknown",
-  "未记录有效期": "No expiry recorded",
-  "已过期": "Expired",
-  "的有效期不足 12 小时。muse.ai 的会话约 2 天到期且不会因使用而延长，建议现在重新登录一次，避免生成时突然失败。": "expire(s) in less than 12 hours. muse.ai sessions expire in about 2 days and are not extended by use; log in again now to avoid sudden failures during generation.",
-  "还没有账号。去「获取 Cookie」页签按三步导入一个": "No accounts yet. Go to the \"Get cookies\" tab and import one in three steps",
-  "● 可用": "● Healthy",
-  "● 异常": "● Error",
-  "○ 未检测": "○ Untested",
-  "缺少核心 cookie，无法生成": "Core cookies missing; cannot generate",
-  "缺核心": "Missing core",
-  "开": "On",
-  "关": "Off",
-  "测试": "Test",
-  "保活": "Keep alive",
-  "静默刷新会话令牌与有效期": "Silently refresh the session token and expiry",
-  "禁用": "Disable",
-  "改名": "Rename",
-  "更新Cookie": "Update cookies",
-  "删除": "Delete",
-  "🔑 请先在右上角填入 API Key 并点「保存」": "🔑 Enter the API Key in the top-right corner and click \"Save\" first",
-  "请先粘贴 Cookie": "Please paste a cookie first",
-  "正在真实打开 muse.ai 校验会话…": "Opening muse.ai to verify the session…",
-  "正在为该账号执行会话静默续期…": "Silently renewing the session for this account…",
-  "✓ 账号保活成功，新到期时间已更新": "✓ Keep-alive succeeded; new expiry updated",
-  "未知错误": "unknown error",
-  "保活执行中…": "Keeping alive…",
-  "正在唤醒无头浏览器，为账号池执行静默续期与保活…": "Waking the headless browser to silently renew and keep the account pool alive…",
-  "保活任务正在后台运行中，请稍候查看": "A keep-alive job is already running in the background; check back shortly",
-  "已启用": "Enabled",
-  "新的账号标签：": "New account label:",
-  "标签已更新": "Label updated",
-  "粘贴该账号最新的 Cookie 字符串：": "Paste the latest cookie string for this account:",
-  "已删除": "Deleted",
-  "暂无任务记录": "No tasks yet",
-  "查看结果": "View result",
-  "视频": "Video",
-  "图片": "Image",
-  "删": "Del",
-  "确定清空全部任务记录？（已生成的媒体文件不会被删除）": "Clear all task records? (Generated media files will not be deleted)",
-  "取消全选": "Deselect all",
-  "删除成功": "Deleted",
-  "文件不存在或已被删除": "File does not exist or was already deleted",
-  "请先选择要删除的媒体文件": "Select the media files to delete first",
-  "删除中…": "Deleting…",
-  "还没有生成任何媒体文件": "No media files generated yet",
-  "勾选以批量操作": "Select for batch actions",
-  "打开": "Open",
-  "下载": "Download",
-  "请输入提示词": "Please enter a prompt",
-  "生成中…": "Generating…",
-  "正在提交图片任务，生成期间会持续查询状态…": "Submitting image task; status will be polled during generation…",
-  "等待超过 15 分钟，请在任务记录查看结果，勿重复提交": "Waited more than 15 minutes; check the result in Tasks and do not resubmit",
-  "图片生成失败": "Image generation failed",
-  "状态查询暂时失败，请在任务记录查看，勿重复提交": "Status polling is temporarily failing; check Tasks and do not resubmit",
-  "✓ 生成成功": "✓ Generated successfully",
-  "✗ 生成失败": "✗ Generation failed",
-  "正在创建视频任务…": "Creating video task…",
-  "✗ 创建任务失败": "✗ Failed to create task",
-  "旧版": "old",
-  "最新": "latest",
-  "最新仓库提交：": "Latest repository commit: ",
-  "性能优化与功能更新": "Performance improvements and feature updates",
-  "· 点击右侧「⚡ 一键在线升级并重启」即可自动拉取更新（保留本地配置与账号数据）。": "· Click \"⚡ Upgrade online & restart\" on the right to pull the update automatically (local config and account data are preserved).",
-  "点击顶部一键升级": "click the one-click upgrade at the top",
-  "当前已部署版本：": "Currently deployed: ",
-  "（Commit:": " (Commit:",
-  "） · GitHub 官方仓库最新：": ") · Latest in official GitHub repo: ",
-  "）": ")",
-  "📜 官方仓库最近提交动态：": "📜 Recent commits in the official repository:",
-  "暂无提交记录": "No commits yet",
-  "🔔 检测到新版本更新！": "🔔 A new version is available!",
-  "✓ 当前已是官方仓库最新版本": "✓ You are on the latest version of the official repository",
-  "待鉴权": "Awaiting auth",
-  "确定立即从 GitHub 官方仓库 (czg86389-hub/muse2api) 拉取最新代码并自动重启服务吗？\n\n（注：本地 .env 密钥、账号池 Cookie 和已生成的媒体文件均会自动保留，不受任何影响）": "Pull the latest code from the official GitHub repository (czg86389-hub/muse2api) and restart the service now?\n\n(Note: your local .env keys, account pool cookies and generated media files are preserved automatically and will not be affected)",
-  "正在在线更新…": "Updating…",
-  "更新完成": "Update complete",
-  "正常": "OK",
-  "运行中": "Running",
-  "空闲": "Idle",
-  "待登录": "Login required",
-  "等待空闲账号超时，当前所有账号均处于繁忙中": "Timed out waiting for an idle account; all accounts are currently busy",
-  "没有可用账号，请先在管理页面导入 cookie": "No available account; please import cookies on the admin page first",
-  "缺少 Authorization: Bearer <key>": "Missing Authorization: Bearer <key>",
-  "API key 无效": "Invalid API key",
-  "等待浏览器队列超时，请稍后重试": "Timed out waiting for the browser queue; please retry later",
-  "任务总等待时限已到，停止重试": "Total task wait time exceeded; stopping retries",
-  "image task 不存在": "image task not found",
-  "task 不存在": "task not found",
-  "messages 为空": "messages is empty",
-  "input 为空": "input is empty",
-  "非法文件名": "Invalid file name",
-  "文件不存在": "File not found",
-  "未解析到任何 cookie，请检查格式": "No cookies could be parsed; please check the format",
-  "未解析到 cookie": "No cookies could be parsed",
-  "账号不存在": "Account not found",
-  "该账号没有 cookie": "This account has no cookies",
-  "没有可用账号": "No available account",
-  "额度面板未读到有效数据；旧缓存未覆盖": "Quota panel returned no valid data; old cache kept",
-  "会话有效": "Session valid",
-  "会话有效；额度读取失败": "Session valid; quota read failed",
-  "会话有效，可正常生成": "Session valid; generation should work",
-  "已更新 cookie": "Cookies updated",
-  "已生成新 Key 并立即生效；旧 Key 已失效，请更新下游项目": "New key generated and active immediately; the old key is now invalid, please update downstream projects",
-  "助手脚本缺失": "Helper script missing",
-  "扩展目录缺失": "Extension directory missing",
-  "任务不存在": "Task not found",
-  "names 必须是文件名数组": "names must be an array of file names",
-  "账号无有效 cookie": "Account has no valid cookies",
-  "会话充足且近期已保活": "Session has plenty of time left and was kept alive recently",
-  "保活任务正在执行中，请稍候": "A keep-alive task is already running; please wait",
-  "已成功提交并推送到 GitHub 仓库": "Successfully committed and pushed to the GitHub repository",
   "服务重启中断了任务，请重新提交": "The task was interrupted by a service restart; please resubmit",
-  "会话认证失败 (/api/session HTTP 401)，请在官网确认登录后重新导入 cookie": "Session authentication failed (/api/session HTTP 401); confirm you are logged in on the official site and re-import the cookies",
-  "/api/session HTTP 200 返回非 JSON；会话状态未确认": "/api/session HTTP 200 returned non-JSON; session status not confirmed",
-  "/api/session HTTP 200 未返回 assigned 会话；请在官网检查账号/工作区状态": "/api/session HTTP 200 did not return an assigned session; check the account/workspace status on the official site",
-  "页面网关连接超时 (Connecting...)，正在自动切换账号": "Page gateway connection timed out (Connecting...), switching account automatically",
-  "会话已被 muse.ai 登出（可能被其它登录挤掉或触发风控），请用浏览器扩展重新导入 cookie": "The session was logged out by muse.ai (possibly kicked by another login or by risk control); please re-import the cookies with the browser extension",
-  "muse.ai 页面加载超时（未出现聊天输入框），请检查服务器网络后重试；未确认会话失效": "muse.ai page load timed out (chat input did not appear); check the server network and retry. The session is not confirmed invalid",
-  "找不到设置入口（Settings／設定／设置）": "Settings entry not found (Settings / 設定 / 设置)",
-  "设置菜单未出现可识别的设置项": "Settings menu did not show a recognizable Settings item",
-  "额度面板未读到有效用量；旧缓存未覆盖": "No valid usage read from the quota panel; old cache left unchanged",
-  "找不到聊天输入框": "Chat input box not found",
-  "客户端已断开连接，终止生成任务": "Client disconnected, aborting generation task",
-  "账号额度不足": "Account quota exhausted",
-  "提示词未成功送达后端（Still sending / Delivery not confirmed），终止等待并重试": "Prompt was not delivered to the backend (Still sending / Delivery not confirmed), aborting wait and retrying",
-  "云端 VM 连接超时 (Still sending)": "Cloud VM connection timed out (Still sending)",
-  "等待助手首字响应超时": "Timed out waiting for the first token of the assistant reply",
+  "未知": "Unknown",
+  "未知错误": "unknown error",
+  "未解析到 cookie": "No cookies could be parsed",
+  "未解析到任何 cookie，请检查格式": "No cookies could be parsed; please check the format",
+  "没有可用账号": "No available account",
+  "没有可用账号，请先在管理页面导入 cookie": "No available account; please import cookies on the admin page first",
   "等待助手回复超时": "Timed out waiting for the assistant reply",
-  "参考图读取失败，已停止生成": "Failed to read the reference image, generation stopped",
-  "附加参考图失败，已停止生成": "Failed to attach the reference image, generation stopped",
-  "参考图上传未确认，已停止生成": "Reference image upload not confirmed, generation stopped",
-  "任务准备超时，已停止发送": "Task preparation timed out, sending stopped",
-  "提示词发送未确认，已停止生成": "Prompt sending not confirmed, generation stopped",
+  "等待助手首字响应超时": "Timed out waiting for the first token of the assistant reply",
   "等待生成超时，未出现新的生成结果": "Timed out waiting for generation, no new result appeared",
-  "已生成但未能取回文件": "Generated but the file could not be retrieved",
-  "免费计划": "Free",
-  "免費計劃": "Free",
-  "免费方案": "Free",
-  "免費方案": "Free",
-  "✓ 会话有效，可正常生成": "✓ Session valid; generation should work",
-  "✗ 保活失败: 未知错误": "✗ Keep-alive failed: unknown error",
+  "等待空闲账号超时，当前所有账号均处于繁忙中": "Timed out waiting for an idle account; all accounts are currently busy",
+  "缺少 Authorization: Bearer <key>": "Missing Authorization: Bearer <key>",
+  "视频": "Video",
+  "设置菜单未出现可识别的设置项": "Settings menu did not show a recognizable Settings item",
+  "该账号没有 cookie": "This account has no cookies",
+  "请输入代理链接或先保存该账号的代理": "Enter a proxy URL or save a proxy for this account first",
+  "账号不存在": "Account not found",
+  "账号代理浏览器连接失败，请检查节点或认证；未回退直连": "The browser could not connect through the account proxy; check the node or credentials. Direct fallback was not used",
+  "账号代理认证失败 (HTTP 407)，未完成 VM 唤醒": "Account proxy authentication failed (HTTP 407); VM wake was not completed",
+  "账号代理认证失败 (HTTP 407)，未完成 VM 状态确认": "Account proxy authentication failed (HTTP 407); VM state was not confirmed",
+  "账号代理认证失败 (HTTP 407)，请检查代理用户名和密码": "Account proxy authentication failed (HTTP 407); check the proxy username and password",
+  "账号无有效 cookie": "Account has no valid cookies",
+  "账号正在执行任务或检测，请稍后再修改代理": "The account is running a task or check; wait before changing its proxy",
+  "账号正在执行任务或检测，请稍后再试": "The account is running a task or check; retry later",
+  "账号额度不足": "Account quota exhausted",
+  "非法文件名": "Invalid file name",
+  "页面网关连接超时 (Connecting...)，正在自动切换账号": "Page gateway connection timed out (Connecting...), switching account automatically",
+  "额度面板未读到有效数据；旧缓存未覆盖": "Quota panel returned no valid data; old cache kept",
+  "额度面板未读到有效用量；旧缓存未覆盖": "No valid usage read from the quota panel; old cache left unchanged",
 };
-/* 含富文本的块：data-i18n="key" → 英文 innerHTML（须保留原有子元素的 id/class/属性） */
+/* Blok berisi rich text: data-i18n="key" → innerHTML Inggris (id/class/atribut anak yang ada harus dipertahankan) */
 const I18N_EN_HTML = {
   "extension-upgrade-notice": "<b>Important: manually upgrade the extension to 1.0.3</b><br>Updating the service does not update unpacked extensions. Replace files in the original folder and click Reload at <code>chrome://extensions</code> or <code>edge://extensions</code>, separately for each browser profile.<br><a href=\"/admin/extension\">Download extension 1.0.3</a>; upgrade the userscript to 1.1.2.",
   "repo-status-desc": "Comparing your local version with the latest version in the official GitHub repository… (online upgrades keep your <code>.env</code> keys and the <code>data/</code> Account Pool and media data)",
@@ -1265,7 +1335,7 @@ const I18N_EN_HTML = {
   "tool-calls-hint": "\n        <b>About the \"tool calling\" limitation (important, tested):</b><br>\n        The muse.ai web assistant has an explicit alignment policy that refuses to \"output fake tool-call JSON\". Its actual reply in testing was\n        \"I won't output 'fake tool calls' in this JSON format — I don't have a get_weather tool.\"\n        Three prompt protocols with different wording and placement were tried, and all failed.<br>\n        So: <b>autonomous agent modes</b> that depend on <code>tool_calls</code> (reading/writing files, running commands, etc.) can't be supported;\n        but all <b>Q&amp;A-style</b> usage (chat, coding, explaining, translating, summarizing, images, videos) <b>works fully</b>.<br>\n        If a client sends a <code>tools</code> field anyway, the API won't error: it ignores the tool declarations and answers as a normal chat.\n      ",
   "col-enabled": "Enabled",
 };
-/* 含变量的文案：[正则源码, 替换串]，按顺序匹配整段文本 */
+/* Teks mengandung variabel: [sumber regex, string pengganti], dicocokkan berurutan terhadap seluruh teks. Pola Mandarin dipertahankan karena mencocokkan pesan server; pola Indonesia ditambahkan untuk string yang disusun UI. */
 const I18N_EN_PATTERNS = ([
   ["账号代理请求失败 \\((.*?)\\)；请检查代理连接或认证，未回退直连", "Account proxy request failed ($1); check the proxy connection or credentials. Direct fallback was not used"],
   ["经账号代理唤醒或确认 VM 失败 \\((.*?)\\)；未回退直连", "VM wake or verification through the account proxy failed ($1); direct fallback was not used"],
@@ -1373,17 +1443,76 @@ const I18N_EN_PATTERNS = ([
   ["期望生成视频，但提取成品类型为图片 \\((.*?)\\)，拒绝以图片冒充视频交付", "Expected a video, but the extracted result is an image ($1); refusing to deliver an image as a video"],
   ["期望生成视频，但下载成品类型为图片 \\((.*?)\\)，拒绝以图片冒充视频交付", "Expected a video, but the downloaded result is an image ($1); refusing to deliver an image as a video"],
   ["CDP (\\S+) 超时", "CDP $1 timed out"],
+  /* Pola Indonesia (kembaran dari pola Mandarin di atas, untuk string yang disusun UI) */
+  ["IP keluar: (.*)", "Egress IP: $1"],
+  ["Status workspace: (.*)", "Workspace status: $1"],
+  ["(\\d+) detik lalu", "$1s ago"],
+  ["(\\d+) menit lalu", "$1 min ago"],
+  ["(\\d+) jam lalu", "$1 h ago"],
+  ["(\\d+) hari lalu", "$1 d ago"],
+  ["Dicek (\\d+) detik lalu", "checked $1s ago"],
+  ["Dicek (\\d+) menit lalu", "checked $1 min ago"],
+  ["Dicek (\\d+) jam lalu", "checked $1 h ago"],
+  ["Dicek (\\d+) hari lalu", "checked $1 d ago"],
+  ["Server mengembalikan respons yang tidak dapat diuraikan \\(HTTP (\\d+)\\), coba lagi nanti atau lihat log server", "The service returned an unparseable response (HTTP $1); try again later or check the server logs"],
+  ["(python get_muse_cookie\\.py .*--key )API_KEY_Anda( .*)", "$1YOUR_API_KEY$2"],
+  ["Berisi (\\d+) berkas:", "Contains $1 files: "],
+  ["Paket: (.*)", "Plan: $1"],
+  ["Reset kuota mingguan: (.*)", "Weekly limit resets: $1"],
+  ["Pemakaian mingguan: terpakai (.*)%", "Weekly usage: $1% used"],
+  ["Token tambahan: sisa (.*) \\(terpakai (.*)%\\)", "Extra tokens: $1 left ($2% used)"],
+  ["Waktu pengecekan: (.*)", "Checked at: $1"],
+  ["(.*) · Terpakai ([\\d.?]+)%", "$1 · $2% used"],
+  ["Kuota: (.*?), pemakaian mingguan terpakai (.*?)%, tambahan sisa (.*)", "Quota: $1, weekly usage $2% used, extra left $3"],
+  ["Kuota: (.*?), pemakaian mingguan terpakai (.*?)%", "Quota: $1, weekly usage $2% used"],
+  ["Sudah kedaluwarsa pada (.*?)\\(Diperkirakan dari masa hidup hatch_vml sekitar 2 hari, expires pastinya tidak didapat\\)", "Expired at $1 (estimated from the ~2-day hatch_vml lifetime; exact expiry not available)"],
+  ["Sudah kedaluwarsa pada (.*?)\\(Waktu kedaluwarsa hatch_vml hasil pengukuran nyata\\)", "Expired at $1 (measured hatch_vml expiry)"],
+  ["Waktu kedaluwarsa: (.*?)\\(Diperkirakan dari masa hidup hatch_vml sekitar 2 hari, expires pastinya tidak didapat\\)", "Expires at: $1 (estimated from the ~2-day hatch_vml lifetime; exact expiry not available)"],
+  ["Waktu kedaluwarsa: (.*?)\\(Waktu kedaluwarsa hatch_vml hasil pengukuran nyata\\)", "Expires at: $1 (measured hatch_vml expiry)"],
+  ["Sisa ([\\d.]+) hari", "$1 d left"],
+  ["Sisa (\\d+) jam", "$1 h left"],
+  ["(\\d+) akun sudah kedaluwarsa", "$1 account(s) expired"],
+  [", ada (\\d+) lagi yang segera kedaluwarsa \\((.*)\\)\\.", ", $1 more expiring soon ($2)."],
+  ["Berhasil mengimpor (\\d+) akun", "Imported $1 account(s)"],
+  ["(.*?); kuota sudah diperbarui: (.*?)%", "$1; quota refreshed: $2%"],
+  ["(.*?); gagal membaca kuota: (.*)", "$1; quota read failed: $2"],
+  ["Berhasil keep-alive (\\d+) akun, lewati (\\d+)", "Kept $1 account(s) alive, skipped $2"],
+  ["Cookie sudah diperbarui \\((\\d+) item\\)", "Cookies updated ($1)"],
+  ["Yakin hapus akun \"(.*)\"\\? Tindakan ini tidak bisa dibatalkan\\.", "Delete account \"$1\"? This cannot be undone."],
+  ["Sudah menghapus (\\d+) catatan", "Cleared $1 record(s)"],
+  ["Yakin hapus berkas media \"(.*)\"\\? Tindakan ini tidak bisa dibatalkan\\.", "Delete media file \"$1\"? This cannot be undone."],
+  ["Yakin hapus permanen (\\d+) berkas media yang dipilih\\? Tindakan ini tidak bisa dibatalkan\\.", "Permanently delete the $1 selected media files? This cannot be undone."],
+  ["Berhasil menghapus (\\d+) berkas", "Deleted $1 file(s)"],
+  ["Gagal memuat: (.*)", "Failed to load: $1"],
+  ["Gagal membaca: (.*)", "Failed to load: $1"],
+  ["Gagal membuat: (.*)", "Generation failed: $1"],
+  ["Gagal mengecek kuota: (.*)", "Quota query failed: $1"],
+  ["Gagal mengimpor: (.*)", "Import failed: $1"],
+  ["Gagal menguji: (.*)", "Test failed: $1"],
+  ["Gagal menjalankan keep-alive: (.*)", "Keep-alive failed: $1"],
+  ["Keep-alive gagal: (.*)", "Keep-alive failed: $1"],
+  ["Operasi gagal: (.*)", "Operation failed: $1"],
+  ["Gagal mengubah nama: (.*)", "Rename failed: $1"],
+  ["Gagal menghapus massal: (.*)", "Batch delete failed: $1"],
+  ["Gagal menghapus: (.*)", "Delete failed: $1"],
+  ["Gagal memperbarui: (.*)", "Update failed: $1"],
+  ["Gagal mengosongkan: (.*)", "Clear failed: $1"],
+  ["Gagal memperbarui online: (.*)", "Online update failed: $1"],
+  ["Tugas (.*?) · (.*?) · sudah menunggu (\\d+) detik", "Task $1 · $2 · waited $3s"],
+  ["Tugas (.*?) · sudah menunggu (\\d+) dtk \\(video biasanya 60–120 detik\\)…", "Task $1 · waited $2s (videos usually take 60–120s)…"],
+  ["✨ Fitur utama versi ini \\((.*)\\): ", "✨ Key features of this version ($1): "],
+  ["(.*), layanan sedang dimulai ulang, halaman akan dimuat ulang otomatis setelah siap…", "$1; the service is restarting and will auto-refresh the page when ready…"],
+  ["(.*) dan (\\d+) lainnya", "$1 and $2 more"],
   ["✗ (.+)", "✗ $1"],
 ]).map(([re, rep]) => [new RegExp('^' + re + '$', 's'), rep]);
-const HAN_RE = /[㐀-鿿！-～　-〿]/;
 const hasOwn = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
 function t(s, depth = 0){
-  if (LANG !== 'en' || typeof s !== 'string' || !HAN_RE.test(s) || depth > 4) return s;
+  if (LANG !== 'en' || typeof s !== 'string' || depth > 4) return s;
   const k = s.trim();
   if (hasOwn(I18N_EN, k)) return s.replace(k, () => I18N_EN[k]);
   for (const [re, rep] of I18N_EN_PATTERNS) {
     if (!re.test(k)) continue;
-    // 捕获组（多为嵌套的服务端消息）也递归翻译
+    // Grup tangkapan (kebanyakan pesan server bersarang) juga diterjemahkan secara rekursif
     const out = k.replace(re, (...m) => rep.replace(/\$(\d)/g, (_, i) => t(m[+i] ?? '', depth + 1)));
     return s.replace(k, () => out);
   }
@@ -1412,16 +1541,16 @@ function translateTree(root){
   for (const el of [root, ...root.querySelectorAll('*')]) {
     for (const a of I18N_ATTRS) {
       const v = el.getAttribute(a);
-      if (v && HAN_RE.test(v)) { const n = t(v); if (n !== v) el.setAttribute(a, n); }
+      if (v) { const n = t(v); if (n !== v) el.setAttribute(a, n); }
     }
-    // 仅翻译文本框里的默认示例内容；<option value> 等是提交给服务端的数据，不能动
-    if (el.tagName === 'INPUT' && el.type === 'text' && HAN_RE.test(el.defaultValue) && el.value === el.defaultValue) {
+    // Hanya terjemahkan isi contoh default di kotak teks; <option value> dan sejenisnya adalah data yang dikirim ke server, jangan diubah
+    if (el.tagName === 'INPUT' && el.type === 'text' && el.value === el.defaultValue) {
       el.value = el.defaultValue = t(el.defaultValue);
     }
   }
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const nodes = [];
-  while (w.nextNode()) if (HAN_RE.test(w.currentNode.nodeValue)) nodes.push(w.currentNode);
+  while (w.nextNode()) nodes.push(w.currentNode);
   nodes.forEach(translateTree);
 }
 document.getElementById('langSel').value = LANG;
@@ -1442,14 +1571,14 @@ if (LANG === 'en') {
   }
 }
 
-/* ================= 基础 ================= */
+/* ================= Dasar ================= */
 const $ = id => document.getElementById(id);
 const KEY_STORE = 'muse2api_key';
 let KEY = localStorage.getItem(KEY_STORE) || new URLSearchParams(location.search).get('key') || '';
 $('key').value = KEY;
 $('dBase').textContent = location.origin + '/v1';
 
-/* 登录状态：控制提示条和 Key 输入框高亮 */
+/* Status login: mengontrol bilah petunjuk dan highlight kolom input Key */
 let authOK = null;
 function setAuth(ok){
   if (authOK === ok) return;
@@ -1457,15 +1586,15 @@ function setAuth(ok){
   $('authBanner').classList.toggle('show', !ok);
   $('keyBox').classList.toggle('ok', ok);
   $('keyBox').classList.toggle('miss', !ok);
-  $('keyLbl').textContent = ok ? '✓ 已登录' : 'API Key 必填';
+  $('keyLbl').textContent = ok ? '✓ Sudah masuk' : 'API Key wajib diisi';
 }
 
 function saveKey(){
   KEY = $('key').value.trim();
   localStorage.setItem(KEY_STORE, KEY);
-  if (!KEY){ setAuth(false); toast('已清除 API Key', 'warn'); return; }
-  toast('API Key 已保存到本机浏览器，下次打开自动带上', 'ok');
-  authOK = null;                 // 强制重新判定
+  if (!KEY){ setAuth(false); toast('API Key sudah dibersihkan', 'warn'); return; }
+  toast('API Key disimpan di browser perangkat ini, otomatis terisi saat dibuka berikutnya', 'ok');
+  authOK = null;                 // Paksa penilaian ulang
   refreshAll();
 }
 
@@ -1487,7 +1616,7 @@ async function api(path, opts){
   let data; try { data = JSON.parse(txt); } catch(e){ data = null; }
   if (r.status === 401){
     setAuth(false);
-    throw new Error('API Key 未填写或填写错误');
+    throw new Error('API Key belum diisi atau salah');
   }
   setAuth(true);
   if (!r.ok) {
@@ -1500,19 +1629,19 @@ async function api(path, opts){
     }
     if (!msg && txt) {
       const statusHints = {
-        400: '请求参数有误 (HTTP 400)，请检查输入内容',
-        403: '服务器拒绝了该请求 (HTTP 403)，请确认登录状态与访问权限',
-        404: '接口不存在 (HTTP 404)，可能是版本不匹配，请刷新页面或更新服务端',
-        409: '账号或任务正在使用中，请稍后重试 (HTTP 409)',
-        405: '服务端不支持该请求方式 (HTTP 405)，请刷新页面或更新服务端',
-        413: '提交内容过大 (HTTP 413)，请减少本次提交的数据量后重试',
-        429: '请求过于频繁 (HTTP 429)，请稍等片刻后重试',
-        500: '服务端内部错误 (HTTP 500)，请稍后重试或查看服务器日志',
-        502: '服务返回网关错误 (HTTP 502)，请稍后重试；持续失败请查看服务器日志',
-        503: '服务暂时不可用 (HTTP 503)，可能正在重启或过载，请稍后重试',
-        504: '网关超时 (HTTP 504)，上游处理时间过长，请稍后重试或调整反代超时设置',
+        400: 'Parameter permintaan salah (HTTP 400), periksa isi input',
+        403: 'Server menolak permintaan ini (HTTP 403), konfirmasi status masuk dan izin akses',
+        404: 'Endpoint tidak ada (HTTP 404), mungkin versi tidak cocok, muat ulang halaman atau perbarui server',
+        409: 'Akun atau tugas sedang digunakan, silakan coba lagi nanti (HTTP 409)',
+        405: 'Server tidak mendukung metode permintaan ini (HTTP 405), muat ulang halaman atau perbarui server',
+        413: 'Data yang dikirim terlalu besar (HTTP 413), kurangi jumlah data lalu coba lagi',
+        429: 'Permintaan terlalu sering (HTTP 429), tunggu sebentar lalu coba lagi',
+        500: 'Kesalahan internal server (HTTP 500), coba lagi nanti atau lihat log server',
+        502: 'Layanan mengembalikan error gateway (HTTP 502), coba lagi nanti; jika terus gagal, lihat log server',
+        503: 'Layanan sementara tidak tersedia (HTTP 503), mungkin sedang mulai ulang atau kelebihan beban, coba lagi nanti',
+        504: 'Waktu habis gateway (HTTP 504), pemrosesan upstream terlalu lama, coba lagi nanti atau sesuaikan pengaturan waktu habis reverse proxy',
       };
-      msg = statusHints[r.status] || ('服务返回了无法解析的响应 (HTTP ' + r.status + ')，请稍后重试或查看服务器日志');
+      msg = statusHints[r.status] || ('Server mengembalikan respons yang tidak dapat diuraikan (HTTP ' + r.status + '), coba lagi nanti atau lihat log server');
     }
     throw new Error(msg || ('HTTP ' + r.status));
   }
@@ -1536,19 +1665,19 @@ function fmtTime(ts){
   return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
 function ago(ts){
-  if (!ts) return '从未';
+  if (!ts) return 'Tidak pernah';
   const s = Math.max(0, Math.floor(Date.now()/1000) - ts);
-  if (s < 60) return s + ' 秒前';
-  if (s < 3600) return Math.floor(s/60) + ' 分钟前';
-  if (s < 86400) return Math.floor(s/3600) + ' 小时前';
-  return Math.floor(s/86400) + ' 天前';
+  if (s < 60) return s + ' detik lalu';
+  if (s < 3600) return Math.floor(s/60) + ' menit lalu';
+  if (s < 86400) return Math.floor(s/3600) + ' jam lalu';
+  return Math.floor(s/86400) + ' hari lalu';
 }
 function cp(el){
-  const t = el.parentElement.innerText.replace(/^(复制|Copy)\n?/, '');
-  navigator.clipboard.writeText(t).then(() => toast('已复制', 'ok'));
+  const t = el.parentElement.innerText.replace(/^(Salin|Copy)\n?/, '');
+  navigator.clipboard.writeText(t).then(() => toast('Disalin', 'ok'));
 }
 
-/* ================= 页签 ================= */
+/* ================= Tab ================= */
 function goTab(name){
   const b = document.querySelector(`nav.tabs button[data-t="${name}"]`);
   if (b) b.click();
@@ -1566,7 +1695,7 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
   };
 });
 
-/* ================= 接入信息 / API Key ================= */
+/* ================= Info Integrasi / API Key ================= */
 let realKey = '';
 let keyShown = false;
 
@@ -1581,7 +1710,7 @@ async function loadApikey(){
   }catch(e){
     $('inBase').value = location.origin + '/v1';
     fillExtFields(location.origin);
-    $('cmdText').textContent = '（先在右上角填入 API Key，这里会生成完整命令）';
+    $('cmdText').textContent = '(Isi dulu API Key di kanan atas, perintah lengkap akan dibuat di sini)';
   }
 }
 
@@ -1591,26 +1720,26 @@ function maskKey(k){
 }
 function renderKey(){
   $('inKey').value = keyShown ? realKey : maskKey(realKey);
-  $('keyEye').textContent = keyShown ? '隐藏' : '显示';
+  $('keyEye').textContent = keyShown ? 'Sembunyikan' : 'Tampilkan';
 }
 function toggleKey(){ keyShown = !keyShown; renderKey(); }
 
 function buildCmd(baseUrl){
   const root = (baseUrl || location.origin).replace(/\/v1\/?$/, '').replace(/\/+$/, '');
-  return `python get_muse_cookie.py --base ${root} --key ${realKey || '你的API_KEY'} --label muse-01`;
+  return `python get_muse_cookie.py --base ${root} --key ${realKey || 'API_KEY_Anda'} --label muse-01`;
 }
 
 async function copyText(v){
-  if (!v) return toast('没有可复制的内容', 'warn');
+  if (!v) return toast('Tidak ada konten untuk disalin', 'warn');
   try{
     await navigator.clipboard.writeText(v);
-    toast('已复制到剪贴板', 'ok');
+    toast('Disalin ke clipboard', 'ok');
   }catch(e){
-    const ta = document.createElement('textarea');   // 非 https 时的兜底
+    const ta = document.createElement('textarea');   // Cadangan saat bukan https
     ta.value = v; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); toast('已复制到剪贴板', 'ok'); }
-    catch(_){ toast('复制失败，请手动选中复制', 'warn'); }
+    try { document.execCommand('copy'); toast('Disalin ke clipboard', 'ok'); }
+    catch(_){ toast('Gagal menyalin, pilih dan salin secara manual', 'warn'); }
     ta.remove();
   }
 }
@@ -1619,7 +1748,7 @@ async function copyKey(){ await copyText(realKey); }
 async function copyCmd(){ await copyText($('cmdText').textContent); }
 async function copyExKey(){ await copyText($('exKey').value); }
 
-/* 扩展方案：把 BASE URL / API Key 填进页面上的复制框 */
+/* Skema ekstensi: isi BASE URL / API Key ke kotak salin di halaman */
 function fillExtFields(baseUrl){
   const root = (baseUrl || location.origin)
     .replace(/\/v1\/?$/i, '').replace(/\/+$/, '');
@@ -1629,20 +1758,20 @@ function fillExtFields(baseUrl){
 async function loadExtFiles(){
   const el = $('extFiles');
   if (!el) return;
-  el.textContent = '读取中…';
+  el.textContent = 'Memuat…';
   try{
     const d = await api('/admin/extension/files');
     const files = d.files || [];
     el.innerHTML = files.length
-      ? `包含 ${files.length} 个文件：` + files.map(f => `<code>${esc(f)}</code>`).join('、')
-      : '（扩展目录为空，请检查部署）';
+      ? `Berisi ${files.length} berkas:` + files.map(f => `<code>${esc(f)}</code>`).join(', ')
+      : '(Direktori ekstensi kosong, periksa deployment)';
   }catch(e){
-    el.textContent = '读取失败：' + e.message;
+    el.textContent = 'Gagal membaca: ' + e.message;
   }
 }
 
 async function rotateKey(){
-  if (!confirm('重新生成 API Key？\n\n旧 Key 会立即失效，已经接入的下游项目必须同步更新，否则会报 401。')) return;
+  if (!confirm('Buat Ulang API Key?\n\nKunci lama langsung tidak berlaku, proyek downstream yang sudah terhubung harus diperbarui secara bersamaan, jika tidak akan error 401.')) return;
   try{
     const d = await api('/admin/apikey/rotate', {method:'POST'});
     realKey = d.api_key;
@@ -1651,75 +1780,75 @@ async function rotateKey(){
     $('key').value = KEY;
     keyShown = true; renderKey();
     $('cmdText').textContent = buildCmd($('inBase').value);
-    toast('已生成新 Key 并立即生效，本页已自动更新', 'ok');
-  }catch(e){ toast('生成失败：' + e.message, 'bad'); }
+    toast('Kunci baru sudah dibuat dan langsung berlaku, halaman ini sudah diperbarui otomatis', 'ok');
+  }catch(e){ toast('Gagal membuat: ' + e.message, 'bad'); }
 }
 
-/* ================= 额度显示 ================= */
+/* ================= Tampilan kuota ================= */
 function quotaBadge(a){
   const q = a.quota;
   if (!q || !q.found){
-    return '<span class="badge mute" title="还没查过。点「操作」里的「额度」实时查询">未查</span>';
+    return '<span class="badge mute" title="Belum pernah diperiksa. Klik \"Kuota\" di \"Aksi\" untuk memeriksa secara real-time">Belum diperiksa</span>';
   }
   const pct = (q.weekly_used_pct != null) ? q.weekly_used_pct : null;
   const cls = pct == null ? 'info' : pct < 50 ? 'ok' : pct < 80 ? 'warn' : 'bad';
   const plan = (q.plan || '').replace(/\s*plan\s*$/i, '') || '—';
-  let title = `计划：${q.plan || '?'}`;
-  if (q.weekly_reset) title += `\n周限额重置：${q.weekly_reset}`;
-  if (pct != null) title += `\n周用量：已用 ${pct}%`;
-  if (q.extra_left) title += `\n额外代币：剩 ${q.extra_left}（已用 ${q.extra_used_pct ?? '?'}%）`;
-  if (q.checked_at) title += `\n查询时间：${fmtTime(q.checked_at)}`;
-  if (q.checked_at && Date.now()/1000 - q.checked_at > 3600) title += '\n额度数据已超过 1 小时，需重新查询';
-  const main = pct != null ? `${plan} · 已用 ${pct}%` : plan;
-  const age = q.checked_at ? `<div class="mono" style="font-size:10px;color:var(--muted);margin-top:2px">查询 ${ago(q.checked_at)}</div>` : '';
+  let title = `Paket: ${q.plan || '?'}`;
+  if (q.weekly_reset) title += `\nReset kuota mingguan: ${q.weekly_reset}`;
+  if (pct != null) title += `\nPemakaian mingguan: terpakai ${pct}%`;
+  if (q.extra_left) title += `\nToken tambahan: sisa ${q.extra_left} (terpakai ${q.extra_used_pct ?? '?'}%)`;
+  if (q.checked_at) title += `\nWaktu pengecekan: ${fmtTime(q.checked_at)}`;
+  if (q.checked_at && Date.now()/1000 - q.checked_at > 3600) title += '\nData kuota sudah lebih dari 1 jam, perlu dicek ulang';
+  const main = pct != null ? `${plan} · Terpakai ${pct}%` : plan;
+  const age = q.checked_at ? `<div class="mono" style="font-size:10px;color:var(--muted);margin-top:2px">Dicek ${ago(q.checked_at)}</div>` : '';
   const sub = (q.extra_left ? `<div class="mono" style="font-size:11px;color:var(--muted);margin-top:2px">+${esc(q.extra_left)}</div>` : '') + age;
   return `<span class="badge ${cls}" title="${esc(title)}">${esc(main)}</span>${sub}`;
 }
 
 async function queryQuota(aid, btn){
-  if (btn){ btn.disabled = true; btn.textContent = '查询中…'; }
+  if (btn){ btn.disabled = true; btn.textContent = 'Memeriksa…'; }
   try{
     const q = await api(`/admin/accounts/${aid}/quota`, {method:'POST'});
     if (q.found){
-      const extra = q.extra_left ? `，额外剩 ${q.extra_left}` : '';
-      toast(`额度：${q.plan || '?'}，周用量已用 ${q.weekly_used_pct ?? '?'}%${extra}`, 'ok');
+      const extra = q.extra_left ? `, tambahan sisa ${q.extra_left}` : '';
+      toast(`Kuota: ${q.plan || '?'}, pemakaian mingguan terpakai ${q.weekly_used_pct ?? '?'}%${extra}`, 'ok');
     }else{
-      toast('设置面板里没有读到额度数据（可能是页面结构变了）', 'warn');
+      toast('Tidak ada data kuota terbaca di panel pengaturan (mungkin struktur halaman berubah)', 'warn');
     }
     loadPool();
   }catch(e){
-    toast('额度查询失败：' + e.message, 'bad');
-    if (btn){ btn.disabled = false; btn.textContent = '额度'; }
+    toast('Gagal mengecek kuota: ' + e.message, 'bad');
+    if (btn){ btn.disabled = false; btn.textContent = 'Kuota'; }
   }
 }
 
-/* ================= 有效期显示 ================= */
+/* ================= Tampilan masa berlaku ================= */
 function expiryBadge(a){
   const ts = a && a.expires_at;
-  if (!ts) return '<span class="badge mute" title="未记录有效期">未知</span>';
+  if (!ts) return '<span class="badge mute" title="Masa berlaku tidak tercatat">Tidak diketahui</span>';
   const est = a.expires_estimated
-    ? '（按 hatch_vml 约 2 天寿命推算，未取到精确 expires）'
-    : '（hatch_vml 实测到期时间）';
+    ? '(Diperkirakan dari masa hidup hatch_vml sekitar 2 hari, expires pastinya tidak didapat)'
+    : '(Waktu kedaluwarsa hatch_vml hasil pengukuran nyata)';
   const left = ts - Math.floor(Date.now() / 1000);
-  if (left <= 0) return `<span class="badge bad" title="已于 ${fmtTime(ts)} 过期${est}">已过期</span>`;
+  if (left <= 0) return `<span class="badge bad" title="Sudah kedaluwarsa pada ${fmtTime(ts)}${est}">Sudah kedaluwarsa</span>`;
   const days = left / 86400;
-  // 保留一位小数，别把「还剩 1.9 天」显示成「剩 1 天」（会让人以为快没了）
+  // Pertahankan satu desimal, jangan tampilkan \"sisa 1,9 hari\" sebagai \"sisa 1 hari\" (terkesan hampir habis)
   const txt = days >= 1
-    ? `剩 ${days >= 10 ? Math.round(days) : days.toFixed(1)} 天`
-    : `剩 ${Math.max(1, Math.floor(left / 3600))} 小时`;
+    ? `Sisa ${days >= 10 ? Math.round(days) : days.toFixed(1)} hari`
+    : `Sisa ${Math.max(1, Math.floor(left / 3600))} jam`;
   const cls = days < 1 ? 'bad' : days < 3 ? 'warn' : 'ok';
-  return `<span class="badge ${cls}" title="到期时间：${fmtTime(ts)}${est}">${txt}</span>`;
+  return `<span class="badge ${cls}" title="Waktu kedaluwarsa: ${fmtTime(ts)}${est}">${txt}</span>`;
 }
 
-/* ================= 账号池 ================= */
+/* ================= Kumpulan Akun ================= */
 let accounts = [];
 
 function proxyStatus(account){
   if (!account.proxy) return '';
   const status = account.proxy_status;
-  const label = !status?.checked_at ? '代理未测试'
-    : status.proxy_reachable === true ? '代理已连通'
-    : status.proxy_reachable === false ? '代理未通过' : '代理未确认';
+  const label = !status?.checked_at ? 'Proxy belum diuji'
+    : status.proxy_reachable === true ? 'Proxy terhubung'
+    : status.proxy_reachable === false ? 'Proxy tidak lolos' : 'Proxy belum dikonfirmasi';
   const title = status?.checked_at ? fmtTime(status.checked_at) : '';
   return '<div class="proxy-summary" title="' + esc(title) + '">' + esc(t(label)) + '</div>';
 }
@@ -1735,65 +1864,65 @@ async function loadPool(){
     $('sDis').textContent   = st.disabled ?? 0;
     $('poolCount').textContent = accounts.length;
     $('pAcc').className = 'pill ' + (accounts.length ? 'on' : 'off');
-    $('pAcc').innerHTML = `<span class="led"></span>账号 <b>${accounts.length}</b>`;
+    $('pAcc').innerHTML = `<span class="led"></span>Akun <b>${accounts.length}</b>`;
 
-    // 快过期 / 已过期提醒。hatch_vml 只有约 2 天寿命，且不会因为使用而延长，
-    // 所以这里是刚需提醒，不是锦上添花。
+    // Peringatan hampir/sudah kedaluwarsa. hatch_vml hanya berumur sekitar 2 hari dan tidak diperpanjang oleh pemakaian,
+    // Jadi peringatan ini kebutuhan pokok, bukan tambahan.
     const now = Math.floor(Date.now() / 1000);
     const soon = accounts.filter(a => a.enabled && a.expires_at &&
                                       a.expires_at - now < 12 * 3600);
     const bar = $('expWarn');
     if (soon.length){
       const dead = soon.filter(a => a.expires_at <= now).length;
-      const names = soon.slice(0, 4).map(a => esc(a.label)).join('、') +
-                    (soon.length > 4 ? ` 等 ${soon.length} 个` : '');
+      const names = soon.slice(0, 4).map(a => esc(a.label)).join(', ') +
+                    (soon.length > 4 ? ` dan ${soon.length} lainnya` : '');
       $('expWarnText').innerHTML = dead
-        ? `⚠️ <b>${dead} 个账号已过期</b>，${soon.length - dead ? `另有 ${soon.length - dead} 个即将过期（${names}）` : names}。` +
-          `过期的账号无法生成，请重新登录一次（约 30 秒）。`
-        : `⏳ <b>${names}</b> 的有效期不足 12 小时。muse.ai 的会话约 2 天到期且不会因使用而延长，` +
-          `建议现在重新登录一次，避免生成时突然失败。`;
+        ? `⚠️ <b>${dead} akun sudah kedaluwarsa</b>, ${soon.length - dead ? `ada ${soon.length - dead} lagi yang segera kedaluwarsa (${names})` : names}.` +
+          `Akun yang kedaluwarsa tidak bisa membuat, masuk lagi sekali (sekitar 30 detik).`
+        : `⏳ Masa berlaku <b>${names}</b> kurang dari 12 jam. Sesi muse.ai kedaluwarsa sekitar 2 hari dan tidak diperpanjang oleh pemakaian,` +
+          `Disarankan masuk lagi sekarang, agar tidak tiba-tiba gagal saat membuat.`;
       bar.style.display = '';
     }else{
       bar.style.display = 'none';
     }
 
     if (!accounts.length){
-      $('poolBody').innerHTML = '<tr><td colspan="10" class="empty">还没有账号。去「获取 Cookie」页签按三步导入一个</td></tr>';
+      $('poolBody').innerHTML = '<tr><td colspan="10" class="empty">Belum ada akun. Buka tab \"Ambil Cookie\" dan impor satu akun dalam tiga langkah</td></tr>';
       return;
     }
     $('poolBody').innerHTML = accounts.map(a => {
       const ok = a.ok;
-      const badge = !a.enabled ? '<span class="badge mute">已禁用</span>'
-                  : ok === true  ? '<span class="badge ok">● 可用</span>'
-                  : ok === false ? '<span class="badge bad">● 异常</span>'
-                  : '<span class="badge warn">○ 未检测</span>';
-      const miss = a.essential_ok ? '' : ' <span class="badge bad" title="缺少核心 cookie，无法生成">缺核心</span>';
+      const badge = !a.enabled ? '<span class="badge mute">Dinonaktifkan</span>'
+                  : ok === true  ? '<span class="badge ok">● Tersedia</span>'
+                  : ok === false ? '<span class="badge bad">● Error</span>'
+                  : '<span class="badge warn">○ Belum diuji</span>';
+      const miss = a.essential_ok ? '' : ' <span class="badge bad" title="Cookie inti tidak ada, tidak dapat membuat">Inti hilang</span>';
       return `<tr>
-        <td><b>${esc(a.label)}</b><div class="mono ellip proxy-summary" title="${esc(a.proxy?.server || '默认网络')}">${esc(a.proxy?.server || '默认网络')}</div>${proxyStatus(a)}</td>
+        <td><b>${esc(a.label)}</b><div class="mono ellip proxy-summary" title="${esc(a.proxy?.server || 'Jaringan default')}">${esc(a.proxy?.server || 'Jaringan default')}</div>${proxyStatus(a)}</td>
         <td class="mono">${esc(a.id)}</td>
         <td>${badge}${miss}</td>
         <td>${expiryBadge(a)}</td>
         <td>${quotaBadge(a)}</td>
-        <td>${a.enabled ? '<span class="badge ok">开</span>' : '<span class="badge mute">关</span>'}</td>
+        <td>${a.enabled ? '<span class="badge ok">Aktif</span>' : '<span class="badge mute">Nonaktif</span>'}</td>
         <td class="mono">${a.cookie_count}</td>
         <td class="mono" title="${a.last_used ? fmtTime(a.last_used) : ''}">${ago(a.last_used)}</td>
         <td class="mono ellip" title="${esc(a.note||'')}">${esc(a.note || '—')}</td>
         <td><div class="acts">
-          <button class="ghost mini" onclick="testAcc('${a.id}')">测试</button>
-          <button class="ghost mini" onclick="keepaliveOne('${a.id}')" title="静默刷新会话令牌与有效期">保活</button>
-          <button class="ghost mini" onclick="queryQuota('${a.id}', this)">额度</button>
-          <button class="ghost mini" onclick="openProxy('${a.id}')">代理</button>
-          <button class="ghost mini" onclick="toggleAcc('${a.id}', ${!a.enabled})">${a.enabled ? '禁用' : '启用'}</button>
-          <button class="ghost mini" onclick="renameAcc('${a.id}','${esc(a.label)}')">改名</button>
-          <button class="ghost mini" onclick="updateCookies('${a.id}')">更新Cookie</button>
-          <button class="danger mini" onclick="delAcc('${a.id}','${esc(a.label)}')">删除</button>
+          <button class="ghost mini" onclick="testAcc('${a.id}')">Uji</button>
+          <button class="ghost mini" onclick="keepaliveOne('${a.id}')" title="Perbarui token sesi dan masa berlaku secara diam-diam">Keep-alive</button>
+          <button class="ghost mini" onclick="queryQuota('${a.id}', this)">Kuota</button>
+          <button class="ghost mini" onclick="openProxy('${a.id}')">Proxy</button>
+          <button class="ghost mini" onclick="toggleAcc('${a.id}', ${!a.enabled})">${a.enabled ? 'Nonaktifkan' : 'Aktifkan'}</button>
+          <button class="ghost mini" onclick="renameAcc('${a.id}','${esc(a.label)}')">Ubah nama</button>
+          <button class="ghost mini" onclick="updateCookies('${a.id}')">Perbarui Cookie</button>
+          <button class="danger mini" onclick="delAcc('${a.id}','${esc(a.label)}')">Hapus</button>
         </div></td>
       </tr>`;
     }).join('');
   }catch(e){
     $('poolBody').innerHTML = authOK === false
-      ? '<tr><td colspan="10" class="empty">🔑 请先在右上角填入 API Key 并点「保存」</td></tr>'
-      : `<tr><td colspan="10" class="empty">加载失败：${esc(e.message)}</td></tr>`;
+      ? '<tr><td colspan="10" class="empty">🔑 Isi dulu API Key di kanan atas lalu klik \"Simpan\"</td></tr>'
+      : `<tr><td colspan="10" class="empty">Gagal memuat: ${esc(e.message)}</td></tr>`;
   }
 }
 
@@ -1802,26 +1931,26 @@ async function addAccount(fromManual){
   const ckEl    = $(fromManual ? 'mCookie' : 'newCookie');
   const label = labelEl.value.trim();
   const raw = ckEl.value.trim();
-  if (!raw) return toast('请先粘贴 Cookie', 'warn');
+  if (!raw) return toast('Tempel dulu Cookie', 'warn');
   const lines = raw.split('\n').map(s => s.trim()).filter(Boolean);
   const body = (lines.length > 1) ? {batch: raw} : {label: label, cookie_header: raw};
   try{
     const r = await api('/admin/accounts', {method:'POST', body: JSON.stringify(body)});
     if (r.warning) toast(r.warning, 'warn');
-    else toast(`成功导入 ${r.count} 个账号`, 'ok');
+    else toast(`Berhasil mengimpor ${r.count} akun`, 'ok');
     ckEl.value = ''; labelEl.value = '';
     loadPool();
-  }catch(e){ toast('导入失败：' + e.message, 'bad'); }
+  }catch(e){ toast('Gagal mengimpor: ' + e.message, 'bad'); }
 }
 
 async function testAcc(id){
-  toast('正在真实打开 muse.ai 校验会话…');
+  toast('Sedang membuka muse.ai secara nyata untuk memverifikasi sesi…');
   try{
     const r = await api(`/admin/accounts/${id}/test`, {method:'POST'});
-    const quotaStatus = r.quota_error ? `；额度读取失败：${r.quota_error}` : r.quota ? `；额度已刷新：${r.quota.weekly_used_pct ?? '?'}%` : '';
+    const quotaStatus = r.quota_error ? `; gagal membaca kuota: ${r.quota_error}` : r.quota ? `; kuota sudah diperbarui: ${r.quota.weekly_used_pct ?? '?'}%` : '';
     toast((r.ok ? '✓ ' : '✗ ') + r.message + quotaStatus, r.ok && !r.quota_error ? 'ok' : 'warn');
     loadPool();
-  }catch(e){ toast('测试失败：' + e.message, 'bad'); }
+  }catch(e){ toast('Gagal menguji: ' + e.message, 'bad'); }
 }
 
 let proxyAccountId = null;
@@ -1884,7 +2013,7 @@ async function saveProxy(remove){
   try{
     await api('/admin/accounts/' + encodeURIComponent(id), {method:'PATCH', body:JSON.stringify({proxy})});
     if (proxyAccountId === id) $('proxyDialog').close();
-    toast(proxy ? '代理已保存，下次请求生效' : '代理已移除，恢复默认网络', 'ok');
+    toast(proxy ? 'Proxy disimpan, berlaku untuk permintaan berikutnya' : 'Proxy dihapus, kembali ke jaringan default', 'ok');
     await loadPool();
   }catch(e){
     if (proxyAccountId === id) $('proxyError').textContent = e.message;
@@ -1897,21 +2026,21 @@ async function testProxy(){
   if (!id || proxyBusy) return;
   $('proxyError').textContent = '';
   if (!$('proxyServer').value.trim()) {
-    $('proxyError').textContent = '请输入代理链接';
+    $('proxyError').textContent = 'Masukkan tautan proxy';
     return;
   }
   const proxy = {server: $('proxyServer').value.trim(), username: $('proxyUsername').value};
   if ($('proxyPassword').value) proxy.password = $('proxyPassword').value;
   proxyBusy = true;
   updateProxyMode();
-  $('proxyResult').textContent = '正在通过当前输入的代理检测出口与 Muse 会话…';
+  $('proxyResult').textContent = 'Sedang memeriksa egress dan sesi Muse melalui proxy yang dimasukkan…';
   try{
     const r = await api('/admin/accounts/' + encodeURIComponent(id) + '/proxy/test', {method:'POST', body:JSON.stringify({proxy})});
-    const label = value => value === true ? '已确认' : value === false ? '未通过' : '未确认';
-    const lines = ['代理连通：' + label(r.proxy_reachable)];
-    if (r.exit_ip) lines.push('出口 IP：' + r.exit_ip);
-    if ('session_ok' in r) lines.push('Muse 会话：' + label(r.session_ok));
-    if (r.workspace_status) lines.push('工作区状态：' + r.workspace_status);
+    const label = value => value === true ? 'Terkonfirmasi' : value === false ? 'Tidak lolos' : 'Belum terkonfirmasi';
+    const lines = ['Proxy terhubung: ' + label(r.proxy_reachable)];
+    if (r.exit_ip) lines.push('IP keluar: ' + r.exit_ip);
+    if ('session_ok' in r) lines.push('Sesi Muse: ' + label(r.session_ok));
+    if (r.workspace_status) lines.push('Status workspace: ' + r.workspace_status);
     if (r.message) lines.push(r.message);
     if (proxyAccountId === id) {
       $('proxyResult').textContent = lines.join('\n');
@@ -1932,108 +2061,108 @@ $('proxyRemove').addEventListener('click', () => saveProxy(true));
 $('proxyTest').addEventListener('click', testProxy);
 
 async function keepaliveOne(id){
-  toast('正在为该账号执行会话静默续期…');
+  toast('Sedang memperpanjang sesi akun ini secara diam-diam…');
   try{
     const r = await api(`/admin/accounts/${id}/keepalive`, {method:'POST'});
-    toast(r.ok ? `✓ 账号保活成功，新到期时间已更新` : `✗ 保活失败: ${r.error||'未知错误'}`, r.ok ? 'ok' : 'bad');
+    toast(r.ok ? `✓ Keep-alive akun berhasil, waktu kedaluwarsa baru sudah diperbarui` : `✗ Keep-alive gagal: ${r.error||'Kesalahan tidak diketahui'}`, r.ok ? 'ok' : 'bad');
     loadPool();
-  }catch(e){ toast('保活失败：' + e.message, 'bad'); }
+  }catch(e){ toast('Keep-alive gagal: ' + e.message, 'bad'); }
 }
 
 async function keepaliveAll(){
   const btn = $('btnKeepaliveAll');
-  if (btn) { btn.disabled = true; btn.innerText = '保活执行中…'; }
-  toast('正在唤醒无头浏览器，为账号池执行静默续期与保活…', 'warn');
+  if (btn) { btn.disabled = true; btn.innerText = 'Keep-alive sedang berjalan…'; }
+  toast('Sedang membangunkan browser headless untuk memperpanjang dan menjaga kumpulan akun secara diam-diam…', 'warn');
   try{
     const r = await api('/admin/accounts/keepalive?force=true', {method:'POST'});
     if (r.status === 'busy') {
-      toast('保活任务正在后台运行中，请稍候查看', 'warn');
+      toast('Tugas keep-alive sedang berjalan di latar belakang, periksa lagi nanti', 'warn');
     } else {
-      toast(`✓ 成功保活 ${r.refreshed_count || 0} 个账号，跳过 ${r.skipped_count || 0} 个`, 'ok');
+      toast(`✓ Berhasil keep-alive ${r.refreshed_count || 0} akun, lewati ${r.skipped_count || 0}`, 'ok');
     }
     loadPool();
-  }catch(e){ toast('保活执行失败：' + e.message, 'bad'); }
+  }catch(e){ toast('Gagal menjalankan keep-alive: ' + e.message, 'bad'); }
   finally{
-    if (btn) { btn.disabled = false; btn.innerText = '⚡ 一键保活所有账号'; }
+    if (btn) { btn.disabled = false; btn.innerText = '⚡ Keep-alive semua akun dengan sekali klik'; }
   }
 }
 
 async function toggleAcc(id, enabled){
   try{
     await api(`/admin/accounts/${id}`, {method:'PATCH', body: JSON.stringify({enabled})});
-    toast(enabled ? '已启用' : '已禁用', 'ok'); loadPool();
-  }catch(e){ toast('操作失败：' + e.message, 'bad'); }
+    toast(enabled ? 'Sudah diaktifkan' : 'Dinonaktifkan', 'ok'); loadPool();
+  }catch(e){ toast('Operasi gagal: ' + e.message, 'bad'); }
 }
 
 async function renameAcc(id, old){
-  const label = prompt('新的账号标签：', old);
+  const label = prompt('Label akun baru:', old);
   if (label === null || !label.trim()) return;
   try{
     await api(`/admin/accounts/${id}`, {method:'PATCH', body: JSON.stringify({label: label.trim()})});
-    toast('标签已更新', 'ok'); loadPool();
-  }catch(e){ toast('改名失败：' + e.message, 'bad'); }
+    toast('Label diperbarui', 'ok'); loadPool();
+  }catch(e){ toast('Gagal mengubah nama: ' + e.message, 'bad'); }
 }
 
 async function updateCookies(id){
-  const v = prompt('粘贴该账号最新的 Cookie 字符串：');
+  const v = prompt('Tempel string Cookie terbaru akun ini:');
   if (!v || !v.trim()) return;
   try{
     const r = await api(`/admin/accounts/${id}/cookies`, {method:'POST', body: JSON.stringify({cookie_header: v.trim()})});
-    toast(`Cookie 已更新（${r.cookie_count} 条）`, 'ok'); loadPool();
-  }catch(e){ toast('更新失败：' + e.message, 'bad'); }
+    toast(`Cookie sudah diperbarui (${r.cookie_count} item)`, 'ok'); loadPool();
+  }catch(e){ toast('Gagal memperbarui: ' + e.message, 'bad'); }
 }
 
 async function delAcc(id, label){
-  if (!confirm(`确定删除账号「${label}」？此操作不可撤销。`)) return;
+  if (!confirm(`Yakin hapus akun \"${label}\"? Tindakan ini tidak bisa dibatalkan.`)) return;
   try{
     await api(`/admin/accounts/${id}`, {method:'DELETE'});
-    toast('已删除', 'ok'); loadPool();
-  }catch(e){ toast('删除失败：' + e.message, 'bad'); }
+    toast('Sudah dihapus', 'ok'); loadPool();
+  }catch(e){ toast('Gagal menghapus: ' + e.message, 'bad'); }
 }
 
-/* ================= 任务记录 ================= */
+/* ================= Catatan Tugas ================= */
 async function loadTasks(){
   try{
     const d = await api('/admin/tasks?limit=60');
     const ts = d.tasks || [];
     $('taskCount').textContent = ts.length;
-    if (!ts.length){ $('taskBody').innerHTML = '<tr><td colspan="8" class="empty">暂无任务记录</td></tr>'; return; }
+    if (!ts.length){ $('taskBody').innerHTML = '<tr><td colspan="8" class="empty">Belum ada catatan tugas</td></tr>'; return; }
     $('taskBody').innerHTML = ts.map(t => {
       const cls = (t.status === 'succeeded' || t.status === 'completed') ? 'ok' : t.status === 'failed' ? 'bad'
                 : t.status === 'processing' ? 'info' : 'warn';
       const accountLabel = accounts.find(a => a.id === t.account)?.label;
       const accountText = accountLabel ? accountLabel + ' (' + t.account + ')' : t.account;
       let out = '—';
-      if (t.result && t.result.url) out = `<a href="${esc(t.result.url)}" target="_blank">查看结果</a> <span class="mono">${fmtBytes(t.result.bytes)}</span>`;
+      if (t.result && t.result.url) out = `<a href="${esc(t.result.url)}" target="_blank">Lihat hasil</a> <span class="mono">${fmtBytes(t.result.bytes)}</span>`;
       else if (t.error) out = `<span style="color:var(--bad)">${esc(t.error).slice(0,120)}</span>`;
       return `<tr>
         <td class="mono">${esc(t.id)}${t.account ? `<br><small>${esc(accountText)} · #${t.attempt || 1}</small>` : ''}</td>
-        <td>${t.kind === 'video' ? '<span class="badge info">视频</span>' : '<span class="badge info">图片</span>'}</td>
+        <td>${t.kind === 'video' ? '<span class="badge info">Video</span>' : '<span class="badge info">Gambar</span>'}</td>
         <td><span class="ellip" title="${esc(t.prompt)}">${esc(t.prompt)}</span></td>
         <td><span class="badge ${cls}">${esc(t.status)}</span></td>
         <td class="mono">${taskDuration(t)}</td>
         <td class="mono">${fmtTime(t.created_at)}</td>
         <td>${out}</td>
-        <td><button class="danger mini" onclick="delTask('${t.id}')">删</button></td>
+        <td><button class="danger mini" onclick="delTask('${t.id}')">Hapus</button></td>
       </tr>`;
     }).join('');
   }catch(e){
-    $('taskBody').innerHTML = `<tr><td colspan="8" class="empty">加载失败：${esc(e.message)}</td></tr>`;
+    $('taskBody').innerHTML = `<tr><td colspan="8" class="empty">Gagal memuat: ${esc(e.message)}</td></tr>`;
   }
 }
 async function delTask(id){
   try{ await api('/admin/tasks/' + id, {method:'DELETE'}); loadTasks(); }
-  catch(e){ toast('删除失败：' + e.message, 'bad'); }
+  catch(e){ toast('Gagal menghapus: ' + e.message, 'bad'); }
 }
 async function clearTasks(){
-  if (!confirm('确定清空全部任务记录？（已生成的媒体文件不会被删除）')) return;
+  if (!confirm('Yakin kosongkan semua catatan tugas? (Berkas media yang sudah dibuat tidak akan dihapus)')) return;
   try{
     const r = await api('/admin/tasks/clear', {method:'POST', body: JSON.stringify({keep: 0})});
-    toast(`已清空 ${r.removed} 条记录`, 'ok'); loadTasks();
-  }catch(e){ toast('清空失败：' + e.message, 'bad'); }
+    toast(`Sudah menghapus ${r.removed} catatan`, 'ok'); loadTasks();
+  }catch(e){ toast('Gagal mengosongkan: ' + e.message, 'bad'); }
 }
 
-/* ================= 媒体库 ================= */
+/* ================= Pustaka Media ================= */
 let _allMedia = [];
 let _selectedMedia = new Set();
 
@@ -2092,7 +2221,7 @@ function updateMediaSelectionUI(){
     btnDel.style.display = count > 0 ? 'inline-flex' : 'none';
   }
   if (btnSelAll) {
-    btnSelAll.textContent = (total > 0 && count === total) ? '取消全选' : '全选';
+    btnSelAll.textContent = (total > 0 && count === total) ? 'Batalkan pilih semua' : 'Pilih Semua';
   }
 
   document.querySelectorAll('.tile[data-name]').forEach(el => {
@@ -2125,44 +2254,44 @@ function toggleSelectAllMedia(){
 }
 
 async function delSingleMedia(name){
-  if (!confirm(`确定要删除媒体文件「${name}」？此操作无法撤销。`)) return;
+  if (!confirm(`Yakin hapus berkas media \"${name}\"? Tindakan ini tidak bisa dibatalkan.`)) return;
   try{
     const r = await api('/admin/media/delete', {
       method: 'POST',
       body: JSON.stringify({ names: [name] })
     });
     if (r.removed > 0) {
-      toast('删除成功', 'ok');
+      toast('Berhasil dihapus', 'ok');
       _selectedMedia.delete(name);
       loadMedia();
     } else {
-      toast('文件不存在或已被删除', 'warn');
+      toast('Berkas tidak ada atau sudah dihapus', 'warn');
       loadMedia();
     }
   }catch(e){
-    toast('删除失败：' + e.message, 'bad');
+    toast('Gagal menghapus: ' + e.message, 'bad');
   }
 }
 
 async function delSelectedMedia(){
   const count = _selectedMedia.size;
-  if (!count) return toast('请先选择要删除的媒体文件', 'warn');
-  if (!confirm(`确定要永久删除选中的 ${count} 个媒体文件？此操作无法撤销。`)) return;
+  if (!count) return toast('Pilih dulu berkas media yang akan dihapus', 'warn');
+  if (!confirm(`Yakin hapus permanen ${count} berkas media yang dipilih? Tindakan ini tidak bisa dibatalkan.`)) return;
 
   const names = Array.from(_selectedMedia);
   const btn = $('btnDelSelectedMedia');
-  if (btn) { btn.disabled = true; btn.textContent = '删除中…'; }
+  if (btn) { btn.disabled = true; btn.textContent = 'Menghapus…'; }
 
   try{
     const r = await api('/admin/media/delete', {
       method: 'POST',
       body: JSON.stringify({ names })
     });
-    toast(`已成功删除 ${r.removed || 0} 个文件`, 'ok');
+    toast(`Berhasil menghapus ${r.removed || 0} berkas`, 'ok');
     _selectedMedia.clear();
     loadMedia();
   }catch(e){
-    toast('批量删除失败：' + e.message, 'bad');
+    toast('Gagal menghapus massal: ' + e.message, 'bad');
   }finally{
     if (btn) btn.disabled = false;
   }
@@ -2181,7 +2310,7 @@ async function loadMedia(){
     $('mediaCount').textContent = ms.length;
     $('sMedia').textContent = ms.length;
     if (!ms.length){
-      $('mediaGrid').innerHTML = '<div class="empty">还没有生成任何媒体文件</div>';
+      $('mediaGrid').innerHTML = '<div class="empty">Belum ada berkas media yang dibuat</div>';
       updateMediaSelectionUI();
       return;
     }
@@ -2189,11 +2318,11 @@ async function loadMedia(){
       const isSel = _selectedMedia.has(m.name);
       return `
       <div class="tile ${isSel ? 'selected' : ''}" data-name="${esc(m.name)}">
-        <label class="check-tag" title="勾选以批量操作" onclick="event.stopPropagation()">
+        <label class="check-tag" title="Centang untuk aksi batch" onclick="event.stopPropagation()">
           <input type="checkbox" class="tile-check" ${isSel ? 'checked' : ''} onchange="toggleMediaSelect('${esc(m.name)}')">
         </label>
         ${m.kind === 'video'
-          ? `<button type="button" class="thumb" data-play-video aria-label="播放视频" title="播放视频">
+          ? `<button type="button" class="thumb" data-play-video aria-label="Putar video" title="Putar video">
               ${m.thumbnail_url ? `<img src="${esc(m.thumbnail_url)}" loading="lazy" decoding="async" alt="" onerror="this.hidden=true">` : ''}
               <span class="play-icon" aria-hidden="true">▶</span>
             </button>`
@@ -2202,25 +2331,25 @@ async function loadMedia(){
           <div class="nm" title="${esc(m.name)}">${esc(m.name)}</div>
           <div style="margin-top:3px">${fmtBytes(m.bytes)} · ${fmtTime(m.mtime)}</div>
           <div class="ac">
-            <a class="badge info" href="${esc(m.url)}" target="_blank" ${m.kind === 'video' ? 'data-play-video' : ''}>打开</a>
-            <a class="badge mute" href="${esc(m.url)}" download>下载</a>
-            <a class="badge bad" href="javascript:void(0)" onclick="delSingleMedia('${esc(m.name)}')">删除</a>
+            <a class="badge info" href="${esc(m.url)}" target="_blank" ${m.kind === 'video' ? 'data-play-video' : ''}>Buka</a>
+            <a class="badge mute" href="${esc(m.url)}" download>Unduh</a>
+            <a class="badge bad" href="javascript:void(0)" onclick="delSingleMedia('${esc(m.name)}')">Hapus</a>
           </div>
         </div>
       </div>`;
     }).join('');
     updateMediaSelectionUI();
-  }catch(e){ $('mediaGrid').innerHTML = `<div class="empty">加载失败：${esc(e.message)}</div>`; }
+  }catch(e){ $('mediaGrid').innerHTML = `<div class="empty">Gagal memuat: ${esc(e.message)}</div>`; }
 }
 
-/* ================= 在线测试 ================= */
+/* ================= Uji Online ================= */
 async function runImage(){
   const btn = $('imgBtn'), box = $('imgRes');
   const prompt = $('imgPrompt').value.trim();
-  if (!prompt) return toast('请输入提示词', 'warn');
-  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>生成中…';
+  if (!prompt) return toast('Masukkan prompt', 'warn');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Sedang membuat…';
   box.className = 'result show';
-  box.innerHTML = '<span class="spin"></span>正在提交图片任务，生成期间会持续查询状态…';
+  box.innerHTML = '<span class="spin"></span>Sedang mengirim tugas gambar, status akan terus dipantau selama pembuatan…';
   const t0 = Date.now();
   try{
     let r = await api('/v1/images/tasks', {method:'POST',
@@ -2229,35 +2358,35 @@ async function runImage(){
     const deadline = Date.now() + 15 * 60 * 1000;
     let failures = 0;
     while (r.status !== 'completed') {
-      if (Date.now() >= deadline) throw new Error('等待超过 15 分钟，请在任务记录查看结果，勿重复提交');
-      if (r.status === 'failed') throw new Error(r.error || '图片生成失败');
-      box.textContent = `任务 ${taskId} · ${r.status} · 已等待 ${Math.floor((Date.now()-t0)/1000)} 秒`;
+      if (Date.now() >= deadline) throw new Error('Menunggu lebih dari 15 menit, lihat hasil di catatan tugas, jangan kirim ulang');
+      if (r.status === 'failed') throw new Error(r.error || 'Gagal membuat gambar');
+      box.textContent = `Tugas ${taskId} · ${r.status} · sudah menunggu ${Math.floor((Date.now()-t0)/1000)} detik`;
       await new Promise(resolve => setTimeout(resolve, 3000));
       try {
         r = await api('/v1/images/tasks/' + encodeURIComponent(taskId));
         failures = 0;
       } catch (e) {
-        if (++failures >= 6) throw new Error('状态查询暂时失败，请在任务记录查看，勿重复提交');
+        if (++failures >= 6) throw new Error('Pemeriksaan status sementara gagal, lihat di catatan tugas, jangan kirim ulang');
       }
     }
     const it = r.data[0];
-    box.innerHTML = `<b style="color:var(--ok)">✓ 生成成功</b>
+    box.innerHTML = `<b style="color:var(--ok)">✓ Berhasil dibuat</b>
       <span class="mono" style="color:var(--muted);margin-left:10px">${((Date.now()-t0)/1000).toFixed(1)}s · ${fmtBytes(it.bytes)}</span>
       <img src="${esc(it.url)}" alt="">
       <pre class="out">${esc(JSON.stringify(r, null, 2))}</pre>`;
     loadMedia();
   }catch(e){
-    box.innerHTML = `<b style="color:var(--bad)">✗ 生成失败</b><pre class="out">${esc(e.message)}</pre>`;
-  }finally{ btn.disabled = false; btn.textContent = '开始生成图片'; }
+    box.innerHTML = `<b style="color:var(--bad)">✗ Gagal dibuat</b><pre class="out">${esc(e.message)}</pre>`;
+  }finally{ btn.disabled = false; btn.textContent = 'Mulai buat gambar'; }
 }
 
 async function runVideo(){
   const btn = $('vidBtn'), box = $('vidRes');
   const prompt = $('vidPrompt').value.trim();
-  if (!prompt) return toast('请输入提示词', 'warn');
-  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>生成中…';
+  if (!prompt) return toast('Masukkan prompt', 'warn');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Sedang membuat…';
   box.className = 'result show';
-  box.innerHTML = '<span class="spin"></span>正在创建视频任务…';
+  box.innerHTML = '<span class="spin"></span>Sedang membuat tugas video…';
   const t0 = Date.now();
   try{
     const t = await api('/v1/videos', {method:'POST', body: JSON.stringify({
@@ -2268,28 +2397,28 @@ async function runVideo(){
       if (s.status === 'succeeded' || s.status === 'completed'){
         const vurl = (s.result && s.result.url) || s.url || '';
         const vbytes = (s.result && s.result.bytes) || 0;
-        box.innerHTML = `<b style="color:var(--ok)">✓ 生成成功</b>
+        box.innerHTML = `<b style="color:var(--ok)">✓ Berhasil dibuat</b>
           <span class="mono" style="color:var(--muted);margin-left:10px">${el}s · ${fmtBytes(vbytes)}</span>
           <video src="${esc(vurl)}" controls playsinline></video>
           <pre class="out">${esc(JSON.stringify(s, null, 2))}</pre>`;
-        btn.disabled = false; btn.textContent = '开始生成视频';
+        btn.disabled = false; btn.textContent = 'Mulai buat video';
         loadMedia(); loadTasks();
       }else if (s.status === 'failed'){
-        box.innerHTML = `<b style="color:var(--bad)">✗ 生成失败</b><pre class="out">${esc(s.error||'')}</pre>`;
-        btn.disabled = false; btn.textContent = '开始生成视频';
+        box.innerHTML = `<b style="color:var(--bad)">✗ Gagal dibuat</b><pre class="out">${esc(s.error||'')}</pre>`;
+        btn.disabled = false; btn.textContent = 'Mulai buat video';
       }else{
-        box.innerHTML = `<span class="spin"></span>任务 ${esc(s.status)} · 已等待 ${el}s（视频通常 60–120 秒）…`;
+        box.innerHTML = `<span class="spin"></span>Tugas ${esc(s.status)} · sudah menunggu ${el} dtk (video biasanya 60–120 detik)…`;
         setTimeout(tick, 4000);
       }
     };
     tick();
   }catch(e){
-    box.innerHTML = `<b style="color:var(--bad)">✗ 创建任务失败</b><pre class="out">${esc(e.message)}</pre>`;
-    btn.disabled = false; btn.textContent = '开始生成视频';
+    box.innerHTML = `<b style="color:var(--bad)">✗ Gagal membuat tugas</b><pre class="out">${esc(e.message)}</pre>`;
+    btn.disabled = false; btn.textContent = 'Mulai buat video';
   }
 }
 
-/* ================= 官方仓库实时更新检测、弹窗通知与一键升级 ================= */
+/* ================= Deteksi pembaruan real-time repo resmi, notifikasi popup, dan upgrade sekali klik ================= */
 let _notifiedSha = localStorage.getItem('muse2api_notified_sha') || '';
 let _dismissedSha = localStorage.getItem('muse2api_dismissed_sha') || '';
 let _lastRepoStatus = null;
@@ -2329,7 +2458,7 @@ async function loadRepoStatus(force){
 
     const state = LANG === 'en'
       ? (s.has_update ? 'Update available' : s.up_to_date === true ? 'Up to date' : 'Version status unconfirmed')
-      : (s.has_update ? '有更新' : s.up_to_date === true ? '已是最新' : '版本状态待确认');
+      : (s.has_update ? 'Ada pembaruan' : s.up_to_date === true ? 'Sudah terbaru' : 'Status versi belum terkonfirmasi');
     badge.className = 'badge ' + (s.has_update ? 'warn' : s.up_to_date === true ? 'ok' : 'mute');
     badge.textContent = `${state} · ${lVer} (${s.local_sha || 'unknown'})`;
     topBtn.classList.toggle('updpill-alert', !!s.has_update);
@@ -2337,14 +2466,14 @@ async function loadRepoStatus(force){
     const bannerHighlights = LANG === 'en' ? (s.highlights_en || s.highlights) : s.highlights;
     $('updBannerVer').textContent = rVer + ' (' + (s.remote_sha || 'unknown') + ')';
     $('updBannerMsg').textContent = s.managed_deployment
-      ? (LANG === 'en' ? 'Rebuild and switch the configured image to update.' : '请从配置的仓库分支重建并切换镜像。')
+      ? (LANG === 'en' ? 'Rebuild and switch the configured image to update.' : 'Bangun ulang dari branch repo yang dikonfigurasi lalu alihkan image.')
       : ((bannerHighlights || [])[0] || s.remote_msg || state);
     banner.classList.toggle('show', !!s.has_update && !!s.remote_sha && s.remote_sha !== _dismissedSha);
-    desc.innerHTML = `${LANG === 'en' ? 'Installed version: ' : '当前已部署版本：'}<code>${esc(lVer)}</code>（Commit: <code>${esc(s.local_sha || '—')}</code>） · ` +
-      `${LANG === 'en' ? 'Update source: ' : '更新来源：'}<a href="${esc(s.repo_url)}" target="_blank">${esc(s.repo_url)}</a> / <code>${esc(s.repo_ref || 'main')}</code><br>` +
-      `${LANG === 'en' ? 'Remote version: ' : '远端版本：'}<code>${esc(s.remote_version || '未知')}</code>（Commit: <code>${esc(s.remote_sha || '—')}</code>）` +
+    desc.innerHTML = `${LANG === 'en' ? 'Installed version: ' : 'Versi yang saat ini diterapkan:'}<code>${esc(lVer)}</code>(Commit: <code>${esc(s.local_sha || '—')}</code>) · ` +
+      `${LANG === 'en' ? 'Update source: ' : 'Sumber pembaruan: '}<a href="${esc(s.repo_url)}" target="_blank">${esc(s.repo_url)}</a> / <code>${esc(s.repo_ref || 'main')}</code><br>` +
+      `${LANG === 'en' ? 'Remote version: ' : 'Versi remote: '}<code>${esc(s.remote_version || 'Tidak diketahui')}</code>(Commit: <code>${esc(s.remote_sha || '—')}</code>)` +
       (s.check_error ? `<br>${esc(s.check_error)}` : '') +
-      (s.managed_deployment ? '<br>此实例通过镜像部署，更新需从上述分支构建并切换容器。' : '');
+      (s.managed_deployment ? '<br>Instance ini di-deploy lewat image, pembaruan harus dibangun dari branch di atas lalu alihkan container.' : '');
     for (const id of ['btnRepoPull', 'btnBannerUpgrade']) {
       const btn = $(id); if (btn) btn.disabled = !!s.managed_deployment;
     }
@@ -2352,34 +2481,34 @@ async function loadRepoStatus(force){
     let html = '';
     const highlights = (LANG === 'en' && Array.isArray(s.highlights_en) && s.highlights_en.length) ? s.highlights_en : s.highlights;
     if (Array.isArray(highlights) && highlights.length){
-      html += `<div style="margin-bottom:8px"><b style="color:var(--text)">✨ 当前版本核心特性 (${esc(rVer)})：</b><ul style="margin:4px 0 0 18px;padding:0;color:var(--muted)">` +
+      html += `<div style="margin-bottom:8px"><b style="color:var(--text)">✨ Fitur utama versi ini (${esc(rVer)}): </b><ul style="margin:4px 0 0 18px;padding:0;color:var(--muted)">` +
         highlights.map(h => `<li>${esc(h)}</li>`).join('') + `</ul></div>`;
     }
     if (Array.isArray(s.recent_commits) && s.recent_commits.length){
-      html += `<div><b style="color:var(--text)">📜 官方仓库最近提交动态：</b><div style="margin-top:5px;display:flex;flex-direction:column;gap:4px">` +
+      html += `<div><b style="color:var(--text)">📜 Aktivitas commit terbaru repositori resmi:</b><div style="margin-top:5px;display:flex;flex-direction:column;gap:4px">` +
         s.recent_commits.slice(0, 5).map(c =>
           `<div style="display:flex;gap:8px;align-items:center"><a href="${esc(c.url)}" target="_blank" class="mono" style="color:var(--accent)">[${esc(c.sha)}]</a><span>${esc(c.message)}</span><span class="mono" style="margin-left:auto">${esc((c.date||'').replace('T',' ').replace('Z',''))}</span></div>`
         ).join('') + `</div></div>`;
     }
-    if (box) box.innerHTML = html || '<span style="color:var(--muted)">暂无提交记录</span>';
+    if (box) box.innerHTML = html || '<span style="color:var(--muted)">Belum ada riwayat commit</span>';
     if (force) toast(state, s.up_to_date === true ? 'ok' : 'warn');
   }catch(e){
-    if ($('repoBadge')) { $('repoBadge').className = 'badge mute'; $('repoBadge').textContent = '待鉴权'; }
+    if ($('repoBadge')) { $('repoBadge').className = 'badge mute'; $('repoBadge').textContent = 'Menunggu autentikasi'; }
   }
 }
 
 async function upgradeNow(){
-  if (_lastRepoStatus?.managed_deployment) return toast('此实例通过镜像部署，请从配置的仓库分支更新容器', 'warn');
-  const upgradePrompt = (LANG === 'en' ? 'Update and restart from ' : '确定从 ')
+  if (_lastRepoStatus?.managed_deployment) return toast('Instance ini di-deploy lewat image, perbarui container dari branch repo yang dikonfigurasi', 'warn');
+  const upgradePrompt = (LANG === 'en' ? 'Update and restart from ' : 'Yakin perbarui dari ')
     + (_lastRepoStatus?.repo_url || '') + ' / ' + (_lastRepoStatus?.repo_ref || 'main')
-    + (LANG === 'en' ? '?' : ' 更新并重启服务吗？');
+    + (LANG === 'en' ? '?' : ' lalu mulai ulang layanan?');
   if (!confirm(upgradePrompt)) return;
   const btn1 = $('btnRepoPull'), btn2 = $('btnBannerUpgrade');
-  if (btn1) { btn1.disabled = true; btn1.innerHTML = '<span class="spin"></span>正在在线更新…'; }
-  if (btn2) { btn2.disabled = true; btn2.innerHTML = '<span class="spin"></span>正在在线更新…'; }
+  if (btn1) { btn1.disabled = true; btn1.innerHTML = '<span class="spin"></span>Sedang memperbarui online…'; }
+  if (btn2) { btn2.disabled = true; btn2.innerHTML = '<span class="spin"></span>Sedang memperbarui online…'; }
   try{
     const r = await api('/admin/update/upgrade', {method: 'POST', body: JSON.stringify({restart: true})});
-    toast('✓ ' + (r.message || '更新完成') + '，服务正在重启，就绪后将自动刷新页面…', 'ok');
+    toast('✓ ' + (r.message || 'Pembaruan selesai') + ', layanan sedang dimulai ulang, halaman akan dimuat ulang otomatis setelah siap…', 'ok');
     $('updateBanner').classList.remove('show');
     let tries = 0;
     const waitReady = async () => {
@@ -2393,9 +2522,9 @@ async function upgradeNow(){
     };
     setTimeout(waitReady, 2500);
   }catch(e){
-    toast('在线更新失败：' + e.message, 'bad');
-    if (btn1) { btn1.disabled = false; btn1.textContent = '⚡ 一键从 GitHub 在线更新并重启'; }
-    if (btn2) { btn2.disabled = false; btn2.textContent = '⚡ 一键在线升级并重启'; }
+    toast('Gagal memperbarui online: ' + e.message, 'bad');
+    if (btn1) { btn1.disabled = false; btn1.textContent = '⚡ Perbarui online dari GitHub dan mulai ulang dengan sekali klik'; }
+    if (btn2) { btn2.disabled = false; btn2.textContent = '⚡ Tingkatkan online dan mulai ulang dengan sekali klik'; }
   }
 }
 
@@ -2405,12 +2534,12 @@ function renderGenerationQueue(settings, config) {
   if (!generationQueueLoaded) { $('generationQueueTimeout').value = settings.queue_timeout; generationQueueLoaded = true; }
   $('generationQueueSummary').textContent = LANG === 'en'
     ? `Execution budget: video ${config.video_timeout}s · image ${config.image_timeout}s`
-    : `实际生成时限：视频 ${config.video_timeout} 秒 · 图片 ${config.image_timeout} 秒`;
+    : `Batas waktu pembuatan sebenarnya: video ${config.video_timeout} detik · gambar ${config.image_timeout} detik`;
 }
 async function saveGenerationQueue() {
   if (!$('generationQueueForm').reportValidity()) return;
   const button=$('generationQueueSave');button.disabled=true;
-  try { await api('/admin/generation-queue',{method:'PUT',body:JSON.stringify({queue_timeout:Number($('generationQueueTimeout').value)})}); generationQueueLoaded=false;await loadStatus();toast('排队设置已保存','ok'); }
+  try { await api('/admin/generation-queue',{method:'PUT',body:JSON.stringify({queue_timeout:Number($('generationQueueTimeout').value)})}); generationQueueLoaded=false;await loadStatus();toast('Pengaturan antrean disimpan','ok'); }
   catch(e){toast(e.message,'bad');}finally{button.disabled=false;}
 }
 function taskDuration(task) {
@@ -2418,28 +2547,28 @@ function taskDuration(task) {
   const total = task.total_elapsed ?? Math.max(0, Date.now()/1000 - task.created_at);
   const queue = task.status === 'queued' ? total : task.queue_elapsed || 0;
   const generation = task.elapsed ?? (task.status === 'processing' ? Math.max(0, total - queue) : 0);
-  return `${LANG === 'en' ? 'Queue' : '排队'} ${queue.toFixed(1)}s<br>${LANG === 'en' ? 'Generate' : '生成'} ${generation.toFixed(1)}s<br>${LANG === 'en' ? 'Total' : '总计'} ${total.toFixed(1)}s`;
+  return `${LANG === 'en' ? 'Queue' : 'Antrean'} ${queue.toFixed(1)}s<br>${LANG === 'en' ? 'Generate' : 'Buat'} ${generation.toFixed(1)}s<br>${LANG === 'en' ? 'Total' : 'Total'} ${total.toFixed(1)}s`;
 }
 
 
-/* ================= 总览刷新 ================= */
+/* ================= Refresh ringkasan ================= */
 async function loadStatus(){
   try{
     const d = await api('/admin/status');
     renderGenerationQueue(d.generation_queue, d.config);
     $('pSvc').className = 'pill on';
-    $('pSvc').innerHTML = '<span class="led"></span>服务 <b>正常</b>';
+    $('pSvc').innerHTML = '<span class="led"></span>Layanan <b>Normal</b>';
     $('pBr').className = 'pill ' + (d.browser_running ? 'on' : 'off');
-    $('pBr').innerHTML = `<span class="led"></span>浏览器 <b>${d.browser_running ? '运行中' : '空闲'}</b>`;
+    $('pBr').innerHTML = `<span class="led"></span>Browser <b>${d.browser_running ? 'Berjalan' : 'Senggang'}</b>`;
     $('sMedia').textContent = d.media_count ?? 0;
     if (d.base_url){ $('dBase').textContent = d.base_url; $('inBase').value = d.base_url; }
   }catch(e){
     if (authOK === false){
       $('pSvc').className = 'pill';
-      $('pSvc').innerHTML = '<span class="led"></span>服务 <b>待登录</b>';
+      $('pSvc').innerHTML = '<span class="led"></span>Layanan <b>Menunggu masuk</b>';
     } else {
       $('pSvc').className = 'pill off';
-      $('pSvc').innerHTML = '<span class="led"></span>服务 <b>' + esc(e.message).slice(0,28) + '</b>';
+      $('pSvc').innerHTML = '<span class="led"></span>Layanan <b>' + esc(e.message).slice(0,28) + '</b>';
     }
   }
 }

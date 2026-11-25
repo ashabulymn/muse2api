@@ -1,73 +1,74 @@
-Muse2API Cookie 导入扩展 —— 安装说明
-=====================================
+Ekstensi Impor Cookie Muse2API —— Petunjuk Instalasi
+====================================================
 
-这个扩展只做一件事：把你浏览器里 muse.ai 的登录 Cookie
-同步到你的 muse2api 服务。不用装 Python、不用开终端。
+Ekstensi ini hanya melakukan satu hal: menyinkronkan Cookie login
+muse.ai dari browser Anda ke layanan muse2api Anda. Tidak perlu
+menginstal Python, tidak perlu membuka terminal.
 
 
-一、解压
---------
-把 muse2api-extension.zip 解压到一个你不会删掉的目录，例如：
+Satu, Ekstrak
+-------------
+Ekstrak muse2api-extension.zip ke direktori yang tidak akan Anda hapus, misalnya:
 
     Windows : D:\muse2api-extension
     macOS   : ~/Documents/muse2api-extension
 
-解压后应该能看到 manifest.json、popup.html、popup.js 三个文件。
+Setelah diekstrak, Anda seharusnya melihat tiga file: manifest.json, popup.html, dan popup.js.
 
 
-二、在 Chrome / Edge 里加载
----------------------------
-Chrome：
-  1. 地址栏输入  chrome://extensions  回车
-  2. 打开右上角的「开发者模式」开关
-  3. 点左上角「加载已解压的扩展程序」
-  4. 选中第 1 步解压出来的那个文件夹（不是里面的单个文件）
-  5. 工具栏出现一个拼图图标，把它固定到工具栏（可选但方便）
+Dua, Memuat di Chrome / Edge
+-----------------------------
+Chrome:
+  1. Ketik chrome://extensions di address bar, lalu tekan Enter
+  2. Nyalakan sakelar "Mode pengembang" di kanan atas
+  3. Klik "Muat ekstensi yang belum dipaketkan" di kiri atas
+  4. Pilih folder hasil ekstrak pada langkah 1 (bukan file di dalamnya)
+  5. Ikon puzzle muncul di toolbar; sematkan ke toolbar (opsional tapi praktis)
 
-Edge：
-  1. 地址栏输入  edge://extensions  回车
-  2. 打开左下角「开发人员模式」
-  3. 点「加载解压缩的扩展」
-  4. 其余同上
+Edge:
+  1. Ketik edge://extensions di address bar, lalu tekan Enter
+  2. Nyalakan "Mode pengembang" di kiri bawah
+  3. Klik "Muat ekstensi yang belum dipaketkan"
+  4. Langkah selanjutnya sama seperti di atas
 
-其他 Chromium 内核浏览器（Brave / Vivaldi / 360 极速 等）步骤类似。
-
-
-三、使用
---------
-1. 先在这个浏览器里打开 https://muse.ai/ 并登录，
-   登录到能看到聊天界面为止。
-2. 到 muse2api 管理页「账号池」页顶部，复制 BASE URL 和 API Key。
-3. 点浏览器工具栏上的扩展图标，把这两项填进去（只需要填一次，会记住）。
-4. 在登录 Muse 的同一个窗口中点「读取并导入」。无痕/InPrivate 使用前，需要在扩展详情中开启「允许在无痕模式下运行」。
-5. 检查结果中的「Cookie 来源」是否为预期窗口，再到管理页测试账号。导入成功只表示保存成功，不代表会话已验证。
+Browser berbasis Chromium lainnya (Brave / Vivaldi / 360 Extreme Explorer, dll.) langkahnya serupa.
 
 
-四、常见问题
-------------
-Q: 无痕窗口已登录，但导入了普通窗口账号，或测试提示 /api/session HTTP 401
-A: 1.0.2 及更早版本没有按当前窗口选择 Cookie 存储区，可能读到普通窗口里的旧会话。
-   从你的 Muse2API 管理页下载 1.0.3，替换原扩展目录并重新加载；在登录 Muse 的同一窗口重试。
-   1.0.3 找不到对应存储区时会停止导入，不会回退到其它窗口。已注销的会话仍需要在官网重新登录。
-
-Q: 提示「没读到 muse.ai 的 Cookie」
-A: 说明这个浏览器里还没登录 muse.ai。先打开 https://muse.ai/ 登录。
-
-Q: 提示「缺核心项 hatch_sess 等」
-A: 同上 —— 登录没完成。确认能看到聊天界面再点。
-
-Q: 提示「API Key 不对（服务返回 401）」
-A: 到管理页重新复制一次 API Key。注意 Key 以 m2a_ 开头。
-
-Q: 提示跨域 / 网络错误
-A: 检查服务地址是不是 https，以及服务本身能不能打开
-   （浏览器直接访问 服务地址/admin 试试）。
-
-Q: 会不会把我的 Cookie 传到别的地方？
-A: 不会。扩展使用 cookies、storage 和 activeTab 权限，代码就在 popup.js 里，
-   你可以自己看：它只往你填的那个服务地址发一个 POST，没有别的请求。
+Tiga, Penggunaan
+----------------
+1. Buka https://muse.ai/ di browser ini dan login,
+   sampai Anda melihat antarmuka chat.
+2. Di halaman admin muse2api, bagian atas halaman "Kolam Akun", salin BASE URL dan API Key.
+3. Klik ikon ekstensi di toolbar browser, isi kedua kolom tersebut (cukup diisi sekali, akan diingat).
+4. Di jendela yang sama dengan tempat Anda login Muse, klik "Baca & Impor". Untuk pemakaian Incognito/InPrivate, aktifkan dulu "Izinkan dalam mode Incognito" di detail ekstensi.
+5. Periksa apakah "Sumber Cookie" pada hasil sesuai dengan jendela yang diharapkan, lalu uji akun di halaman admin. Impor berhasil hanya berarti penyimpanan berhasil, bukan berarti sesi sudah terverifikasi.
 
 
-五、卸载
---------
-chrome://extensions → 找到「Muse2API Cookie 导入」→ 移除。
+Empat, Masalah Umum
+-------------------
+Q: Jendela Incognito sudah login, tetapi yang terimpor adalah akun jendela biasa, atau pengujian menampilkan /api/session HTTP 401
+A: Versi 1.0.2 dan yang lebih lama tidak memilih penyimpanan Cookie berdasarkan jendela saat ini, sehingga bisa membaca sesi lama dari jendela biasa.
+   Unduh 1.0.3 dari halaman admin Muse2API Anda, ganti direktori ekstensi lama, lalu muat ulang; coba lagi di jendela yang sama dengan tempat Anda login Muse.
+   Versi 1.0.3 akan menghentikan impor jika penyimpanan yang sesuai tidak ditemukan, dan tidak akan beralih ke jendela lain. Sesi yang sudah logout tetap harus login ulang di situs resmi.
+
+Q: Muncul pesan "Cookie muse.ai tidak terbaca"
+A: Artinya browser ini belum login ke muse.ai. Buka https://muse.ai/ dan login terlebih dahulu.
+
+Q: Muncul pesan "Item inti hatch_sess, dll. tidak ada"
+A: Sama seperti di atas — login belum selesai. Pastikan Anda sudah melihat antarmuka chat sebelum mengklik.
+
+Q: Muncul pesan "API Key salah (layanan mengembalikan 401)"
+A: Salin ulang API Key dari halaman admin. Perhatikan bahwa Key diawali m2a_.
+
+Q: Muncul pesan error lintas domain / jaringan
+A: Periksa apakah alamat layanan memakai https, dan apakah layanan itu sendiri bisa dibuka
+   (coba buka langsung di browser: alamat-layanan/admin).
+
+Q: Apakah Cookie saya akan dikirim ke tempat lain?
+A: Tidak. Ekstensi memakai izin cookies, storage, dan activeTab; kodenya ada di popup.js,
+   Anda bisa memeriksanya sendiri: ekstensi hanya mengirim satu POST ke alamat layanan yang Anda isi, tidak ada permintaan lain.
+
+
+Lima, Uninstal
+---------------
+chrome://extensions → cari "Impor Cookie Muse2API" → Hapus.

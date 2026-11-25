@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "Impor Cookie Muse2API",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "Impor cookie login muse.ai ke layanan muse2api Anda dalam sekali klik. Tanpa Python atau terminal.",
+    "description": "Extension description"
+  }
+}
