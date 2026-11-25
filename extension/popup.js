@@ -1,9 +1,9 @@
-/* Impor Cookie Muse2API —— membaca cookie muse.ai lalu POST ke layanan muse2api.
+/* Muse2API Cookie 导入 —— 读取 muse.ai 的 cookie 并 POST 到 muse2api 服务。
  *
- * Poin penting: pakai chrome.cookies, bukan document.cookie.
- * Cookie sesi penting muse.ai (hatch_sess / hatch_vml) bertanda httpOnly,
- * tidak bisa dibaca JS halaman web, hanya bisa diambil lewat antarmuka cookies ekstensi browser.
- * hatch_gw adalah cache routing yang bisa diterbitkan ulang, tidak boleh menghalangi impor akun.
+ * 关键点：用 chrome.cookies 而不是 document.cookie。
+ * muse.ai 的关键会话 cookie（hatch_sess / hatch_vml）带 httpOnly，
+ * 网页 JS 读不到，只有浏览器扩展的 cookies 接口能拿到。
+ * hatch_gw 是可重新签发的路由缓存，不应阻止账号导入。
  */
 
 const $ = (id) => document.getElementById(id);
@@ -11,65 +11,62 @@ const STORE = 'muse2api_ext_cfg';
 
 const ESSENTIAL = ['hatch_sess'];
 
-/* ================= Bahasa antarmuka / UI language =================
- * Bahasa Indonesia adalah bahasa sumber; Inggris diganti lewat kamus di bawah.
- * Saat menambah teks Indonesia baru, tambahkan bahasa Inggrisnya di I18N_EN (kalimat utuh, boleh mengandung placeholder {name}) atau I18N_EN_PATTERNS (teks dari server yang mengandung variabel). */
+/* ================= 界面语言 / UI language =================
+ * 中文是源语言；英文通过下面的词典替换。
+ * 新增中文文案时，请在 I18N_EN（整句，可含 {name} 占位符）或 I18N_EN_PATTERNS（服务端返回的含变量文案）里补上英文。 */
 const LANG_STORE = 'muse2api_lang';
 const LANG = (() => {
-  try { const v = localStorage.getItem(LANG_STORE); if (v === 'id' || v === 'en') return v; } catch (e) {}
-  return /^en\b/i.test(navigator.language || '') ? 'en' : 'id';
+  try { const v = localStorage.getItem(LANG_STORE); if (v === 'zh' || v === 'en') return v; } catch (e) {}
+  return /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
 })();
 function setLang(v) {
   try { localStorage.setItem(LANG_STORE, v); } catch (e) {}
   location.reload();
 }
 
-/* Kalimat utuh: Indonesia → Inggris */
+/* 整句：中文 → 英文 */
 const I18N_EN = {
-  // popup.html teks statis
-  'Impor Cookie Muse2API': 'Muse2API Cookie Import',
-  'Sinkronkan sesi login muse.ai dari browser ini ke layanan muse2api Anda dalam sekali klik.':
+  // popup.html 静态文案
+  'Muse2API Cookie 导入': 'Muse2API Cookie Import',
+  '把当前浏览器里 muse.ai 的登录态，一键同步到你的 muse2api 服务。':
     'Sync the muse.ai login session from this browser to your muse2api service in one click.',
-  'Alamat Layanan (BASE URL)': 'Service URL (BASE URL)',
-  'Label Akun (opsional)': 'Account label (optional)',
-  'mis. muse-main': 'e.g. muse-main',
-  'Baca dan Impor': 'Read and import',
-  // popup.js log / status
-  'Isi alamat layanan dulu': 'Please enter the service URL first',
-  'Isi API Key dulu': 'Please enter the API Key first',
-  'Membaca Cookie muse.ai…': 'Reading muse.ai cookies…',
-  'Tidak dapat memastikan penyimpanan Cookie jendela saat ini. Buka ekstensi di jendela tempat Anda masuk ke Muse, dan pastikan ekstensi diizinkan berjalan dalam mode Samaran/Pribadi.':
+  '服务地址（BASE URL）': 'Service URL (BASE URL)',
+  '账号标签（可留空）': 'Account label (optional)',
+  '例如 muse-main': 'e.g. muse-main',
+  '读取并导入': 'Read and import',
+  // popup.js 日志 / 状态
+  '请先填服务地址': 'Please enter the service URL first',
+  '请先填 API Key': 'Please enter the API Key first',
+  '正在读取 muse.ai 的 Cookie…': 'Reading muse.ai cookies…',
+  '无法确认当前窗口的 Cookie 存储区。请在已登录 Muse 的窗口中打开扩展，并确认已允许扩展在无痕/InPrivate 模式运行。':
     'Cannot identify the current window\'s cookie store. Open the extension in the window signed in to Muse, and allow it in Incognito/InPrivate mode if needed.',
-  'Membaca Cookie muse.ai dari jendela {window} saat ini…': 'Reading muse.ai cookies from the current {window} window…',
-  'Mode Samaran/Pribadi': 'Incognito/InPrivate',
-  'Biasa': 'regular',
-  '\nSumber Cookie: jendela {window} saat ini. Impor hanya menyimpan sesi login, silakan uji akun di halaman admin.':
+  '正在读取当前{window}窗口的 muse.ai Cookie…': 'Reading muse.ai cookies from the current {window} window…',
+  '无痕/InPrivate': 'Incognito/InPrivate',
+  '普通': 'regular',
+  '\nCookie 来源：当前{window}窗口。导入仅保存登录态，请到管理页测试账号。':
     '\nCookie source: current {window} window. Import only saves the session; test the account on the admin page.',
-  'Tidak menemukan Cookie muse.ai.\nBuka dan masuk ke https://muse.ai/ di browser ini dulu, lalu klik lagi.':
+  '没读到 muse.ai 的 Cookie。\n请先在这个浏览器里打开并登录 https://muse.ai/ ，再回来点一次。':
     'No muse.ai cookies found.\nOpen and log in to https://muse.ai/ in this browser first, then click again.',
-  'Membaca {n} Cookie, tetapi ada item inti yang hilang: {missing}\nSesi login tidak terbaca, periksa status login browser ini dan izin ekstensi.':
+  '读到 {n} 条 Cookie，但缺核心项：{missing}\n未读到登录会话，请检查当前浏览器的登录状态和扩展权限。':
     'Read {n} cookies, but missing core items such as: {missing}\nThe login session could not be read. Check this browser\'s login and extension permissions.',
-  'Membaca {n} Cookie, mengunggah ke {base} …': 'Read {n} cookies, uploading to {base} …',
-  'API Key salah (layanan mengembalikan 401).\nSalin API Key yang benar dari bagian atas tab "Kumpulan Akun" di halaman admin.':
+  '读到 {n} 条 Cookie，正在上传到 {base} …': 'Read {n} cookies, uploading to {base} …',
+  'API Key 不对（服务返回 401）。\n请到管理页「账号池」页顶部复制正确的 API Key。':
     'Invalid API Key (the service returned 401).\nCopy the correct API Key from the top of the "Account Pool" tab on the admin page.',
-  'Impor gagal: HTTP {status}\n{body}': 'Import failed: HTTP {status}\n{body}',
-  '(otomatis)': '(auto)',
-  'Tidak diketahui': 'unknown',
-  '✓ Impor berhasil\nLabel akun: {label}\nID akun: {id}\nJumlah Cookie: {count}\nBerlaku sampai: {expires}\n':
+  '导入失败：HTTP {status}\n{body}': 'Import failed: HTTP {status}\n{body}',
+  '(自动)': '(auto)',
+  '未知': 'unknown',
+  '✓ 导入成功\n账号标签：{label}\n账号 ID：{id}\nCookie 条数：{count}\n有效期到：{expires}\n':
     '✓ Imported successfully\nAccount label: {label}\nAccount ID: {id}\nCookie count: {count}\nValid until: {expires}\n',
-  '\nPerhatian: {warning}': '\nNote: {warning}',
-  'Terjadi kesalahan: {msg}\n\nPenyebab umum:\n· Alamat layanan salah atau layanan belum berjalan\n· Alamat ini bukan https (atau sertifikatnya tidak dipercaya)\n· Browser memblokir permintaan lintas origin':
+  '\n注意：{warning}': '\nNote: {warning}',
+  '出错了：{msg}\n\n常见原因：\n· 服务地址填错或服务没启动\n· 这个地址不是 https（或证书不被信任）\n· 浏览器拦截了跨域请求':
     'Something went wrong: {msg}\n\nCommon causes:\n· The service URL is wrong or the service is not running\n· The URL is not https (or the certificate is not trusted)\n· The browser blocked the cross-origin request',
-  // Pesan dari server (/admin/accounts) yang mungkin dikembalikan apa adanya
-  'Tidak ada cookie yang dapat diparse, periksa formatnya': 'No cookies could be parsed; please check the format',
-  'Tidak ada Authorization: Bearer <key>': 'Missing Authorization: Bearer <key>',
-  'API key tidak valid': 'Invalid API key',
+  // 服务端（/admin/accounts）可能返回的整句
   '未解析到任何 cookie，请检查格式': 'No cookies could be parsed; please check the format',
   '缺少 Authorization: Bearer <key>': 'Missing Authorization: Bearer <key>',
   'API key 无效': 'Invalid API key',
 };
 
-/* Blok rich-text: data-i18n="key" → innerHTML Inggris */
+/* 含富文本的块：data-i18n="key" → 英文 innerHTML */
 const I18N_EN_HTML = {
   steps: '<b>Before you start, check two things:</b><br>\n'
     + '    1. You are logged in to <a href="https://muse.ai/" target="_blank"\n'
@@ -80,9 +77,7 @@ const I18N_EN_HTML = {
     + '    Nothing is collected or uploaded to any third-party server.',
 };
 
-/* Teks dari server yang mengandung variabel: [regex, string pengganti]
- * Regex di bawah mencocokkan pesan Mandarin dari server (server masih mengembalikan Mandarin);
- * terjemahan Indonesianya tercakup oleh entri kamus I18N_EN di atas bila pesannya sudah diterjemahkan. */
+/* 服务端返回的含变量文案：[正则, 替换串] */
 const I18N_EN_PATTERNS = [
   [/^缺少核心 cookie：(.*)，该账号可能无法生成$/s, 'Missing core cookies: $1; this account may not be able to generate'],
 ];
@@ -120,7 +115,7 @@ function log(html, cls) {
   el.innerHTML = cls ? `<span class="${cls}">${html}</span>` : html;
 }
 
-/* Normalisasi alamat layanan: buang slash akhir dan akhiran /v1 */
+/* 规范化服务地址：去掉结尾斜杠和 /v1 后缀 */
 function normBase(v) {
   let s = (v || '').trim();
   if (!s) return '';
@@ -136,7 +131,7 @@ async function loadCfg() {
   if (c.base) $('base').value = c.base;
   if (c.key) $('key').value = c.key;
   if (c.label) $('label').value = c.label;
-  // Bila belum pernah ada konfigurasi, coba tebak dari tab aktif (saat pengguna sedang di halaman admin)
+  // 没有配置过就尝试从当前标签页猜一个（用户在管理页上时）
   if (!c.base) {
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -146,7 +141,7 @@ async function loadCfg() {
         const k = new URLSearchParams(u.search).get('key');
         if (k) $('key').value = k;
       }
-    } catch (e) { /* abaikan */ }
+    } catch (e) { /* 忽略 */ }
   }
 }
 
@@ -161,18 +156,18 @@ async function saveCfg() {
 }
 
 async function grabCookies() {
-  // Ekstensi spanning berbagi konteks reguler dengan jendela samaran.
-  // Pilih store dari tab aktif secara eksplisit; jangan menebak atau memakai fallback.
+  // A spanning extension shares its regular context with incognito windows.
+  // Select the active tab's store explicitly; never guess or fall back.
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const stores = await chrome.cookies.getAllCookieStores();
   const store = tab && stores.find((s) => s.tabIds.includes(tab.id));
   if (!store) {
-    throw new Error(t('Tidak dapat memastikan penyimpanan Cookie jendela saat ini. Buka ekstensi di jendela tempat Anda masuk ke Muse, dan pastikan ekstensi diizinkan berjalan dalam mode Samaran/Pribadi.'));
+    throw new Error(t('无法确认当前窗口的 Cookie 存储区。请在已登录 Muse 的窗口中打开扩展，并确认已允许扩展在无痕/InPrivate 模式运行。'));
   }
-  const windowKind = t(tab.incognito ? 'Mode Samaran/Pribadi' : 'Biasa');
-  log(t('Membaca Cookie muse.ai dari jendela {window} saat ini…', { window: windowKind }));
-  // Filter URL mengecualikan subdomain dan path yang tidak terkait. Chrome mengurutkan
-  // hasil berdasarkan path terpanjang, lalu waktu pembuatan paling awal (seperti cookies.get).
+  const windowKind = t(tab.incognito ? '无痕/InPrivate' : '普通');
+  log(t('正在读取当前{window}窗口的 muse.ai Cookie…', { window: windowKind }));
+  // URL filtering excludes unrelated subdomains and paths. Chrome orders
+  // matches by longest path, then earliest creation time (as cookies.get does).
   const all = await chrome.cookies.getAll({ url: 'https://muse.ai/api/session', storeId: store.id });
   const out = Object.create(null), exp = Object.create(null);
   for (const c of all) {
@@ -188,28 +183,28 @@ async function run() {
   const key = $('key').value.trim();
   const label = $('label').value.trim();
 
-  if (!base) return log(t('Isi alamat layanan dulu'), 'bad');
-  if (!key) return log(t('Isi API Key dulu'), 'bad');
+  if (!base) return log(t('请先填服务地址'), 'bad');
+  if (!key) return log(t('请先填 API Key'), 'bad');
 
   $('go').disabled = true;
-  log(t('Membaca Cookie muse.ai…'));
+  log(t('正在读取 muse.ai 的 Cookie…'));
 
   try {
     const { cookies, expires, windowKind } = await grabCookies();
     const names = Object.keys(cookies);
     if (!names.length) {
-      return log(t('Tidak menemukan Cookie muse.ai.\nBuka dan masuk ke '
-                 + 'https://muse.ai/ di browser ini dulu, lalu klik lagi.'), 'bad');
+      return log(t('没读到 muse.ai 的 Cookie。\n请先在这个浏览器里打开并登录 '
+                 + 'https://muse.ai/ ，再回来点一次。'), 'bad');
     }
     const missing = ESSENTIAL.filter((n) => !cookies[n]);
     if (missing.length) {
-      log(t('Membaca {n} Cookie, tetapi ada item inti yang hilang: {missing}\n'
-          + 'Sesi login tidak terbaca, periksa status login browser ini dan izin ekstensi.',
-          { n: names.length, missing: missing.join(', ') }), 'warn');
+      log(t('读到 {n} 条 Cookie，但缺核心项：{missing}\n'
+          + '未读到登录会话，请检查当前浏览器的登录状态和扩展权限。',
+          { n: names.length, missing: missing.join(LANG === 'en' ? ', ' : '、') }), 'warn');
       return;
     }
 
-    log(t('Membaca {n} Cookie, mengunggah ke {base} …', { n: names.length, base }));
+    log(t('读到 {n} 条 Cookie，正在上传到 {base} …', { n: names.length, base }));
 
     const r = await fetch(base + '/admin/accounts', {
       method: 'POST',
@@ -225,29 +220,29 @@ async function run() {
     try { data = JSON.parse(text); } catch (e) { data = { raw: text }; }
 
     if (r.status === 401) {
-      return log(t('API Key salah (layanan mengembalikan 401).\n'
-                 + 'Salin API Key yang benar dari bagian atas tab "Kumpulan Akun" di halaman admin.'), 'bad');
+      return log(t('API Key 不对（服务返回 401）。\n'
+                 + '请到管理页「账号池」页顶部复制正确的 API Key。'), 'bad');
     }
     if (!r.ok) {
       const body = typeof data.detail === 'string' ? t(data.detail) : text.slice(0, 300);
-      return log(t('Impor gagal: HTTP {status}\n{body}', { status: r.status, body }), 'bad');
+      return log(t('导入失败：HTTP {status}\n{body}', { status: r.status, body }), 'bad');
     }
 
     const a = (data.added && data.added[0]) || {};
     await saveCfg();
-    log(t('✓ Impor berhasil\nLabel akun: {label}\nID akun: {id}\nJumlah Cookie: {count}\nBerlaku sampai: {expires}\n', {
-          label: a.label || label || t('(otomatis)'),
+    log(t('✓ 导入成功\n账号标签：{label}\n账号 ID：{id}\nCookie 条数：{count}\n有效期到：{expires}\n', {
+          label: a.label || label || t('(自动)'),
           id: a.id || '?',
           count: a.cookie_count || names.length,
-          expires: a.expires_at ? new Date(a.expires_at * 1000).toLocaleString() : t('Tidak diketahui'),
+          expires: a.expires_at ? new Date(a.expires_at * 1000).toLocaleString() : t('未知'),
         })
-        + t('\nSumber Cookie: jendela {window} saat ini. Impor hanya menyimpan sesi login, silakan uji akun di halaman admin.', { window: windowKind })
-        + (data.warning ? t('\nPerhatian: {warning}', { warning: t(data.warning) }) : ''), 'ok');
+        + t('\nCookie 来源：当前{window}窗口。导入仅保存登录态，请到管理页测试账号。', { window: windowKind })
+        + (data.warning ? t('\n注意：{warning}', { warning: t(data.warning) }) : ''), 'ok');
   } catch (e) {
-    log(t('Terjadi kesalahan: {msg}\n\nPenyebab umum:\n'
-        + '· Alamat layanan salah atau layanan belum berjalan\n'
-        + '· Alamat ini bukan https (atau sertifikatnya tidak dipercaya)\n'
-        + '· Browser memblokir permintaan lintas origin', { msg: e && e.message ? e.message : String(e) }), 'bad');
+    log(t('出错了：{msg}\n\n常见原因：\n'
+        + '· 服务地址填错或服务没启动\n'
+        + '· 这个地址不是 https（或证书不被信任）\n'
+        + '· 浏览器拦截了跨域请求', { msg: e && e.message ? e.message : String(e) }), 'bad');
   } finally {
     $('go').disabled = false;
   }
