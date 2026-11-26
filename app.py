@@ -47,7 +47,7 @@ from fastapi import Body, Depends, FastAPI, Header, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                Response, StreamingResponse)
-from pydantic import model_validator, BaseModel, Field, SecretStr, field_validator
+from pydantic import model_validator, BaseModel, Field, SecretStr, ValidationError, field_validator
 
 from config import CFG
 from engine import (ESSENTIAL_COOKIES, MAX_REFERENCE_IMAGE_BYTES,
@@ -1692,9 +1692,92 @@ async def images_edits(request: Request, _=Depends(auth)):
 
 
 # ------------------------- 生视频（异步任务） -------------------------
+def _form_int(value: Any) -> int | None:
+    try:
+        return int(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+async def _video_request_from_form(request: Request) -> VideoRequest:
+    """multipart/form-data ala API video OpenAI (yang dikirim Muse-Canvas):
+    field teks model/prompt/seconds/size/ratio/resolution_name/generate_audio/
+    watermark/mode + file images/image[]/first_frame/last_frame/video[]/audio[].
+    Pola baca file sama seperti /v1/images/edits (batas ukuran & tipe sama)."""
+    form = await request.form(
+        max_files=MAX_REFERENCE_IMAGES, max_fields=20)
+    prompt = (form.get("prompt") or "")
+    if isinstance(prompt, str):
+        prompt = prompt.strip()
+    if not prompt:
+        raise HTTPException(400, "prompt wajib diisi")
+    model = form.get("model") or "muse-video"
+    duration = _form_int(form.get("seconds"))
+    if duration is None:
+        duration = _form_int(form.get("duration"))
+    size = form.get("size") or None
+    aspect_ratio = form.get("ratio") or form.get("aspect_ratio") or None
+    resolution = form.get("resolution_name") or form.get("resolution") or None
+    timeout = _form_int(form.get("timeout"))
+    extra_opts = {k: form.get(k) for k in ("generate_audio", "watermark", "mode")
+                  if form.get(k) is not None}
+    extra = json.dumps(extra_opts, ensure_ascii=False) if extra_opts else None
+
+    images: list[str] = []
+    videos: list[str] = []
+    audios: list[str] = []
+    buckets = (("images", images), ("image[]", images),
+               ("first_frame", images), ("last_frame", images),
+               ("video[]", videos), ("videos", videos),
+               ("audio[]", audios), ("audios", audios))
+    total_bytes = 0
+    total_files = 0
+    mib = 1024 * 1024
+    for name, bucket in buckets:
+        for field in form.getlist(name):
+            if hasattr(field, "read"):
+                ref_mime = (getattr(field, "content_type", "") or "").split(";", 1)[0].strip().lower()
+                if ref_mime and ref_mime not in REFERENCE_MIME_EXT and not _generic_upload_mime(ref_mime):
+                    raise HTTPException(400, f"{name} 文件类型不受支持（{ref_mime}）")
+                content = await field.read(MAX_REFERENCE_IMAGE_BYTES + 1)
+                if len(content) > MAX_REFERENCE_IMAGE_BYTES:
+                    raise HTTPException(400, f"{name} 超过 {MAX_REFERENCE_IMAGE_BYTES // mib} MiB 限制")
+                total_bytes += len(content)
+                if total_bytes > MAX_REFERENCE_TOTAL_BYTES:
+                    raise HTTPException(400, f"参考素材总大小超过 {MAX_REFERENCE_TOTAL_BYTES // mib} MiB 限制")
+                ref_mime = ref_mime or "application/octet-stream"
+                bucket.append(
+                    f"data:{ref_mime};base64,{base64.b64encode(content).decode('ascii')}")
+                total_files += 1
+                if total_files > MAX_REFERENCE_IMAGES:
+                    raise HTTPException(400, f"参考素材最多 {MAX_REFERENCE_IMAGES} 个（当前 {total_files} 个）")
+            elif isinstance(field, str) and field.strip():
+                bucket.append(field.strip())
+    return VideoRequest(
+        prompt=prompt, model=model, duration=duration, size=size,
+        aspect_ratio=aspect_ratio, resolution=resolution, timeout=timeout,
+        images=images or None, videos=videos or None, audios=audios or None,
+        extra=extra)
+
+
 @app.post("/v1/videos")
 @app.post("/v1/videos/generations")
-async def create_video(req: VideoRequest, _=Depends(auth)):
+async def create_video(request: Request, _=Depends(auth)):
+    content_type = request.headers.get("content-type", "").lower()
+    if "multipart/form-data" in content_type:
+        req = await _video_request_from_form(request)
+    else:
+        try:
+            body = await request.json()
+        except Exception as exc:
+            raise HTTPException(400, "body harus JSON yang valid") from exc
+        try:
+            req = VideoRequest.model_validate(body)
+        except ValidationError as exc:
+            errors = [{k: v for k, v in e.items() if k not in ("input", "ctx")}
+                      for e in exc.errors()]
+            raise HTTPException(
+                422, "请求参数校验失败：" + str(errors)[:400]) from exc
     ref_images = await asyncio.to_thread(
         _prepare_reference_images, _video_references(req))
 
